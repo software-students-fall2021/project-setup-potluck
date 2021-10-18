@@ -10,23 +10,6 @@ Each team will decide, using whatever decision-making process they prefer, on wh
 - these roles must shift every Sprint, so each team member should fill each role at least once.
 - each team must announce which team members are **Scrum Master** and **Product Owner** at the start of each Sprint
 
-## Set up Slack channels
-
-Slack is each team's primary communication tool. Each member's communications and contributions within Slack are tracked and used towards grading.
-
-### Public communications channels
-
-Each team **must have at least one Slack channel** where the professor, and any course assistants, graders, and tutors are also invited to be members:
-
-- use this channel for general team communication
-- individual participation in this and other channels may be used towards each member's grade
-
-Channel names must be short and consistent. For example, if a team is named `octopus`, their main channel might be called `team-octopus`
-
-### Private communications channels
-
-Communications within private channels or on communications systems where the stakeholders are not present are not visible to stakeholders and therefore will not be considered analyzing the engagement of any individual or of the team as a whole.
-
 ## Configure GitHub repository
 
 GitHub is each team's primary resource for version control, project
