@@ -6,7 +6,7 @@
 
 **Potluck** is a school-specific social media platform for students to find and share their experiences with food around campus. Users can post recipes, items they bought from local grocery stores, food from local restaurants, or anything else they want to share. Students can also discuss in the feed area, Sample topics include: Street Food, Bubble Tea, Italian food, 3-ingredient meals, et cetera.
 
-## Product Visioon Statement
+## Product Vision Statement
 
 **Potluck** consists of two main components.
 
@@ -20,6 +20,7 @@ In addition to the feed and map view, users can view their own account page, whe
 
 Finally, the users can read about the app (PotLuck) and its origins and purpose in the About page.
 
+Initial [Prototype](https://www.figma.com/proto/XMcwr5StWMdYmwJL3cW51j/First-attempt?node-id=47701%3A946&scaling=min-zoom&page-id=33%3A444&starting-point-node-id=47701%3A946&show-proto-sidebar=1) (check different flows on the left the handside)  and [design file](https://www.figma.com/file/XMcwr5StWMdYmwJL3cW51j/First-attempt?node-id=33%3A444)
 ---
 
 ## Meet the Team
