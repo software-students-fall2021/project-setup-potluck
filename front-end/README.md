@@ -2,6 +2,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Workflow for Potluck Contributors
+
+1. `git pull`
+2. `cd front-end`
+3. `npm install` - to install the React dependencies
+4. `git branch branch_name` - to create a branch for your assigned components
+5. `git checkout branch_name`
+6. Write code
+7. Commit code to the branch
+8. `git push --set-upstream origin branch_name`
+9. Create Pull Request for others to review
+
 ## Available Scripts
 
 In the project directory, you can run:
