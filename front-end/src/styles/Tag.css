@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.tag:hover {
+  background-color: black;
+}
+
 p1 {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */

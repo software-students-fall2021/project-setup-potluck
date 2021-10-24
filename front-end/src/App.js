@@ -1,12 +1,12 @@
 import "./App.css"
 
 // Import components
-import TagContainer from "./components/TagContainer"
+import TagButton from "./components/TagButton"
 
 import SampleComponent from "./components/SampleComponent"
 
 function App() {
-  return <TagContainer />
+  return <TagButton />
 }
 
 export default App

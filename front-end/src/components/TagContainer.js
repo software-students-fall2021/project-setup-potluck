@@ -4,7 +4,7 @@ import Tag from "./Tag"
 import "../styles/TagContainer.css"
 
 const TagContainer = () => {
-  const [tags, setTags] = useState(["Tag1", "Tag2", "Tag3"])
+  // State to show / Hide tags
 
   return (
     <div className="tagContainer">
