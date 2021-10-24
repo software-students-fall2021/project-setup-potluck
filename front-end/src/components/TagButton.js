@@ -5,17 +5,21 @@ import TagContainer from "./TagContainer"
 const TagButton = () => {
   const [showTags, setShowTags] = useState(false)
   const [buttonText, setButtonText] = useState("Show Tags")
-  const [hidden, setHidden] = useState("hidden")
+  const [selectedArr, setSelectedArr] = useState([true, true, true, true])
 
   const onClick = () => {
     setShowTags(!showTags)
     setButtonText(showTags ? "Show Tags" : "Hide Tags")
-    setHidden(showTags ? "undefined" : "hidden")
   }
   return (
     <div>
       <input type="button" onClick={onClick} value={buttonText}></input>
-      {showTags ? <TagContainer /> : null}
+      {showTags ? (
+        <TagContainer
+          selectedArr={selectedArr}
+          setSelectedArr={setSelectedArr}
+        />
+      ) : null}
     </div>
   )
 }

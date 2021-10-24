@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react"
 
 import "../styles/Tag.css"
 
-const Tag = (props) => {
-  const [tagSelected, setTagSelected] = useState(true)
-  const [color, setColor] = useState("#0096c7")
+const Tag = ({ name, selectedArr, setSelectedArr, idx }) => {
+  const [color, setColor] = useState(selectedArr[idx] ? "#0096c7" : "#caf0f8")
 
   useEffect(() => {
-    let resultstr = tagSelected ? "selected" : "not selected"
-    console.log(`${props.name} is ${resultstr}`)
-  }, [tagSelected, props.name])
+    let resultstr = selectedArr[idx] ? "selected" : "not selected"
+    console.log(`${name} is ${resultstr}`)
+  })
 
   const clicked = () => {
-    setTagSelected(!tagSelected)
-    setColor(tagSelected ? "#caf0f8" : "#0096c7")
+    setColor(selectedArr[idx] ? "#caf0f8" : "#0096c7")
+    let temp = [...selectedArr]
+    temp[idx] = !selectedArr[idx]
+    setSelectedArr(temp)
   }
 
   return (
@@ -22,7 +23,7 @@ const Tag = (props) => {
       onClick={() => clicked()}
       style={{ backgroundColor: color }}
     >
-      <p1>{props.name}</p1>
+      <p1>{name}</p1>
     </div>
   )
 }
