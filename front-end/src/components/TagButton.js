@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 
 import TagContainer from "./TagContainer"
+import "../styles/TagContainer.css"
 
 const TagButton = () => {
   const [showTags, setShowTags] = useState(false)
@@ -12,7 +13,7 @@ const TagButton = () => {
     setButtonText(showTags ? "Show Tags" : "Hide Tags")
   }
   return (
-    <div>
+    <div className="tagButton">
       <input type="button" onClick={onClick} value={buttonText}></input>
       {showTags ? (
         <TagContainer
