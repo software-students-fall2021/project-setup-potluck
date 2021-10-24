@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
 
+import "../styles/Tag.css"
+
 const Tag = (props) => {
   const [tagSelected, setTagSelected] = useState(true)
 
@@ -10,7 +12,7 @@ const Tag = (props) => {
 
   return (
     <div className="tag" onClick={() => setTagSelected(!tagSelected)}>
-      <p1>This is tag {props.name}</p1>
+      <p1>{props.name}</p1>
     </div>
   )
 }

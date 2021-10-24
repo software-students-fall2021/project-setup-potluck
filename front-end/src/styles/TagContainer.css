@@ -1,0 +1,18 @@
+.tagContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  columns: 2;
+  column-gap: 5vw;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin: 10px 20px;
+}
+
+.col {
+  margin: 10px;
+}

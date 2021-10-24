@@ -1,0 +1,12 @@
+.tag {
+  background-color: rgb(206, 206, 206);
+  padding: 15px;
+  color: green;
+  width: 40vw;
+
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
