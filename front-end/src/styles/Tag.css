@@ -1,8 +1,9 @@
 .tag {
-  background-color: rgb(206, 206, 206);
+  background-color: #caf0f8;
+  color: black;
   padding: 15px;
-  color: green;
   width: 40vw;
+  height: 10vh;
 
   border-radius: 8px;
 
