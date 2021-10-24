@@ -20,7 +20,7 @@ const Tag = (props) => {
     <div
       className="tag"
       onClick={() => clicked()}
-      style={{ "background-color": color }}
+      style={{ backgroundColor: color }}
     >
       <p1>{props.name}</p1>
     </div>
