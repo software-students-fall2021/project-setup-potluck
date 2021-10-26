@@ -1,0 +1,24 @@
+.tag {
+  background-color: #caf0f8;
+  color: black;
+  padding: 15px;
+  width: 40vw;
+  height: 10vh;
+
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tag:hover {
+  background-color: black;
+}
+
+p1 {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
