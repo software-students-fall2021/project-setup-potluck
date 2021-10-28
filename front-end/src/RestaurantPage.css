@@ -1,0 +1,69 @@
+.restaurantContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    border: 10px rgb(128, 66, 245);
+    width: 100%;
+}
+
+.topMost {
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    width: 101%;
+    background-color: rgb(128, 66, 245);
+    position: fixed;
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+    z-index:0;
+    position: center;
+}
+
+.dishImage {
+    height: auto;
+    width: 100%;
+    z-index:-1;
+
+}
+
+.dishPic {
+    display: flex;
+    width: 100%;
+    height: 300px;
+}
+
+.restaurantInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(126, 66, 245);
+    width: 100%;
+}
+
+.restaurantNameAddr {
+    color: white;
+    padding: 10px;
+}
+
+.roundedCorners {
+    float: right;
+    border-radius: 30px;
+}
+
+.mostPopularDishses {
+    width: 100%;
+}
+
+.beverages {
+    width: 100%;
+}
+
+.indent {
+    left: 30px;
+    position: relative;
+
+}

@@ -2,9 +2,7 @@ import "./App.css"
 
 // Import components
 import TagButton from "./components/TagButton"
-// import NavBar from "./components/NavBar"
-import SampleComponent from "./components/SampleComponent"
-import PostPage from "./components/FeedPage.js"
+
 function App() {
   return (
     
