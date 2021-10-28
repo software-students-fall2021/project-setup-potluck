@@ -2,12 +2,14 @@ import "./App.css"
 
 // Import components
 import TagButton from "./components/TagButton"
-
+// import NavBar from "./components/NavBar"
 import SampleComponent from "./components/SampleComponent"
-
+import PostPage from "./components/FeedPage.js"
 function App() {
   return (
+    
     <div>
+      {/* 
       <TagButton className="tagButton" />
       <h1>Example Text</h1>
       <p1>
@@ -20,7 +22,10 @@ function App() {
         orci. Integer viverra ut quam quis vestibulum. Nunc in maximus leo, a
         venenatis mi. Vivamus mollis faucibus auctor. Quisque iaculis placerat
         dictum.
-      </p1>
+      </p1> */}
+      {/* Uncomment postpage to see the post page route for now */}
+      <PostPage/>
+    
     </div>
   )
 }
