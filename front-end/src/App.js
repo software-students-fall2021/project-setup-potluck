@@ -1,9 +1,10 @@
 import "./App.css"
+import RestaurantContainer from "./components/RestaurantContainer.js"
 
-import SampleComponent from "./components/SampleComponent"
+//import SampleComponent from "./components/SampleComponent"
 
 function App() {
-  return <SampleComponent />
+  return <RestaurantContainer />
 }
 
 export default App
