@@ -5,7 +5,9 @@ import TagButton from "./components/TagButton"
 
 function App() {
   return (
+    
     <div>
+      {/* 
       <TagButton className="tagButton" />
       <h1>Example Text</h1>
       <p1>
@@ -18,7 +20,10 @@ function App() {
         orci. Integer viverra ut quam quis vestibulum. Nunc in maximus leo, a
         venenatis mi. Vivamus mollis faucibus auctor. Quisque iaculis placerat
         dictum.
-      </p1>
+      </p1> */}
+      {/* Uncomment postpage to see the post page route for now */}
+      <PostPage/>
+    
     </div>
   )
 }
