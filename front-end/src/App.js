@@ -11,10 +11,10 @@ import Header from "./components/Header.js"
 
 function App() {
   return (
-    
+
     <div>
       <Header/>
-      {/* 
+      {/*
       <TagButton className="tagButton" />
       <h1>Example Text</h1>
       <p1>
@@ -30,7 +30,7 @@ function App() {
       </p1> */}
       {/* Uncomment postpage to see the post page route for now */}
       {/* <PostPage/> */}
-    
+
     </div>
   )
 }
