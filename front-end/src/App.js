@@ -2,13 +2,18 @@ import "./App.css"
 
 // Import components
 import TagButton from "./components/TagButton"
-// import NavBar from "./components/NavBar"
+ import NavBar from "./components/NavBar"
 import SampleComponent from "./components/SampleComponent"
 import PostPage from "./components/FeedPage.js"
+import 'bootstrap/dist/css/bootstrap.css';
+import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import Header from "./components/Header.js"
+
 function App() {
   return (
     
     <div>
+      <Header/>
       {/* 
       <TagButton className="tagButton" />
       <h1>Example Text</h1>
@@ -24,7 +29,7 @@ function App() {
         dictum.
       </p1> */}
       {/* Uncomment postpage to see the post page route for now */}
-      <PostPage/>
+      {/* <PostPage/> */}
     
     </div>
   )

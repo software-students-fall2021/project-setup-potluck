@@ -51,7 +51,7 @@ const PostPage = () =>{
 }
 
 //Search component that recieves the search keyword and the search function itself is called every time the input changes
-const Search = ({search, onSearch}) =>(
+export const Search = ({search, onSearch}) =>(
 <div>
     <label htmlFor="search">Search:</label>
     <input
@@ -64,11 +64,11 @@ const Search = ({search, onSearch}) =>(
 
 );
 //The feed passes all of the search results to individual posts and displays them
-const PostFeed = ({list}) =>
+export const PostFeed = ({list}) =>
     list.map(item => <Post key={item.objectID} item={item} />);
 
 //Individual posts take all the details about the post and display them.
-const Post = ({ item })=>(
+export const Post = ({ item })=>(
 
   
        <div>
