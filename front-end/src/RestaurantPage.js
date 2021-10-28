@@ -1,11 +1,11 @@
-import "../styles/RestaurantContainer.css"
-import Button from "./BackButton.js"
-import FoodContainer from "./FoodContainer2x2.js"
-import BiggerContainer from "./BiggerContainer.js"
+import "./RestaurantPage.css"
+import Button from "./components/BackButton.js"
+import FoodContainer from "./components/FoodContainer2x2.js"
+import BiggerContainer from "./components/BiggerContainer.js"
 
-const RestaurantContainer = () => {
+const RestaurantPage = () => {
     return (
-        <div className="restaurantContainer">
+        <div className="restaurantPage">
 
             <div className="topMost" >
                 <Button></Button>
@@ -47,4 +47,4 @@ const RestaurantContainer = () => {
 
 }
 
-export default RestaurantContainer
+export default RestaurantPage
