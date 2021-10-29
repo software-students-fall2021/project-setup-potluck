@@ -1,6 +1,6 @@
 import { listClasses, ListItem } from "@mui/material";
 import React from "react"
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import "../styles/FeedPage.css"
 import "../App.css"
 
@@ -45,11 +45,33 @@ const InitialView = () =>{
                 What is Potluck?
             </h1>   
             <p style={{fontFamily: 'Bebas Neue', textAlign: 'center', fontSize: '25px'}}>
-                Input text here
+                Find food carts.
             </p>
+            <p style={{fontFamily: 'Bebas Neue', textAlign: 'center', fontSize: '25px'}}>
+                Filter your dietary restrictions.
+            </p>
+            <p style={{fontFamily: 'Bebas Neue', textAlign: 'center', fontSize: '25px'}}>
+                Share your recipes.
+            </p>
+            <p style={{fontFamily: 'Bebas Neue', textAlign: 'center', fontSize: '25px'}}>
+                And more.
+            </p>
+            <p style={{fontFamily: 'Bebas Neue', textAlign: 'center', fontSize: '25px'}}>
+                An app for all things food.
+            </p>
+            <div style={{display: 'flex', justifyContent: 'center', alignItem: 'center'}}>
+                <img src="../Logos/TextOnlyBlack.png" height="100px"/>
+            </div>
+
             <Search search={keyWord} onSearch={executeSearch}/>
             <br></br>
             <PostFeed list={matchedPosts}/>
+
+            <div style={{display: 'flex', justifyContent: 'center', alignItem: 'center'}}>
+                <Button>Login / Sign Up</Button>
+            </div>
+           
+
         </div>
       )
 }
