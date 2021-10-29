@@ -19,10 +19,7 @@ const Map = () => {
   // Temporary function to generate random longitude OR latitude, centered around
   // a given location with a given spread
   const getRandomLocation = (location, spread) => {
-    console.log(spread)
-    const randomLocation = spread / 2 - spread * Math.random() + location
-    console.log(randomLocation)
-    return randomLocation
+    return spread / 2 - spread * Math.random() + location
   }
 
   // viewport determines the user's view of the map
@@ -35,13 +32,12 @@ const Map = () => {
     bearing: 0,
   })
 
-  let tempArr = []
-
   // Fake data filler to create an array of markers
-  const [markerArr, setMarkerArr] = useState(tempArr)
+  const [markerArr, setMarkerArr] = useState([])
 
+  // Hook to initailize markerArr on the first browser load
   useEffect(() => {
-    tempArr = [...markerArr]
+    let tempArr = [...markerArr]
     for (let i = 0; i < 100; i++) {
       tempArr.push({
         longitude: getRandomLocation(DEFAULT_LONGITUDE, DEFAULT_SPRAD),
@@ -51,8 +47,6 @@ const Map = () => {
 
     setMarkerArr(tempArr)
   }, [])
-
-  console.log(markerArr)
 
   return (
     <ReactMapGl
@@ -66,16 +60,19 @@ const Map = () => {
       // Provide Mapbox API key
       mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
     >
-      {markerArr.map((restuarant) => {
-        return (
-          <Marker
-            latitude={restuarant.latitude}
-            longitude={restuarant.longitude}
-          >
-            <Pin size={15} />
-          </Marker>
-        )
-      })}
+      {
+        // Display all pins
+        markerArr.map((restuarant) => {
+          return (
+            <Marker
+              latitude={restuarant.latitude}
+              longitude={restuarant.longitude}
+            >
+              <Pin size={15} />
+            </Marker>
+          )
+        })
+      }
     </ReactMapGl>
   )
 }
