@@ -2,12 +2,12 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import App from "./App"
-import Login from "./Login"
-import RestaurantPage from "./RestaurantPage"
+import InitialView from "./components/InitialView";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <InitialView />
   </React.StrictMode>,
   document.getElementById("root")
 )

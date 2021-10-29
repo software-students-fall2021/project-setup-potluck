@@ -43,7 +43,7 @@ const Header = () => {
          
           textAlign : 'center'
         }}>
-          Logo
+          <img src="../Logos/TextOnlyBlack.png" height="100px"/>
       </Col>
         <Col style={{
           
