@@ -4,6 +4,8 @@ import "./App.css"
 import TagButton from "./components/TagButton"
 import PostPage from "./components/FeedPage.js"
 import "bootstrap/dist/css/bootstrap.css"
+import InitialView from "./components/InitialView"
+
 import {
   Navbar,
   Nav,
@@ -15,12 +17,13 @@ import {
 } from "react-bootstrap"
 import Header from "./components/Header.js"
 import Map from "./components/Map.js"
-
+import Login from "./components/Login"
 function App() {
   return (
     <div>
       <Header />
-      <TagButton className="tagButton" />
+      <InitialView />
+      <Login />
       <Map />
     </div>
   )
