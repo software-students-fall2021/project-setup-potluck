@@ -53,7 +53,7 @@ const Map = () => {
       // Spread all values of the viewport as prop for <ReactMapGl />
       {...viewport}
       width="100vw"
-      height="100vh"
+      height="80vh"
       initial
       // Track changes in the viewPort
       onViewportChange={setViewport}
