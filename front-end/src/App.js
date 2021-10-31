@@ -9,18 +9,50 @@ import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
 import RestaurantPage from "./components/RestaurantPage"
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+
 function App() {
   return (
-    <div>
-      <InitialView />
+    <Router>
+      <div>
+        {/* To be replaced with custom header / hamburger menu w links */}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Initial View</Link>
+            </li>
+            <li>
+              <Link to="/feed">Feed</Link>
+            </li>
+            <li>
+              <Link to="/restaurant">Restaurant</Link>
+            </li>
+            <li>
+              <Link to="/map">Map</Link>
+            </li>
+          </ul>
+        </nav>
 
-      <PostPage />
-      <Header />
-      <TagButton />
-      <Login />
-      <RestaurantPage />
-      <Map />
-    </div>
+        <Switch>
+          <Route path="/feed">
+            <Header />
+            <TagButton />
+            <PostPage />
+          </Route>
+          <Route path="/restaurant">
+            <RestaurantPage />
+          </Route>
+          <Route path="/map">
+            <Map />
+          </Route>
+          <Route path="/">
+            <InitialView />
+            <Login />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   )
 }
 
