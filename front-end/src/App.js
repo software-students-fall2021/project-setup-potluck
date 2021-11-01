@@ -6,7 +6,8 @@ import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
 import RestaurantPage from "./components/RestaurantPage"
-
+import TagButton from "./components/TagButton"
+import InitialView from "./components/InitialView"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 function App() {
@@ -33,9 +34,8 @@ function App() {
 
         <Switch>
           <Route path="/feed">
-            <Header />
             <TagButton />
-            <PostPage />
+            <Header />
           </Route>
           <Route path="/restaurant">
             <RestaurantPage />
