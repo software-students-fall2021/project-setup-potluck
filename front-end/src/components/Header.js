@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Search, PostFeed, Post} from "./FeedPage.js"
+import "../styles/Header.css"
+import "../styles/FeedPage.css"
 // const HeaderLink = ({page}) =>{
 //     const title = page.charAt(0).toUpperCase() + page.slice(1);
 
@@ -30,9 +32,9 @@ const Header = () => {
     //TODO: Move all styling to seperate CSS file
     //TODO: Add route handling to this Header
     return (
-        <div style={{ display: 'block', width: '99%'}}>
+        <div className="myHeader" style={{ display: 'block', width: '99%'}}>
      
-      <Row>
+      <Row id= "myRow">
         <Col style={{
           
           textAlign : 'left'
@@ -93,7 +95,7 @@ const PostSearch = ({path}) =>{
       );
     //passes search functionality to Search child component and search results to PostFeed
       return(
-          <div>
+          <div  className = "searchBar">
            {(path == "/") && <h1> Add custom search here</h1>}
            {(path =="/feed") &&  <><Search search={keyWord} onSearch={executeSearch}/>
                         <PostFeed list={matchedPosts}/> </> }
