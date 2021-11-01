@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
 .tagButton {
   position: absolute;
 }
+
+.headerText{
+  font-family: 'Bebas Neue', cursive;
+}
+
+.regularText{
+  font-family: 'Roboto', sans-serif;
+}
+
+

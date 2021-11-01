@@ -3,13 +3,16 @@ import Tag from "./Tag"
 
 import "../styles/TagContainer.css"
 
+// This Component contains all tags, which are (unfortunately) hard coded
+// for ease of alignment.
+// TO-DO: Figure out CSS styling, so that we can display Tags with selectedArr.map()
+// rather than hard coded
 const TagContainer = ({ selectedArr, setSelectedArr }) => {
-  // State to show / Hide tags
-
   return (
     <div className="tagContainer">
       <div className="row">
         <div className="col">
+          {/* Hard code index for each tag, to access selectedArr */}
           <Tag
             name={"Cheap-eats"}
             selectedArr={selectedArr}
