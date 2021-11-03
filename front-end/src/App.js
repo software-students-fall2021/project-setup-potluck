@@ -47,13 +47,15 @@ function App() {
           <Route path="/map">
             <Map />
           </Route>
+          <Route path="/about">
+              <About />
+          </Route>
+          {/* Dont add routes after the base route they wont work*/}
           <Route path="/">
             <InitialView />
             <Login />
           </Route>
-          <Route path="/about">
-              <About />
-          </Route>
+          
         </Switch>
       </div>
     </Router>
