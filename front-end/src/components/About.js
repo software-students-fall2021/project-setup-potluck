@@ -13,8 +13,6 @@ const About = () => {
             <h2 class="WhatisPL"> What is PotLuck</h2>
             <p class="intro"> Gummies jujubes bear claw I love sweet gingerbread. Gummies marzipan I love chocolate powder carrot cake. Fruitcake lollipop dragée wafer sugar plum halvah. Jujubes carrot cake marzipan wafer topping brownie candy dessert pie. Toffee chocolate jujubes muffin sesame snaps fruitcake. Chocolate cake lollipop cupcake pastry danish chocolate cake tootsie roll bear claw cotton candy.
                 Shortbread liquorice sugar plum jelly beans pudding. Marshmallow danish I love I love tiramisu sesame snaps apple pie. Carrot cake sesame snaps danish cupcake croissant candy. Pudding fruitcake cotton candy macaroon icing gummi bears jelly. Muffin lemon drops halvah candy lollipop fruitcake biscuit biscuit wafer. Jelly-o jelly marshmallow gummies lemon drops gingerbread.
-                I love I love wafer caramels I love tart. Dessert pie marzipan cheesecake marzipan muffin soufflé halvah. Jelly-o jelly beans soufflé soufflé sweet roll caramels. Wafer liquorice candy I love candy. Cupcake cheesecake I love tiramisu tart soufflé wafer liquorice sweet roll. Bear claw cookie caramels candy liquorice pie. Sugar plum icing topping caramels danish cake pastry wafer. Bear claw biscuit jelly-o apple pie dessert lemon drops. 
-                I love I love caramels marzipan chocolate muffin jujubes fruitcake pastry. 
                 Cupcake pastry cake oat cake cotton candy gingerbread.</p>
             
             </div>
@@ -60,7 +58,7 @@ const About = () => {
                 <div class="column">
                     <div class="card">
         
-                    <img src="../team/wajahat.jpg"></img>
+                    <img src="../team/lee.jpeg"></img>
                     <div class="container">
                         <h2 class="name">Seunggun Lee
                             <span><a href="https://www.linkedin.com/in/seunggunlee" target="_blank">
@@ -94,7 +92,7 @@ const About = () => {
                 <div class="column">
                     <div class="card">
         
-                    <img src="../team/wajahat.jpg"></img>
+                    <img src="../team/jin.jpeg"></img>
                     <div class="container">
                         <h2 class="name">Jin Kim
                             <span><a href="https://www.linkedin.com/in/jin-hyeong-kim-38959b221/" target="_blank">
