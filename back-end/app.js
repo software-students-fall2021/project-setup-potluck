@@ -44,7 +44,7 @@ app.get("/restaurants", (req, res) => {
             "name": "restaurant1",
             "number": "123-456-7890",
             "address": "123 5th Ave, New York, NY, 10003",
-            "no_posts": Math.random() * 100,
+            "no_posts": Math.floor(Math.random() * 100),
             "location": {
                 "longitude": getRandomLocation(-73.9936, 0.01),
                 "latitude": getRandomLocation(-73.9936, 0.01),
