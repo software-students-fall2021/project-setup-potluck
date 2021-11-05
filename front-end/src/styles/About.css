@@ -1,0 +1,113 @@
+
+  
+.column {
+    float: left;
+    width: 30%;
+    height: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+  
+.card {
+    box-shadow: 0 4px 4px 0 #A467F2;
+    margin: 6px;
+    float: center;
+    height: auto;
+    width: auto;
+    /* size: 20px; */
+    
+}
+
+.card:hover {
+    background: #A467F2;
+    /* box-shadow: 0 4px 4px 0 #A467F2; */
+}
+
+.about-section {
+    padding: 50px;
+    text-align: center;
+    background: #8C33FF;
+    background-image: linear-gradient(270deg,#8C33FF, #A467F2, indigo);
+    color: white;
+}
+
+.what-PL{
+    padding: 50px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    text-align: center;
+    
+}
+.row {
+    align-items: center;
+    background-image: linear-gradient(270deg,#9a4dff, #A467F2, #b780ff);
+}
+.WhatisPL{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.TeamTag{
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 50px;
+}
+
+.container {
+    padding: 0 16px;
+    float: center;
+}
+  
+.container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.name{
+    color: black;
+    padding-top: 15px;
+}
+.title {
+    color:black;
+    font-size: 4.5vmin;
+}
+.intro {
+    text-align: justify;
+    font-size:2.5vmin; 
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: medium;
+    
+}
+.para{
+    color: black;
+    font-size: 4vmin; 
+}
+.button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    /* background-color: #000; */
+    background: #8C33FF;
+    text-align: center;
+    cursor: pointer;
+    width: 80%;
+}
+  
+
+@media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+}
+
+img{
+    border-radius: 1px;
+}
+span {
+    margin-left: 1em;
+}

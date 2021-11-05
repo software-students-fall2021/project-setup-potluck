@@ -8,6 +8,7 @@ import Login from "./components/Login"
 import RestaurantPage from "./components/RestaurantPage"
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
+import About from "./components/About"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
             <li>
               <Link to="/map">Map</Link>
             </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
           </ul>
         </nav>
 
@@ -43,10 +47,15 @@ function App() {
           <Route path="/map">
             <Map />
           </Route>
+          <Route path="/about">
+              <About />
+          </Route>
+          {/* Dont add routes after the base route they wont work*/}
           <Route path="/">
             <InitialView />
             <Login />
           </Route>
+          
         </Switch>
       </div>
     </Router>
