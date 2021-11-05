@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 app.use("/static", express.static("public"))
 
 // Handle GET request to grab all restaurant information (no filter)
-app.use("/restaurants", (req, res) => {
+app.get("/restaurants", (req, res) => {
 
     // ----- GENERATE RANDOM RESTAURANT LOCATIONS - to be deleted -----
     // Define default location to load map
@@ -56,3 +56,6 @@ app.use("/restaurants", (req, res) => {
     // Send restaurants as response
     res.send(restaurants)
 })
+
+// Export the express app
+module.exports = app
