@@ -8,6 +8,7 @@ const multer = require("multer") // middleware to handle HTTP POST requests with
 const axios = require("axios") // middleware for making requests to APIs
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
+const { METHODS } = require("http")
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -41,6 +42,7 @@ app.get("/restaurants", (req, res) => {
     restaurants = []
     for (let i = 0; i < NO_RESTAURANTS; i++) {
         restaurants.push({
+            "restaurant_id": i,
             "name": "restaurant1",
             "number": "123-456-7890",
             "address": "123 5th Ave, New York, NY, 10003",
