@@ -25,3 +25,4 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 
+module.exports = app
