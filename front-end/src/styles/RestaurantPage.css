@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     height: 80vh;
-    border: 10px rgb(128, 66, 245);
+    border: 10px #A467F2;
     width: 100%;
 }
 
@@ -12,7 +12,7 @@
     align-items: center;
     height: 5vh;
     width: 101%;
-    background-color: rgb(128, 66, 245);
+    background-color: #A467F2;
     position: fixed;
 }
 
@@ -40,7 +40,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: rgb(126, 66, 245);
+    background-color: #A467F2;
     width: 100%;
 }
 
