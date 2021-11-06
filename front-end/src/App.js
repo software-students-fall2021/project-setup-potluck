@@ -20,7 +20,8 @@ function App() {
           
             <label for="hamburger">&#9776;</label>
             <input type="checkbox" id="hamburger"/>
-            
+
+            {/* Later come back and revisit implementation for desktop browser */}
             <div id="hamitems">
               <a href="/">Initial view</a>
               <a href="/feed">Feed</a>
