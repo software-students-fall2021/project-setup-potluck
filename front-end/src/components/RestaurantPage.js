@@ -3,6 +3,7 @@ import Button from "./BackButton.js"
 import FoodContainer from "./FoodContainer2x2.js"
 import BiggerContainer from "./BiggerContainer.js"
 
+
 const RestaurantPage = () => {
   return (
     <div className="restaurantPage">

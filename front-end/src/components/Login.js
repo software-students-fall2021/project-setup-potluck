@@ -6,6 +6,7 @@ function Login(){
     <div>
       <h1 class="headerText" style={{textAlign: 'center', fontSize: '75px', margin: '15px'}}>Login</h1>   
       <Form/>
+
     </div>
   )
 }

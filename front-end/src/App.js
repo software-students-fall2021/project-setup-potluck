@@ -9,6 +9,7 @@ import RestaurantPage from "./components/RestaurantPage"
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
+import Footer from "./components/Footer.js"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           
         </Switch>
       </div>
+      <Footer/>
     </Router>
   )
 }
