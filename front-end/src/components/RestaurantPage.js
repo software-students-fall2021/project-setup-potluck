@@ -10,13 +10,19 @@ const FeedPage = () => {
   const [restaurants, setRestaurants] = useState(['hello'])
 
   // Makes GET API call and sets data
-  useEffect(() => {
+  useEffect( async() => {
     
     const initializeRestaurants = async () => {
-      const restaurants = await axios.get('localhost:3000/restaurants/')
+      //promise based request to query backend for restaurants
+       await fetch("http://localhost:3000/restaurants").then(response => response.json())
+       .then(data => {console.log(data);
+        setRestaurants(data)
+      })
+  
       console.log(restaurants)
-      console.log("YO")
-      setRestaurants(restaurants)
+  
+    
+
     }
     
     initializeRestaurants()

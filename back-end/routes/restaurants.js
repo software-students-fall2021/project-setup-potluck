@@ -10,7 +10,10 @@ const getRandomLocation = (location, spread) => {
 // Function to randomly generate fake restaurant data
 // (To be replaced with proxy requests to MongoDB)
 const getRestaurants = (req, res) => {
-
+    try{
+        //set cors header ignore this as long as CORS Middleware is active
+        //res.header("Acces-Control-Allow-Origin", "*");
+    console.log("HI");
     // ----- GENERATE RANDOM RESTAURANT LOCATIONS - to be deleted -----
     // Define default location to load map
     const DEFAULT_LONGITUDE = -73.9936
@@ -38,7 +41,11 @@ const getRestaurants = (req, res) => {
     }
 
     // Send restaurants as response
-    res.json(restaurants)
+    res.json(restaurants)}
+    catch(error){
+        res.send(error);
+
+    }
     
 }
 

@@ -2,7 +2,7 @@
 const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
 const path = require("path")
-
+const cors = require("cors");
 // ---------------- IMPORT MIDDLEWARE  ---------------- 
 
 const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
@@ -17,7 +17,8 @@ app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nic
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
-
+//enable cors requsts accros all routes
+app.use(cors());
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 
