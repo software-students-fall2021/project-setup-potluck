@@ -1,5 +1,4 @@
 import "./../styles/RestaurantPage.css"
-import Button from "./BackButton.js"
 import FoodContainer from "./FoodContainer2x2.js"
 import BiggerContainer from "./BiggerContainer.js"
 import React, { useState, useEffect } from "react"
@@ -38,9 +37,7 @@ const FeedPage = () => {
 
     return (
       <div className="restaurantPage">
-        <div className="topMost">
-          <Button></Button>
-        </div>
+        
 
         <div className="dishImage">
           <img
