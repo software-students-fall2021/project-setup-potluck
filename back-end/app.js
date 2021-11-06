@@ -22,6 +22,7 @@ app.use(cors());
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 
+
 // ---------------- IMPORT ROUTES  ---------------- 
 
 const restaurantsRoute = require("./routes/restaurants")
@@ -32,4 +33,6 @@ const restaurantsRoute = require("./routes/restaurants")
 app.use("/restaurants", restaurantsRoute);
 
 // Export the express app
+
+
 module.exports = app

@@ -9,32 +9,28 @@ import FeedPage from "./components/RestaurantPage"
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
+import Footer from "./components/Footer.js"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
-function App() {
+
+function App() { 
   return (
     <Router>
-      <div>
-        {/* To be replaced with custom header / hamburger menu w links */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Initial View</Link>
-            </li>
-            <li>
-              <Link to="/feed">Feed</Link>
-            </li>
-            <li>
-              <Link to="/restaurant">Restaurant</Link>
-            </li>
-            <li>
-              <Link to="/map">Map</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
+      {/* <div> */}
+      <nav id="hamnav">
+          
+            <label for="hamburger">&#9776;</label>
+            <input type="checkbox" id="hamburger"/>
+
+            {/* Later come back and revisit implementation for desktop browser */}
+            <div id="hamitems">
+              <a href="/">Initial view</a>
+              <a href="/feed">Feed</a>
+              <a href="/restaurant">Restaurant</a>
+              <a href="/map">Map</a>
+              <a href="/about">About</a>
+            </div>
+          </nav>
 
         <Switch>
           <Route path="/feed">
@@ -58,7 +54,7 @@ function App() {
           </Route>
           
         </Switch>
-      </div>
+      <Footer/>
     </Router>
   )
 }

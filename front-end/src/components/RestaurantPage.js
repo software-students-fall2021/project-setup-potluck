@@ -6,7 +6,6 @@ import React, { useState, useEffect } from "react"
 const axios = require("axios").default
   
 const FeedPage = () => {
-
   const [restaurants, setRestaurants] = useState(['hello'])
 
   // Makes GET API call and sets data
@@ -38,6 +37,10 @@ const FeedPage = () => {
 }
 
 const RestaurantPage = ( { restaurant } ) => {
+
+
+const RestaurantPage = () => {
+
   return (
     <div className="restaurantPage">
       <div className="topMost">

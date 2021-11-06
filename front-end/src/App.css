@@ -1,16 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
 
-.tagButton {
-  position: absolute;
+#hamnav label, #hamburger { 
+  display: none; 
 }
 
-.headerText{
-  font-family: 'Bebas Neue', cursive;
+#hamnav {
+  width: 100%;
+  background: linear-gradient(270deg,#8C33FF, #A467F2, indigo);
+  position: static;
+  top: 0;
 }
 
-.regularText{
-  font-family: 'Roboto', sans-serif;
+#hamnav label {
+    display: inline-block;
+    color: white;
+    font-style: normal;
+    font-size: 1.2em;
+    padding: 8px;
+}
+
+#hamitems { display: flex; }
+#hamitems a {
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+#hamitems a:hover { 
+  background: indigo 
+}
+
+@media screen and (max-width: 768px){
+  
+#hamitems a {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #333;
+    /* transition: 0.5s; */
+    transition: all 0.5s;
 }
 
 
+#hamitems { 
+  display: none; 
+}
+#hamnav input:checked ~ #hamitems { display: block; }
+}
+
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: arial, sans-serif;
+}
