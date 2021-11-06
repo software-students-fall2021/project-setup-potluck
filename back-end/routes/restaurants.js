@@ -36,7 +36,10 @@ const getRestaurants = (req, res) => {
                 "longitude": getRandomLocation(DEFAULT_LONGITUDE, DEFAULT_SPREAD),
                 "latitude": getRandomLocation(DEFAULT_LATITUDE, DEFAULT_SPREAD),
             },
-            "menu": ["menu1", "menu2", "menu3", "menu4"]
+            "menuPopular": ["menu1", "menu2", "menu3", "menu4"],
+            "menuMain": ["main1", "main2", "main3", "main4", "main5", "main6", "main7", "main8"],
+            "beverages": ["bev1", "bev2", "bev3", "bev4"]
+            
         })
     }
 
