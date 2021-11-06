@@ -23,7 +23,7 @@ app.use("/static", express.static("public"))
 
 // ---------------- IMPORT ROUTES  ---------------- 
 
-const restaurantsRoute = require("./routes/restaurants");;
+const restaurantsRoute = require("./routes/restaurants")
 
 // ---------------- ROUTES  ---------------- 
 

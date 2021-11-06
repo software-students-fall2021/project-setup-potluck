@@ -38,7 +38,7 @@ const getRestaurants = (req, res) => {
     }
 
     // Send restaurants as response
-    res.send(restaurants)
+    res.json(restaurants)
     
 }
 
@@ -46,6 +46,7 @@ const getRestaurants = (req, res) => {
 
 // Define an endpoint to handle GET request to grab all restaurant information (no filter)
 // TO-DO : Implement filtered GET request
+// /restaurants
 router.route("/").get((req, res) => {
     getRestaurants(req, res);
 });
