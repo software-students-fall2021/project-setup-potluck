@@ -45,24 +45,7 @@ const About = () => {
                         <p class="title">NYU CAS</p>
                         <p class="para">[short description]</p>
                         <p class="email">cbw307@nyu.edu
-                            <span><a href="https://www.linkedin.com/in/wajahat-mirza/" target="_blank">
-                            <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>
-                            </a></span>
-                        </p>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-        
-                    <img src="../team/lee.jpeg"></img>
-                    <div class="container">
-                        <h2 class="name">Seunggun Lee </h2>
-                        <p class="title">NYU CAS</p>
-                        <p class="para">[short description]</p>
-                        <p class="email">sl6369@nyu.edu
-                            <span><a href="https://www.linkedin.com/in/seunggunlee" target="_blank">
+                            <span><a href="https://www.linkedin.com/in/christian-w-229194127" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>
                             </a></span>
                         </p>
@@ -75,17 +58,36 @@ const About = () => {
         
                     <img src="../team/lauren.jpeg"></img>
                     <div class="container">
-                        <h2 class="name">Lauren Gatesman</h2>
+                        <h2 class="name">Lauren Gatesman </h2>
                         <p class="title">NYU CAS</p>
                         <p class="para">[short description]</p>
                         <p class="email">lkg282@nyu.edu
-                            <span><a href="https://www.linkedin.com/in/lauren-gatesman/" target="_blank">
+                             <span><a href="https://www.linkedin.com/in/lauren-gatesman/" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30" ></img>
                             </a></span>
                         </p>
                     </div>
                     </div>
                 </div>
+
+                <div class="column">
+                    <div class="card">
+        
+                    <img src="../team/lee.jpeg"></img>
+                    <div class="container">
+                        <h2 class="name">Seunggun Lee</h2>
+                        <p class="title">NYU CAS</p>
+                        <p class="para">Lee is die hard formula 1 fan</p>
+                        <p class="email">sl6369@nyu.edu
+                            <span><a href="https://www.linkedin.com/in/seunggunlee" target="_blank">
+                            <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>
+                            </a></span>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+
+                
 
                 <div class="column">
                     <div class="card">
