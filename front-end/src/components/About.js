@@ -44,13 +44,30 @@ const About = () => {
                     <img src="../team/wajahat.jpg"></img>
                     <div class="container">
                         <h2 class="name">Christian Weinschenk  
-                            <span><a href="https://www.linkedin.com/in/wajahat-mirza/" target="_blank">
+                            <span><a href="https://www.linkedin.com/in/christian-w-229194127" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>
                             </a></span>
                         </h2>
                         <p class="title">NYU CAS</p>
                         <p class="para">Christian is die hard formula 1 fan</p>
                         <p class="email">cbw307@nyu.edu</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+        
+                    <img src="../team/lauren.jpeg"></img>
+                    <div class="container">
+                        <h2 class="name">Lauren Gatesman
+                            <span><a href="https://www.linkedin.com/in/lauren-gatesman/" target="_blank">
+                            <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30" ></img>
+                            </a></span>
+                        </h2>
+                        <p class="title">NYU CAS</p>
+                        <p class="para">Lauren is die hard formula 1 fan</p>
+                        <p class="email">lkg282@nyu.edu</p>
                     </div>
                     </div>
                 </div>
@@ -72,22 +89,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div class="column">
-                    <div class="card">
-        
-                    <img src="../team/wajahat.jpg"></img>
-                    <div class="container">
-                        <h2 class="name">Lauren Gatesman
-                            <span><a href="https://www.linkedin.com/in/lauren-gatesman/" target="_blank">
-                            <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30" ></img>
-                            </a></span>
-                        </h2>
-                        <p class="title">NYU CAS</p>
-                        <p class="para">Lauren is die hard formula 1 fan</p>
-                        <p class="email">lkg282@nyu.edu</p>
-                    </div>
-                    </div>
-                </div>
+                
 
                 <div class="column">
                     <div class="card">
