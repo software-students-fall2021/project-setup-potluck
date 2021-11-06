@@ -13,7 +13,7 @@ const FeedPage = () => {
   useEffect(() => {
     
     const initializeRestaurants = async () => {
-      const restaurants = await axios.get('restaurants/').data
+      const restaurants = await axios.get('localhost:3000/restaurants/')
       console.log(restaurants)
       console.log("YO")
       setRestaurants(restaurants)
