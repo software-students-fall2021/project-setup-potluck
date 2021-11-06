@@ -4,48 +4,46 @@ import ReactMapGl, { Marker } from "react-map-gl"
 import Pin from "./Pin"
 // Load API key from .env file (WHICH SHOULD BE IN .gitignore)
 require("dotenv").config()
+const axios = require("axios")
+
+const getRestaurants = () => {
+  return []
+}
 
 // This component loads an interactive map using react-map-gl
 // which is a React wrapper package for deck.gl
 const Map = () => {
+
   // Grab API Key for Mapbox
   const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX
 
   // Define default location to load map
   const DEFAULT_LONGITUDE = -73.9936
   const DEFAULT_LATITUDE = 40.7218
-  const DEFAULT_SPRAD = 0.02
-
-  // Temporary function to generate random longitude OR latitude, centered around
-  // a given location with a given spread
-  const getRandomLocation = (location, spread) => {
-    return spread / 2 - spread * Math.random() + location
-  }
 
   // viewport determines the user's view of the map
   const [viewport, setViewport] = React.useState({
     // Default values for the viewport when the App is loaded
-    longitude: -73.9936,
-    latitude: 40.7128,
+    longitude: DEFAULT_LONGITUDE,
+    latitude: DEFAULT_LATITUDE,
     zoom: 15,
     pitch: 0,
     bearing: 0,
   })
 
   // Fake data filler to create an array of markers
-  const [markerArr, setMarkerArr] = useState([])
+  const [restaurants, setRestaurants] = useState(axios.get("/restaurants"))
+  
+  // restaurants = [{},{}]
+  // i = 0
 
   // Hook to initailize markerArr on the first browser load
   useEffect(() => {
-    let tempArr = [...markerArr]
-    for (let i = 0; i < 100; i++) {
-      tempArr.push({
-        longitude: getRandomLocation(DEFAULT_LONGITUDE, DEFAULT_SPRAD),
-        latitude: getRandomLocation(DEFAULT_LATITUDE, DEFAULT_SPRAD),
-      })
-    }
+    
+    // GET all restaurants from the Map
+    // (later Map should accept tags as props and render pre-filtered Data, even if it's the first render)
+    setRestaurants(getRestaurants())
 
-    setMarkerArr(tempArr)
   }, [])
 
   return (
@@ -62,8 +60,10 @@ const Map = () => {
     >
       {
         // Display all pins
-        markerArr.map((restuarant) => {
+        restaurants.map((restuarant) => {
           return (
+            // 1. Callback function to detect a click on any of the markers
+            // 2. 
             <Marker
               latitude={restuarant.latitude}
               longitude={restuarant.longitude}

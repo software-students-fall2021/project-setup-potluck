@@ -5,7 +5,7 @@ import "./App.css"
 import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
-import RestaurantPage from "./components/RestaurantPage"
+import FeedPage from "./components/RestaurantPage"
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
@@ -42,7 +42,7 @@ function App() {
             <Header />
           </Route>
           <Route path="/restaurant">
-            <RestaurantPage />
+            <FeedPage />
           </Route>
           <Route path="/map">
             <Map />
@@ -52,6 +52,7 @@ function App() {
           </Route>
           {/* Dont add routes after the base route they wont work*/}
           <Route path="/">
+            <FeedPage />
             <InitialView />
             <Login />
           </Route>
