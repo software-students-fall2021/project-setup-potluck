@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect }  from "react"
 import { useLocation } from 'react-router-dom';
 
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -62,7 +62,27 @@ const Header = () => {
 //This component funcitons as a search function and allows you to pass the results to your own result handler components
 const PostSearch = ({path}) =>{
     //Fake Data that will be replaced by our API Call
+    const [posts, setPosts] = useState([])
+
+    // Makes GET API call and sets data
+    useEffect( () => {
+      
+      const initializePosts= async () => {
+        //promise based request to query backend for posts
+        
+         await fetch("http://localhost:3001/search").then(response => response.json())
+         .then(data => {console.log(data);
+          setPosts(data)
+        })
     
+        console.log(posts)
+    
+      }
+      
+      initializePosts()
+  
+    
+    }, [])
     const dummyData = [
         {
           title: 'Ramen',
@@ -88,7 +108,7 @@ const PostSearch = ({path}) =>{
           setKeyWord(event.target.value);
       }
       //filters posts with titles that match our keyword (this itself is the search), this can be further updated to include tags
-      const matchedPosts = dummyData.filter(post=>
+      const matchedPosts = posts.filter(post=>
         //   console.log(post.title.toLowerCase().includes(keyWord.toLowerCase()));
           post.title.toLowerCase().includes(keyWord.toLowerCase())
           ///console.log(matchedPosts);
