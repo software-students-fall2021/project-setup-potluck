@@ -2,38 +2,16 @@ import "./../styles/RestaurantPage.css"
 import FoodContainer from "./FoodContainer2x2.js"
 import BiggerContainer from "./BiggerContainer.js"
 import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
   
-const FeedPage = () => {
-  const [restaurants, setRestaurants] = useState([])
 
-  // Makes GET API call and sets data
-  useEffect( () => {
-    
-    const initializeRestaurants = async () => {
-      //promise based request to query backend for restaurants
-       await fetch("http://localhost:3001/restaurants").then(response => response.json())
-       .then(data => {console.log(data);
-        setRestaurants(data)
-      })
-  
-      console.log(restaurants)
-  
-    }
-    
-    initializeRestaurants()
-
-  
-  }, [])
-
-  return (
-      restaurants.map( restaurant => {
-        return <RestaurantPage restaurant={restaurant} />
-      })
-  )
-}
 
   const RestaurantPage = ( { restaurant } ) => {
+    
+    // Extract restaurant id from url parameter
+    let { id } = useParams()
 
+    // Make GET request to grab specific restaurant JSON object
     return (
       <div className="restaurantPage">
         
@@ -80,4 +58,4 @@ const FeedPage = () => {
     )
   }
 
-export default FeedPage
+export default RestaurantPage
