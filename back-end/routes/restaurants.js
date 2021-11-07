@@ -11,42 +11,40 @@ const getRandomLocation = (location, spread) => {
 // (To be replaced with proxy requests to MongoDB)
 const getRestaurants = (req, res) => {
     try{
-        //set cors header ignore this as long as CORS Middleware is active
-        //res.header("Acces-Control-Allow-Origin", "*");
-    console.log("HI");
-    // ----- GENERATE RANDOM RESTAURANT LOCATIONS - to be deleted -----
-    // Define default location to load map
-    const DEFAULT_LONGITUDE = -73.9936
-    const DEFAULT_LATITUDE = 40.7218
-    const DEFAULT_SPREAD = 0.01
+        // ----- GENERATE RANDOM RESTAURANT LOCATIONS - to be deleted -----
+        // Define default location to load map
+        const DEFAULT_LONGITUDE = -73.9936
+        const DEFAULT_LATITUDE = 40.7218
+        const DEFAULT_SPREAD = 0.01
 
-    // Define number of restaurants to randomly generate
-    NO_RESTAURANTS = 20
+        // Define number of restaurants to randomly generate
+        NO_RESTAURANTS = 20
 
-    // Create random restaurants
-    restaurants = []
-    for (let i = 0; i < NO_RESTAURANTS; i++) {
-        restaurants.push({
-            "restaurant_id": i,
-            "name": "restaurant1",
-            "number": "123-456-7890",
-            "address": "123 5th Ave, New York, NY, 10003",
-            "no_posts": Math.floor(Math.random() * 100),
-            "location": {
-                "longitude": getRandomLocation(DEFAULT_LONGITUDE, DEFAULT_SPREAD),
-                "latitude": getRandomLocation(DEFAULT_LATITUDE, DEFAULT_SPREAD),
-            },
-            "menuPopular": ["menu1", "menu2", "menu3", "menu4"],
-            "menuMain": ["main1", "main2", "main3", "main4", "main5", "main6", "main7", "main8"],
-            "beverages": ["bev1", "bev2", "bev3", "bev4"]
-            
-        })
+        // Create random restaurants
+        restaurants = []
+        for (let i = 0; i < NO_RESTAURANTS; i++) {
+            restaurants.push({
+                "restaurant_id": i,
+                "name": "restaurant1",
+                "number": "123-456-7890",
+                "address": "123 5th Ave, New York, NY, 10003",
+                "no_posts": Math.floor(Math.random() * 100),
+                "location": {
+                    "longitude": getRandomLocation(DEFAULT_LONGITUDE, DEFAULT_SPREAD),
+                    "latitude": getRandomLocation(DEFAULT_LATITUDE, DEFAULT_SPREAD),
+                },
+                "menuPopular": ["menu1", "menu2", "menu3", "menu4"],
+                "menuMain": ["main1", "main2", "main3", "main4", "main5", "main6", "main7", "main8"],
+                "beverages": ["bev1", "bev2", "bev3", "bev4"]
+                
+            })
+        }
+
+        return restaurants
     }
-
-    // Send restaurants as response
-    res.json(restaurants)}
+    
     catch(error){
-        res.send(error);
+        return error
 
     }
     
@@ -58,7 +56,32 @@ const getRestaurants = (req, res) => {
 // TO-DO : Implement filtered GET request
 // /restaurants
 router.route("/").get((req, res) => {
-    getRestaurants(req, res);
+    const restaurants = getRestaurants(req, res);
+    res.send(restaurants)
 });
+
+router.route("/single/:id").get((req, res) => {
+    // Extract restaurant id from the DB
+    const id = req.params.id
+
+    // Make async call to API to receive all restaurants
+    // (TO BE CHANGED TO GET SINGLE RESTAURANT W MONGODB)
+    const restaurants = getRestaurants(req, res);
+
+    try {
+        // Try to index restaurant
+        const restaurant = restaurants[id]
+
+        // Send requested restaurant JSON back
+        res.send(restaurant)
+    }
+    // If getRestaurants(req, res) resulted in error, pass on error
+    catch {
+        // Notice we're sending restaurants with an 's', to pass on the error
+        // restaurant would never have been indexed in restaurants resulted in an error
+        res.send(restaurants)
+    }
+    
+})
   
 module.exports = router
