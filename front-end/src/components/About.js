@@ -77,7 +77,7 @@ const About = () => {
                     <div class="container">
                         <h2 class="name">Seunggun Lee</h2>
                         <p class="title">NYU CAS</p>
-                        <p class="para">Lee is die hard formula 1 fan</p>
+                        <p class="para">[short description]</p>
                         <p class="email">sl6369@nyu.edu
                             <span><a href="https://www.linkedin.com/in/seunggunlee" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>

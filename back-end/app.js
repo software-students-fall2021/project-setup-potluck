@@ -25,4 +25,20 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 
-module.exports = app
+/*
+Beginning of Login Configuration
+*/
+
+//Require passport initializer for login function
+const passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+const json = require('./MOCK_LOGIN_DATA.json')
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+/*
+End of Login Configuration
+*/
