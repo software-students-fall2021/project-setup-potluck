@@ -6,10 +6,32 @@ import { useParams } from "react-router-dom"
   
 
 
-  const RestaurantPage = ( { restaurant } ) => {
+  const RestaurantPage = () => {
     
     // Extract restaurant id from url parameter
     let { id } = useParams()
+
+    const [restaurant, setRestaurant] = useState({})
+  
+    // Makes GET API call and sets data
+    useEffect( () => {
+      
+      // Make GET request to the backend the get all restaurant JSON objects
+      const initializeRestaurants = async () => {
+        
+        // Request for the particular restaurant using its id
+         await fetch(`http://localhost:3001/restaurants/single/${id}`).then(response => response.json())
+         .then(data => {console.log(data);
+          setRestaurant(data)
+        })
+    
+        console.log(restaurant)
+    
+      }
+      
+      initializeRestaurants()
+    
+    }, [])
 
     // Make GET request to grab specific restaurant JSON object
     return (
