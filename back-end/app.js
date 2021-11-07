@@ -25,11 +25,11 @@ app.use("/static", express.static("public"))
 // ---------------- LOGIN CONFIGURATION  ---------------- 
 
 //Require passport initializer for login function
-const passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+// const passport = require('passport')
+// const LocalStrategy = require('passport-local').Strategy;
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // ---------------- IMPORT ROUTES  ---------------- 
 
