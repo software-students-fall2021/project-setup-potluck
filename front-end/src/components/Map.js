@@ -1,14 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react"
-import ReactMapGl, { Marker } from "react-map-gl"
+import ReactMapGl, { Marker, GeolocateControl } from "react-map-gl"
 
 import Pin from "./Pin"
 // Load API key from .env file (WHICH SHOULD BE IN .gitignore)
 require("dotenv").config()
-const axios = require("axios")
-
-const getRestaurants = () => {
-  return []
-}
 
 // This component loads an interactive map using react-map-gl
 // which is a React wrapper package for deck.gl
@@ -32,20 +27,30 @@ const Map = () => {
   })
 
   // Fake data filler to create an array of markers
-  const [restaurants, setRestaurants] = useState(axios.get("/restaurants"))
-  
-  // restaurants = [{},{}]
-  // i = 0
+  const [restaurants, setRestaurants] = useState([])
 
-  // Hook to initailize markerArr on the first browser load
-  useEffect(() => {
+    // Makes GET API call and sets data
+    useEffect( () => {
     
-    // GET all restaurants from the Map
-    // (later Map should accept tags as props and render pre-filtered Data, even if it's the first render)
-    setRestaurants(getRestaurants())
+      const initializeRestaurants = async () => {
+        //promise based request to query backend for restaurants
+         await fetch("http://localhost:3001/restaurants").then(response => response.json())
+         .then(data => {console.log(data);
+          setRestaurants(data)
+        })
+    
+        console.log(restaurants)
+    
+      }
+      
+      initializeRestaurants()
+    }, [])
 
-  }, [])
-
+  const geolocateControlStyle= {
+    right: 10,
+    top: 10
+  };
+  
   return (
     <ReactMapGl
       // Spread all values of the viewport as prop for <ReactMapGl />
@@ -58,15 +63,21 @@ const Map = () => {
       // Provide Mapbox API key
       mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
     >
+      <GeolocateControl
+        style={geolocateControlStyle}
+        positionOptions={{enableHighAccuracy: true}}
+        trackUserLocation={true}
+        auto
+      />
       {
         // Display all pins
-        restaurants.map((restuarant) => {
+        restaurants.map((restaurant) => {
           return (
             // 1. Callback function to detect a click on any of the markers
             // 2. 
             <Marker
-              latitude={restuarant.latitude}
-              longitude={restuarant.longitude}
+              latitude={restaurant.location.latitude}
+              longitude={restaurant.location.longitude}
             >
               <Pin size={15} />
             </Marker>
