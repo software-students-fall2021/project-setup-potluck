@@ -2,9 +2,45 @@ import "./../styles/RestaurantPage.css"
 import Button from "./BackButton.js"
 import FoodContainer from "./FoodContainer2x2.js"
 import BiggerContainer from "./BiggerContainer.js"
+import React, { useState, useEffect } from "react"
+const axios = require("axios").default
+  
+const FeedPage = () => {
+  const [restaurants, setRestaurants] = useState(['hello'])
+
+  // Makes GET API call and sets data
+  useEffect( async() => {
+    
+    const initializeRestaurants = async () => {
+      //promise based request to query backend for restaurants
+       await fetch("http://localhost:3000/restaurants").then(response => response.json())
+       .then(data => {console.log(data);
+        setRestaurants(data)
+      })
+  
+      console.log(restaurants)
+  
+    
+
+    }
+    
+    initializeRestaurants()
+
+  
+  }, [])
+
+  return (
+      restaurants.map( restaurant => {
+        return <RestaurantPage restaurant={restaurant} />
+      })
+  )
+}
+
+const RestaurantPage = ( { restaurant } ) => {
 
 
 const RestaurantPage = () => {
+
   return (
     <div className="restaurantPage">
       <div className="topMost">
@@ -21,7 +57,7 @@ const RestaurantPage = () => {
 
       <div className="restaurantInfo">
         <div className="restaurantNameAddr">
-          <h2>Name_of_Restaurant</h2>
+          <h2>Restaurant Name</h2>
           <h4>Address_of_Restaurant (240 W 40th St)</h4>
           <h4>Contact (929-9299-9929)</h4>
           <h6>Number of Posts: 5,241</h6>
@@ -53,4 +89,4 @@ const RestaurantPage = () => {
   )
 }
 
-export default RestaurantPage
+export default FeedPage
