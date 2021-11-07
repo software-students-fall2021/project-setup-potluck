@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react"
 import ReactMapGl, { Marker, GeolocateControl } from "react-map-gl"
-
+import { useHistory } from "react-router-dom"
 import Pin from "./Pin"
 // Load API key from .env file (WHICH SHOULD BE IN .gitignore)
 require("dotenv").config()
@@ -8,6 +8,9 @@ require("dotenv").config()
 // This component loads an interactive map using react-map-gl
 // which is a React wrapper package for deck.gl
 const Map = () => {
+
+  // Initialize history to program navigation - to render clicked restaurants
+  let history = useHistory()
 
   // Grab API Key for Mapbox
   const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX
@@ -22,30 +25,33 @@ const Map = () => {
     longitude: DEFAULT_LONGITUDE,
     latitude: DEFAULT_LATITUDE,
     zoom: 15,
-    pitch: 0,
-    bearing: 0,
   })
 
   // Fake data filler to create an array of markers
   const [restaurants, setRestaurants] = useState([])
 
-    // Makes GET API call and sets data
-    useEffect( () => {
-      
-      // GET restaurant data from /restaurants
-      const initializeRestaurants = async () => {
-        //promise based request to query backend for restaurants
-         await fetch("http://localhost:3001/restaurants").then(response => response.json())
-         .then(data => {console.log(data);
-          setRestaurants(data)
-        })
+  // Makes GET API call and sets data
+  useEffect( () => {
     
-        console.log(restaurants)
+    // GET restaurant data from /restaurants
+    const initializeRestaurants = async () => {
+      //promise based request to query backend for restaurants
+        await fetch("http://localhost:3001/restaurants").then(response => response.json())
+        .then(data => {console.log(data);
+        setRestaurants(data)
+      })
+  
+      console.log(restaurants)
+  
+    }
     
-      }
-      
-      initializeRestaurants()
-    }, [])
+    initializeRestaurants()
+  }, [])
+
+  // Callback function to render clicked Restaurant
+  const restaurantClicked = (id) => {
+    history.push('/feed')
+  }
 
   // Styling for the geolocation feature
   const geolocateControlStyle= {
@@ -78,13 +84,14 @@ const Map = () => {
         restaurants.map((restaurant) => {
           return (
             // 1. Callback function to detect a click on any of the markers
-            // 2. 
+            // 2.
             <Marker
-              latitude={restaurant.location.latitude}
-              longitude={restaurant.location.longitude}
-            >
-              <Pin size={15} />
-            </Marker>
+                latitude={restaurant.location.latitude}
+                longitude={restaurant.location.longitude}
+                onClick={() => restaurantClicked(restaurant.id)}
+              >
+                <Pin size={15} />
+              </Marker>
           )
         })
       }
