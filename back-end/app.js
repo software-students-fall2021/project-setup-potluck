@@ -22,6 +22,16 @@ app.use(cors());
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 
+// ---------------- LOGIN CONFIGURATION  ---------------- 
+
+//Require passport initializer for login function
+const passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+const json = require('./MOCK_LOGIN_DATA.json')
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // ---------------- IMPORT ROUTES  ---------------- 
 
@@ -29,10 +39,8 @@ const restaurantsRoute = require("./routes/restaurants")
 
 // ---------------- ROUTES  ---------------- 
 
-// Routes for querying MongoDB - users & exercises
+// Route for restaurant GET requests
 app.use("/restaurants", restaurantsRoute);
 
 // Export the express app
-
-
 module.exports = app

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
 form {
     background: white;
     border: 1px solid #dedede;
@@ -26,3 +29,16 @@ form {
     font-weight: 500;
     margin-bottom: 5px;
   }
+
+  .login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+  font-family: 'Bebas Neue', cursive;
+  text-align: center;
+  font-size: 75px;
+  padding-top: 50px;
+}
