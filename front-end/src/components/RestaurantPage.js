@@ -2,7 +2,6 @@ import "./../styles/RestaurantPage.css"
 import FoodContainer from "./FoodContainer2x2.js"
 import BiggerContainer from "./BiggerContainer.js"
 import React, { useState, useEffect } from "react"
-const axios = require("axios").default
   
 const FeedPage = () => {
   const [restaurants, setRestaurants] = useState([])

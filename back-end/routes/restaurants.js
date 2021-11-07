@@ -21,7 +21,7 @@ const getRestaurants = (req, res) => {
     const DEFAULT_SPREAD = 0.01
 
     // Define number of restaurants to randomly generate
-    NO_RESTAURANTS = 5
+    NO_RESTAURANTS = 20
 
     // Create random restaurants
     restaurants = []
