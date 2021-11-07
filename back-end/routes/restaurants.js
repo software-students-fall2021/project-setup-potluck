@@ -32,12 +32,18 @@ const getRestaurants = (req, res) => {
             "number": "123-456-7890",
             "address": "123 5th Ave, New York, NY, 10003",
             "no_posts": Math.floor(Math.random() * 100),
+            "backgroundPic" : "https://picsum.photos/0/200", 
             "location": {
                 "longitude": getRandomLocation(DEFAULT_LONGITUDE, DEFAULT_SPREAD),
                 "latitude": getRandomLocation(DEFAULT_LATITUDE, DEFAULT_SPREAD),
             },
+            "logoPic" : "https://picsum.photos/250/250",
             "menuPopular": ["menu1", "menu2", "menu3", "menu4"],
+            "recipesPopular": ["recipe1", "recipe2", "recipe3", "recipe4"],
+            "menuPopularPics": ["https://picsum.photos/200/200", "https://picsum.photos/200/200", "https://picsum.photos/200/200", "https://picsum.photos/200/200"],
             "menuMain": ["main1", "main2", "main3", "main4", "main5", "main6", "main7", "main8"],
+            "recipesMain" : ["recipe1", "recipe2", "recipe3", "recipe4", "recipe5", "recipe6", "recipe7", "recipe8"],
+            "menuMainPics": ["https://picsum.photos/200/200","https://picsum.photos/200/200","https://picsum.photos/200/200","https://picsum.photos/200/200","https://picsum.photos/200/200","https://picsum.photos/200/200","https://picsum.photos/200/200","https://picsum.photos/200/200",],
             "beverages": ["bev1", "bev2", "bev3", "bev4"]
             
         })

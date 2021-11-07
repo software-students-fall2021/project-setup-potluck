@@ -1,6 +1,5 @@
 import "./../styles/RestaurantPage.css"
-import FoodContainer from "./FoodContainer2x2.js"
-import BiggerContainer from "./BiggerContainer.js"
+import FoodPopUp from "./FoodPopUp.js"
 import React, { useState, useEffect } from "react"
 const axios = require("axios").default
   
@@ -34,7 +33,7 @@ const FeedPage = () => {
 }
 
   const RestaurantPage = ( { restaurant } ) => {
-
+    const [buttonPopUp, setButtonPopUp] = useState(false)
     return (
       <div className="restaurantPage">
         
@@ -42,7 +41,7 @@ const FeedPage = () => {
         <div className="dishImage">
           <img
             className="dishPic"
-            src="https://picsum.photos/0/200"
+            src={restaurant.backgroundPic}
             alt="new"
           ></img>
         </div>
@@ -56,7 +55,7 @@ const FeedPage = () => {
           </div>
           <div>
             <img
-              src="https://picsum.photos/250/250"
+              src={restaurant.logoPic}
               alt="new"
               className="roundedCorners"
             ></img>
@@ -65,17 +64,48 @@ const FeedPage = () => {
 
         <div className="mostPopularDishses">
           <h1 className="indent">Popular Dishes:</h1>
-          <FoodContainer></FoodContainer>
+          {/*<FoodContainer restaurant={restaurant}></FoodContainer> */}
+          <div className="popDishes"> {/*
+              {restaurant.menuPopular.map(url => {
+                  return (<div key={restaurant.name} className="">
+                    <button onClick={() => setButtonPopUp(true)}><img src={url} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{restaurant.menuPopular.indexOf()}</figcaption><FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>Name_Of_Food</h1><p>space for recipe + nutrtional content</p></FoodPopUp>
+                  </div> )
+                })} */}
+
+                {restaurant.menuPopular.map((item, index) => {
+                  return (<div key={restaurant.name} className="">
+                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                    <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
+                  </div> )
+                })}
+
+          </div>
         </div>
 
         <div className="mainDishes">
           <h1 className="indent">Main Dishes:</h1>
-          <BiggerContainer></BiggerContainer>
+          {/* <BiggerContainer></BiggerContainer> */}
+          <div className="allDishes">
+
+                {restaurant.menuMain.map((item, index) => {
+                  return (<div key={restaurant.name} className="">
+                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                    <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
+                  </div> )
+                })}
+          </div>
         </div>
 
-        <div className="beverages">
+        <div className="drinks">
           <h1 className="indent">Beverages:</h1>
-          <FoodContainer></FoodContainer>
+           <div className="beverages">
+              {restaurant.beverages.map((item, index) => {
+                  return (<div key={restaurant.name} className="">
+                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="beverages" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                    <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
+                  </div> )
+                })}
+           </div>
         </div>
       </div>
     )
