@@ -28,8 +28,6 @@ app.use("/static", express.static("public"))
 const passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-const json = require('./MOCK_LOGIN_DATA.json')
-
 app.use(passport.initialize());
 app.use(passport.session());
 
