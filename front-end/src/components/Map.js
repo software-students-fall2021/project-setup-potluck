@@ -31,7 +31,8 @@ const Map = () => {
 
     // Makes GET API call and sets data
     useEffect( () => {
-    
+      
+      // GET restaurant data from /restaurants
       const initializeRestaurants = async () => {
         //promise based request to query backend for restaurants
          await fetch("http://localhost:3001/restaurants").then(response => response.json())
@@ -46,6 +47,7 @@ const Map = () => {
       initializeRestaurants()
     }, [])
 
+  // Styling for the geolocation feature
   const geolocateControlStyle= {
     right: 10,
     top: 10
@@ -63,7 +65,9 @@ const Map = () => {
       // Provide Mapbox API key
       mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
     >
+      
       <GeolocateControl
+        // Show & zoom to user's current location
         style={geolocateControlStyle}
         positionOptions={{enableHighAccuracy: true}}
         trackUserLocation={true}
