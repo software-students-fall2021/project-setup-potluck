@@ -25,6 +25,7 @@ const Map = () => {
     longitude: DEFAULT_LONGITUDE,
     latitude: DEFAULT_LATITUDE,
     zoom: 15,
+    maxPitch: 0
   })
 
   // Fake data filler to create an array of markers
