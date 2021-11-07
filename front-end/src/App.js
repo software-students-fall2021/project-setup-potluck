@@ -48,7 +48,7 @@ function App() {
           </Route>
           {/* Dont add routes after the base route they wont work*/}
           <Route path="/">
-            <FeedPage />
+    
             <InitialView />
             <Login />
           </Route>

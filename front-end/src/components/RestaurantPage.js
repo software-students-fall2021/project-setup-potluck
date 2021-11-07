@@ -8,7 +8,7 @@ const FeedPage = () => {
   const [restaurants, setRestaurants] = useState([])
 
   // Makes GET API call and sets data
-  useEffect( async() => {
+  useEffect( () => {
     
     const initializeRestaurants = async () => {
       //promise based request to query backend for restaurants
