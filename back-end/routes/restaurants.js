@@ -60,28 +60,28 @@ router.route("/").get((req, res) => {
     res.send(restaurants)
 });
 
-router.route("/single/:id").get((req, res) => {
-    // Extract restaurant id from the DB
-    const id = req.params.id
+// router.route("/single/:id").get((req, res) => {
+//     // Extract restaurant id from the DB
+//     const id = req.params.id
 
-    // Make async call to API to receive all restaurants
-    // (TO BE CHANGED TO GET SINGLE RESTAURANT W MONGODB)
-    const restaurants = getRestaurants(req, res);
+//     // Make async call to API to receive all restaurants
+//     // (TO BE CHANGED TO GET SINGLE RESTAURANT W MONGODB)
+//     const restaurants = getRestaurants(req, res);
 
-    try {
-        // Try to index restaurant
-        const restaurant = restaurants[id]
+//     try {
+//         // Try to index restaurant
+//         const restaurant = restaurants[id]
 
-        // Send requested restaurant JSON back
-        res.send(restaurant)
-    }
-    // If getRestaurants(req, res) resulted in error, pass on error
-    catch {
-        // Notice we're sending restaurants with an 's', to pass on the error
-        // restaurant would never have been indexed in restaurants resulted in an error
-        res.send(restaurants)
-    }
+//         // Send requested restaurant JSON back
+//         res.send(restaurant)
+//     }
+//     // If getRestaurants(req, res) resulted in error, pass on error
+//     catch {
+//         // Notice we're sending restaurants with an 's', to pass on the error
+//         // restaurant would never have been indexed in restaurants resulted in an error
+//         res.send(restaurants)
+//     }
     
-})
+// })
   
 module.exports = router
