@@ -15,6 +15,9 @@ import { useState, useEffect } from 'react'
 
 function App() {
 
+  // State holding an array of restaurant JSON objects
+  // This array will be passed down as prop to RestaurantPage, RestaurantFeed, and Map
+  // to avoid calling the backend API multiple times
   const [restaurants, setRestaurants] = useState([])
   
   // Makes GET API call and sets data

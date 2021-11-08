@@ -45,7 +45,6 @@ const getRestaurants = (req, res) => {
     
     catch(error){
         return error
-
     }
     
 }

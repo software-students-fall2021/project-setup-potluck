@@ -31,7 +31,8 @@ const Map = ( {restaurants} ) => {
     maxPitch: 0
   })
 
-  // Callback function to render clicked Restaurant
+  // Callback function to render clicked Restaurant by pushing
+  // the page specific restaurant page to the browser's history
   const restaurantClicked = (id) => {
     history.push(`/restaurant/${id}`)
   }
@@ -70,14 +71,10 @@ const Map = ( {restaurants} ) => {
           auto
         />
         {
-          // Conditionally display Restaurants if restaurants state is loaded
-          // Display all pins
-      
-        
+          // Conditionally display Restaurants if restaurants state is loaded  
           restaurants.map((restaurant) => {
           
-            // 1. Callback function to detect a click on any of the markers
-            // 2.
+            // Callback function to detect a click on any of the markers
             return (
             <Marker
                 latitude={restaurant.location.latitude}
@@ -91,6 +88,7 @@ const Map = ( {restaurants} ) => {
         
       </ReactMapGl>
     ) : (
+      // Display loading screen if async call to GET restaurants is incomplete
       <div>
         <h1>Loading Map</h1>
         <Spinner animation="border" role="status">
