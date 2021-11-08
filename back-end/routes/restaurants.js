@@ -24,7 +24,7 @@ const getRestaurants = (req, res) => {
         restaurants = []
         for (let i = 0; i < NO_RESTAURANTS; i++) {
             restaurants.push({
-                "restaurant_id": i,
+                "id": i,
                 "name": "restaurant1",
                 "number": "123-456-7890",
                 "address": "123 5th Ave, New York, NY, 10003",
