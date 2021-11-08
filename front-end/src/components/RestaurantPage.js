@@ -61,9 +61,9 @@ import { useParams } from "react-router-dom"
           <div className="popDishes"> 
             {console.log(restaurant, "LALALALALAL")}
             {
-              restaurant.menuPopular.map( item => {
+              restaurant.menuPopular.map( (item, index) => {
                 return (
-                  <div key={restaurant.name} className="">
+                  <div key={index} className="">
                     <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div>
@@ -80,7 +80,7 @@ import { useParams } from "react-router-dom"
           <h1 className="indent">Main Dishes:</h1>
           <div className="allDishes">
                 {restaurant.menuMain.map((item, index) => {
-                  return (<div key={restaurant.name} className="">
+                  return (<div key={index} className="">
                     <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div> )
@@ -91,7 +91,7 @@ import { useParams } from "react-router-dom"
           <h1 className="indent">Beverages:</h1>
            <div className="beverages">
               {restaurant.beverages.map((item, index) => {
-                  return (<div key={restaurant.name} className="">
+                  return (<div key={index} className="">
                     <button onClick={() => setButtonPopUp(true)}><img src={item} alt="beverages" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div> )
