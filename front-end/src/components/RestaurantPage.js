@@ -2,42 +2,32 @@ import "./../styles/RestaurantPage.css"
 import FoodContainer from "./FoodContainer2x2.js"
 import BiggerContainer from "./BiggerContainer.js"
 import React, { useState, useEffect } from "react"
-  
-const FeedPage = () => {
-  const [restaurants, setRestaurants] = useState([])
+import { Spinner } from "react-bootstrap"
+import { useParams } from "react-router-dom"
 
-  // Makes GET API call and sets data
-  useEffect( () => {
+  const RestaurantPage = ({ restaurants }) => {
+    console.log(restaurants, "RESTAURANTS PASSED IN RESTAURANT PAGE")
+    // Extract restaurant id from url parameter
+    let { id } = useParams()
+  
+    // State to keep track of the restaurant JSON object
+    const [ restaurant, setRestaurant ] = useState({})
+
+    // Sets the restaurant state once the async backend call sets restaurants
+    // in App.js (otherwise, React would throw an error because restaurants
+    // has not been created yet)
+    useEffect( () => { 
+      console.log("SETTING RESTAURANT")
+      setRestaurant(restaurants[id])    
+    }, [restaurants, id])
     
-    const initializeRestaurants = async () => {
-      //promise based request to query backend for restaurants
-       await fetch("http://localhost:3001/restaurants").then(response => response.json())
-       .then(data => {console.log(data);
-        setRestaurants(data)
-      })
-  
-      console.log(restaurants)
-  
-    }
-    
-    initializeRestaurants()
 
-  
-  }, [])
-
-  return (
-      restaurants.map( restaurant => {
-        return <RestaurantPage restaurant={restaurant} />
-      })
-  )
-}
-
-  const RestaurantPage = ( { restaurant } ) => {
-
+    // Make GET request to grab specific restaurant JSON object
     return (
+      // Conditionally render restaurant if data has been fetched
+      restaurant ? (
+      
       <div className="restaurantPage">
-        
-
         <div className="dishImage">
           <img
             className="dishPic"
@@ -77,7 +67,15 @@ const FeedPage = () => {
           <FoodContainer></FoodContainer>
         </div>
       </div>
-    )
+    ) : ( // Otherwise, render loading screen
+    <div>
+      <h1>Loading Restaurant</h1>
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </div>
+    
+    ))
   }
 
-export default FeedPage
+export default RestaurantPage
