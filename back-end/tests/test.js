@@ -50,4 +50,15 @@ describe("searchTests", ()=>{
 
 });
 
+//basic primer for unit testing with mocha/chai:
 
+//use describe() to define your test suite and then individual tests inside it's your suite's callback
+//use it() to write the description of an individual test
+//everything in your it() callback is part of that test, 
+//you can use chai.request to make a request from the app and then .get('/your route')
+//you can use should be and should have to check specific properties of whatever you are checking
+//think of these as less verbose assertions made to be easier to read
+//the rest is pretty self explanatory check out the documentation for chai, mocha, or any of the mocha plugins
+//type in npm run name of test file  (so in this case npm run test) to run your tests
+//type npm run coverage to take a look at a coverage report (this comes from istanbul-nyc)
+//have a great day!
