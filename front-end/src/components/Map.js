@@ -78,10 +78,10 @@ const Map = ( {restaurants} ) => {
             // Callback function to detect a click on any of the markers
             return (
             <Marker
-                key={restaurant["restaurant id"]}
+                key={restaurant.id}
                 latitude={restaurant.location.latitude}
                 longitude={restaurant.location.longitude}
-                onClick={() => restaurantClicked(restaurant["restaurant id"])}
+                onClick={() => restaurantClicked(restaurant.id)}
             >
               <Pin size={15} />
             </Marker>)
