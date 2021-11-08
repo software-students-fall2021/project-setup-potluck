@@ -1,5 +1,3 @@
-
-
 const router = require("express").Router(); // Router object to define a route
 const mockaroo = require("mockaroo")
 

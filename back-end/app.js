@@ -36,8 +36,8 @@ app.use("/static", express.static("public"))
 // ---------------- IMPORT ROUTES  ---------------- 
 
 const restaurantsRoute = require("./routes/restaurants")
-
 const searchRoute = require("./routes/searchRoute")
+const usernameRoute = require("./routes/usernameRoute")
 
 // ---------------- ROUTES  ---------------- 
 
@@ -45,6 +45,8 @@ const searchRoute = require("./routes/searchRoute")
 app.use("/restaurants", restaurantsRoute);
 
 app.use("/search", searchRoute);
+
+app.use("/myAccount/:username", usernameRoute);
 
 // Export the express app
 module.exports = app

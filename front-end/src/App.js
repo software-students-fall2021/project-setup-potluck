@@ -10,6 +10,7 @@ import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
 import RestaurantPage from "./components/RestaurantPage"
+import GetData from "./components/MyAccountPage"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
 
@@ -21,23 +22,24 @@ function App() {
   const [restaurants, setRestaurants] = useState([])
   
   // Makes GET API call and sets data
-  useEffect( () => {
+//  useEffect( () => {
     
     // Make GET request to the backend the get all restaurant JSON objects
-    const initializeRestaurants = async () => {
+
+//    const initializeRestaurants = async () => {
       
       // Request for the particular restaurant using its id
-       await fetch(`http://localhost:3001/restaurants/`).then(response => response.json())
-       .then(data => {console.log(" logging data",data);
-        setRestaurants([...data])
-      })
+//       await fetch(`http://localhost:3001/restaurants/`).then(response => response.json())
+//       .then(data => {console.log(" logging data",data);
+//        setRestaurants([...data])
+//      })
     
   
-    }
+//    }
     
-    initializeRestaurants()
+ //   initializeRestaurants()
   
-  }, [])
+//  }, [])
 
   return (
     <Router>
@@ -75,6 +77,10 @@ function App() {
           {/* Route with restaurant id passed as a parameter */}
           <Route path="/restaurant/:id">
             <RestaurantPage restaurants={restaurants}/>
+          </Route>
+
+          <Route path="/myAccount">
+            <GetData/>
           </Route>
           {/* Dont add routes after the base route they wont work*/}
           <Route path="/">
