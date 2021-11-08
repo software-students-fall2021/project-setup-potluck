@@ -29,7 +29,7 @@ function App() {
       // Request for the particular restaurant using its id
        await fetch(`http://localhost:3001/restaurants/`).then(response => response.json())
        .then(data => {console.log(" logging data",data);
-        setRestaurants([...data])
+        setRestaurants(data)
       })
     
   

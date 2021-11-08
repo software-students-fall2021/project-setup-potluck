@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom"
     let { id } = useParams()
   
     // State to keep track of the restaurant JSON object
-    const [ restaurant, setRestaurant ] = useState({})
+    const [ restaurant, setRestaurant ] = useState()
 
     const [buttonPopUp, setButtonPopUp] = useState(false)
     // Sets the restaurant state once the async backend call sets restaurants
@@ -21,12 +21,12 @@ import { useParams } from "react-router-dom"
       setRestaurant(restaurants[id])    
     }, [restaurants, id])
     
-
+    console.log(restaurant, "YO")
     // Make GET request to grab specific restaurant JSON object
     return (
       // Conditionally render restaurant if data has been fetched
-      restaurant ? (
       
+      restaurant ? (
       <div className="restaurantPage">
         <div className="dishImage">
           <img
@@ -59,23 +59,29 @@ import { useParams } from "react-router-dom"
         <div className="mostPopularDishses">
           <h1 className="indent">Popular Dishes:</h1>
           <div className="popDishes"> 
-                {restaurant.menuPopular.map((item, index) => {
-                  return (<div key={restaurant.name} className="">
-                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+            {console.log(restaurant, "LALALALALAL")}
+            {
+              restaurant.menuPopular.map( (item, index) => {
+                return (
+                  <div key={index} className="">
+                    <button onClick={() => setButtonPopUp(true)}><img src={restaurant.menuPopularPics[index]} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
-                  </div> )
-                })}
+                  </div>
+                )
+              })
+            }
 
           </div>
         </div>
+
         {/* As shown above, the .map function is utilized to render in the exact number of dishes/beverages of each respective
         restaurant as opposed to the initial approach, hard-code (which kept us from implementing a more dynamic approach). */}
         <div className="mainDishes">
           <h1 className="indent">Main Dishes:</h1>
           <div className="allDishes">
                 {restaurant.menuMain.map((item, index) => {
-                  return (<div key={restaurant.name} className="">
-                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                  return (<div key={index} className="">
+                    <button onClick={() => setButtonPopUp(true)}><img src={restaurant.menuMainPics[index]} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div> )
                 })}
@@ -85,8 +91,8 @@ import { useParams } from "react-router-dom"
           <h1 className="indent">Beverages:</h1>
            <div className="beverages">
               {restaurant.beverages.map((item, index) => {
-                  return (<div key={restaurant.name} className="">
-                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="beverages" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                  return (<div key={index} className="">
+                    <button onClick={() => setButtonPopUp(true)}><img src={restaurant.menuMainPics[index]} alt="beverages" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div> )
                 })}
