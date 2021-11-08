@@ -27,7 +27,7 @@ const Map = ( {restaurants} ) => {
     // Default values for the viewport when the App is loaded
     longitude: DEFAULT_LONGITUDE,
     latitude: DEFAULT_LATITUDE,
-    zoom: 15,
+    zoom: 2,
     maxPitch: 0
   })
 
@@ -68,6 +68,7 @@ const Map = ( {restaurants} ) => {
           style={geolocateControlStyle}
           positionOptions={{enableHighAccuracy: true}}
           trackUserLocation={true}
+          showAccuracyCircle={false}
           auto
         />
         {
