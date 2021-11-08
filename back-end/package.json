@@ -7,8 +7,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "axios": "^0.24.0",
-
-=======
     "babel": "^6.23.0",
     "babel-node": "0.0.1-security",
 
