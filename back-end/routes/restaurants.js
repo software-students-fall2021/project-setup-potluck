@@ -60,6 +60,7 @@ router.route("/").get((req, res) => {
     res.send(restaurants)
 });
 
+// TEMPORARILY EXCLUDED TO TEST OPTIMAL API CALLS
 // router.route("/single/:id").get((req, res) => {
 //     // Extract restaurant id from the DB
 //     const id = req.params.id
