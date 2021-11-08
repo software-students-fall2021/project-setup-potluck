@@ -63,7 +63,7 @@ function App() {
             <RestaurantFeed restaurants={restaurants} />
           </Route>
           <Route path="/map">
-            <Map />
+            <Map restaurants={restaurants}/>
           </Route>
           <Route path="/about">
             <About />
