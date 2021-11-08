@@ -56,10 +56,42 @@
 
 .mostPopularDishses {
     width: 100%;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.popDishes {
+    display: flex;
+    flex-wrap: wrap;;
+    justify-content: space-around;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.mainDishes {
+    width: 100%;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.allDishes {
+    display: flex;
+    flex-wrap: wrap;;
+    justify-content: space-around;
+    background-color: rgba(241, 231, 254, 1);
 }
 
 .beverages {
+    display: flex;
+    flex-wrap: wrap;;
+    justify-content: space-around;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.drinks {
     width: 100%;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.rounded {
+    border-radius: 30px;
 }
 
 .indent {
@@ -67,3 +99,4 @@
     position: relative;
 
 }
+
