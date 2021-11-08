@@ -1,19 +1,44 @@
 import "./App.css"
 
-// Import components
-
-import Header from "./components/Header.js"
-import Map from "./components/Map.js"
+// Import component
+import Header from "./components/Header"
+import Map from "./components/Map"
 import Login from "./components/Login"
-import FeedPage from "./components/RestaurantPage"
+import RestaurantFeed from "./components/RestaurantFeed"
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
-import Footer from "./components/Footer.js"
+import Footer from "./components/Footer"
+import RestaurantPage from "./components/RestaurantPage"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { useState, useEffect } from 'react'
 
+function App() {
 
-function App() { 
+  // State holding an array of restaurant JSON objects
+  // This array will be passed down as prop to RestaurantPage, RestaurantFeed, and Map
+  // to avoid calling the backend API multiple times
+  const [restaurants, setRestaurants] = useState([])
+  
+  // Makes GET API call and sets data
+  useEffect( () => {
+    
+    // Make GET request to the backend the get all restaurant JSON objects
+    const initializeRestaurants = async () => {
+      
+      // Request for the particular restaurant using its id
+       await fetch(`http://localhost:3001/restaurants/`).then(response => response.json())
+       .then(data => {console.log(" logging data",data);
+        setRestaurants([...data])
+      })
+    
+  
+    }
+    
+    initializeRestaurants()
+  
+  }, [])
+
   return (
     <Router>
       {/* <div> */}
@@ -26,7 +51,7 @@ function App() {
             <div id="hamitems">
               <a href="/">Initial view</a>
               <a href="/feed">Feed</a>
-              <a href="/restaurant">Restaurant</a>
+              <a href="/restaurants">Restaurants</a>
               <a href="/map">Map</a>
               <a href="/about">About</a>
             </div>
@@ -37,18 +62,23 @@ function App() {
             <TagButton />
             <Header />
           </Route>
-          <Route path="/restaurant">
-            <FeedPage />
+          <Route path="/restaurants">
+            <RestaurantFeed restaurants={restaurants} />
           </Route>
           <Route path="/map">
-            <Map />
+            <Map restaurants={restaurants}/>
           </Route>
           <Route path="/about">
-              <About />
+            <About />
+          </Route>
+          
+          {/* Route with restaurant id passed as a parameter */}
+          <Route path="/restaurant/:id">
+            <RestaurantPage restaurants={restaurants}/>
           </Route>
           {/* Dont add routes after the base route they wont work*/}
           <Route path="/">
-            <FeedPage />
+    
             <InitialView />
             <Login />
           </Route>

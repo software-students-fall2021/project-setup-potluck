@@ -1,43 +1,33 @@
 import "./../styles/RestaurantPage.css"
 import FoodPopUp from "./FoodPopUp.js"
 import React, { useState, useEffect } from "react"
-const axios = require("axios").default
-  
-const FeedPage = () => {
-  const [restaurants, setRestaurants] = useState([])
+import { Spinner } from "react-bootstrap"
+import { useParams } from "react-router-dom"
 
-  // Makes GET API call and sets data
-  useEffect( async() => {
-    
-    const initializeRestaurants = async () => {
-      //promise based request to query backend for restaurants
-       await fetch("http://localhost:3001/restaurants").then(response => response.json())
-       .then(data => {console.log(data);
-        setRestaurants(data)
-      })
+  const RestaurantPage = ({ restaurants }) => {
+    console.log(restaurants, "RESTAURANTS PASSED IN RESTAURANT PAGE")
+    // Extract restaurant id from url parameter
+    let { id } = useParams()
   
-      console.log(restaurants)
-  
-    }
-    
-    initializeRestaurants()
+    // State to keep track of the restaurant JSON object
+    const [ restaurant, setRestaurant ] = useState({})
 
-  
-  }, [])
-
-  return (
-      restaurants.map( restaurant => {
-        return <RestaurantPage restaurant={restaurant} />
-      })
-  )
-}
-
-  const RestaurantPage = ( { restaurant } ) => {
     const [buttonPopUp, setButtonPopUp] = useState(false)
-    return (
-      <div className="restaurantPage">
-        
+    // Sets the restaurant state once the async backend call sets restaurants
+    // in App.js (otherwise, React would throw an error because restaurants
+    // has not been created yet)
+    useEffect( () => { 
+      console.log("SETTING RESTAURANT")
+      setRestaurant(restaurants[id])    
+    }, [restaurants, id])
+    
 
+    // Make GET request to grab specific restaurant JSON object
+    return (
+      // Conditionally render restaurant if data has been fetched
+      restaurant ? (
+      
+      <div className="restaurantPage">
         <div className="dishImage">
           <img
             className="dishPic"
@@ -103,17 +93,25 @@ const FeedPage = () => {
            </div>
         </div>
       </div>
-    )
+    ) : ( // Otherwise, render loading screen
+    <div>
+      <h1>Loading Restaurant</h1>
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </div>
+    
+    ))
   }
-
-  {/* Integration between the back-end and front-end has been achieved, but there still exist some actions which 
+  
+  /* Integration between the back-end and front-end has been achieved, but there still exist some actions which 
   keeps the component from running coherently.
     - mapping through an array of images: Many of the images that are to be displayed on this component are stored within 
     an array (a field within the JSON object) as picsum urls and not actual IMAGES. << potential source of prob tho UNSURE.
     - Cannot get the correct food_name or recipe to display on the popUp window when an item is clicked << will work on this.
-*/}
+*/
 
-{/* As for the restaurant.js page within the back-end dir, the only changes are the addition of certain fields within the 
-JSON object (that is ultimately to be sent to the front-end: RestaurantPage.js & possibly Map.js?). */}
+/* As for the restaurant.js page within the back-end dir, the only changes are the addition of certain fields within the 
+JSON object (that is ultimately to be sent to the front-end: RestaurantPage.js & possibly Map.js?). */
 
-export default FeedPage
+export default RestaurantPage
