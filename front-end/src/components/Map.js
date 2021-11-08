@@ -39,8 +39,8 @@ const Map = ( {restaurants} ) => {
 
   // Styling for the geolocation feature
   const geolocateControlStyle= {
-    right: 10,
-    top: 10
+    right: 40,
+    top: 40
   };
 
   // Rerender Map when restaurants is loaded / changed
@@ -68,7 +68,7 @@ const Map = ( {restaurants} ) => {
           style={geolocateControlStyle}
           positionOptions={{enableHighAccuracy: true}}
           trackUserLocation={true}
-          showAccuracyCircle={false}
+          showAccuracyCircle={false} // Remove the big blue accuracy circle
           auto
         />
         {
