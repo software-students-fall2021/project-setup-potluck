@@ -12,6 +12,7 @@ require("dotenv").config({ silent: true }) // load environmental variables from 
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
 const { METHODS } = require("http")
 const mockaroo = require("mockaroo")
+import '@babel/polyfill'
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
 
