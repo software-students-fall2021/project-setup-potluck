@@ -61,17 +61,14 @@ const FeedPage = () => {
             ></img>
           </div>
         </div>
-
+        {/* what used to be separate component calls within these three compartments (Popular Dishes, Main Dishes, 
+        Beverages -> all found between the <h1> tags have now been deleted and replaced with actual code within the
+        RestaurantPage.js component itself. Through the use of the "FeedPage" & "initializeRestaurants," all functions 
+        defined within this same component, we receive an array of JSON objects via restaurant.js, a file found within
+        the project's back-end directory. */}
         <div className="mostPopularDishses">
           <h1 className="indent">Popular Dishes:</h1>
-          {/*<FoodContainer restaurant={restaurant}></FoodContainer> */}
-          <div className="popDishes"> {/*
-              {restaurant.menuPopular.map(url => {
-                  return (<div key={restaurant.name} className="">
-                    <button onClick={() => setButtonPopUp(true)}><img src={url} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{restaurant.menuPopular.indexOf()}</figcaption><FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>Name_Of_Food</h1><p>space for recipe + nutrtional content</p></FoodPopUp>
-                  </div> )
-                })} */}
-
+          <div className="popDishes"> 
                 {restaurant.menuPopular.map((item, index) => {
                   return (<div key={restaurant.name} className="">
                     <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
@@ -81,12 +78,11 @@ const FeedPage = () => {
 
           </div>
         </div>
-
+        {/* As shown above, the .map function is utilized to render in the exact number of dishes/beverages of each respective
+        restaurant as opposed to the initial approach, hard-code (which kept us from implementing a more dynamic approach). */}
         <div className="mainDishes">
           <h1 className="indent">Main Dishes:</h1>
-          {/* <BiggerContainer></BiggerContainer> */}
           <div className="allDishes">
-
                 {restaurant.menuMain.map((item, index) => {
                   return (<div key={restaurant.name} className="">
                     <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
@@ -95,7 +91,6 @@ const FeedPage = () => {
                 })}
           </div>
         </div>
-
         <div className="drinks">
           <h1 className="indent">Beverages:</h1>
            <div className="beverages">
@@ -110,5 +105,15 @@ const FeedPage = () => {
       </div>
     )
   }
+
+  {/* Integration between the back-end and front-end has been achieved, but there still exist some actions which 
+  keeps the component from running coherently.
+    - mapping through an array of images: Many of the images that are to be displayed on this component are stored within 
+    an array (a field within the JSON object) as picsum urls and not actual IMAGES. << potential source of prob tho UNSURE.
+    - Cannot get the correct food_name or recipe to display on the popUp window when an item is clicked << will work on this.
+*/}
+
+{/* As for the restaurant.js page within the back-end dir, the only changes are the addition of certain fields within the 
+JSON object (that is ultimately to be sent to the front-end: RestaurantPage.js & possibly Map.js?). */}
 
 export default FeedPage
