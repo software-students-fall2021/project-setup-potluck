@@ -2,12 +2,15 @@ import React, { useCallback, useEffect, useState } from "react"
 import ReactMapGl, { Marker, GeolocateControl } from "react-map-gl"
 import { useHistory } from "react-router-dom"
 import Pin from "./Pin"
+import { Spinner } from "react-bootstrap"
 // Load API key from .env file (WHICH SHOULD BE IN .gitignore)
 require("dotenv").config()
 
 // This component loads an interactive map using react-map-gl
 // which is a React wrapper package for deck.gl
-const Map = () => {
+const Map = ( {restaurants} ) => {
+
+  const [restaurantsLoaded, setRestaurantsLoaded] = useState(false)
 
   // Initialize history to program navigation - to render clicked restaurants
   let history = useHistory()
@@ -28,30 +31,9 @@ const Map = () => {
     maxPitch: 0
   })
 
-  // Fake data filler to create an array of markers
-  const [restaurants, setRestaurants] = useState([])
-
-  // Makes GET API call and sets data
-  useEffect( () => {
-    
-    // GET restaurant data from /restaurants
-    const initializeRestaurants = async () => {
-      //promise based request to query backend for restaurants
-        await fetch("http://localhost:3001/restaurants").then(response => response.json())
-        .then(data => {console.log(data);
-        setRestaurants(data)
-      })
-  
-      console.log(restaurants)
-  
-    }
-    
-    initializeRestaurants()
-  }, [])
-
   // Callback function to render clicked Restaurant
   const restaurantClicked = (id) => {
-    history.push('/feed')
+    history.push(`/restaurant/${id}`)
   }
 
   // Styling for the geolocation feature
@@ -59,44 +41,63 @@ const Map = () => {
     right: 10,
     top: 10
   };
+
+  // Rerender Map when restaurants is loaded / changed
+  useEffect(() => {
+    restaurants ? setRestaurantsLoaded(true) : setRestaurantsLoaded(false)
+    console.log(restaurantsLoaded)
+  }, [restaurants])
   
   return (
-    <ReactMapGl
-      // Spread all values of the viewport as prop for <ReactMapGl />
-      {...viewport}
-      width="100vw"
-      height="80vh"
-      initial
-      // Track changes in the viewPort
-      onViewportChange={setViewport}
-      // Provide Mapbox API key
-      mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
-    >
+    restaurantsLoaded ? (
+      <ReactMapGl
+        // Spread all values of the viewport as prop for <ReactMapGl />
+        {...viewport}
+        width="100vw"
+        height="80vh"
+        initial
+        // Track changes in the viewPort
+        onViewportChange={setViewport}
+        // Provide Mapbox API key
+        mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
+      >
+        
+        <GeolocateControl
+          // Show & zoom to user's current location
+          style={geolocateControlStyle}
+          positionOptions={{enableHighAccuracy: true}}
+          trackUserLocation={true}
+          auto
+        />
+        {
+          // Conditionally display Restaurants if restaurants state is loaded
+          // Display all pins
       
-      <GeolocateControl
-        // Show & zoom to user's current location
-        style={geolocateControlStyle}
-        positionOptions={{enableHighAccuracy: true}}
-        trackUserLocation={true}
-        auto
-      />
-      {
-        // Display all pins
-        restaurants.map((restaurant) => {
-          return (
+        
+          restaurants.map((restaurant) => {
+          
             // 1. Callback function to detect a click on any of the markers
             // 2.
+            return (
             <Marker
                 latitude={restaurant.location.latitude}
                 longitude={restaurant.location.longitude}
                 onClick={() => restaurantClicked(restaurant.id)}
-              >
-                <Pin size={15} />
-              </Marker>
-          )
-        })
-      }
-    </ReactMapGl>
+            >
+              <Pin size={15} />
+            </Marker>)
+          })
+        } 
+        
+      </ReactMapGl>
+    ) : (
+      <div>
+        <h1>Loading Map</h1>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    )
   )
 }
 
