@@ -64,7 +64,7 @@ import { useParams } from "react-router-dom"
               restaurant.menuPopular.map( (item, index) => {
                 return (
                   <div key={index} className="">
-                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                    <button onClick={() => setButtonPopUp(true)}><img src={restaurant.menuPopularPics[index]} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div>
                 )
@@ -81,7 +81,7 @@ import { useParams } from "react-router-dom"
           <div className="allDishes">
                 {restaurant.menuMain.map((item, index) => {
                   return (<div key={index} className="">
-                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                    <button onClick={() => setButtonPopUp(true)}><img src={restaurant.menuMainPics[index]} alt="popularDishes" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div> )
                 })}
@@ -92,7 +92,7 @@ import { useParams } from "react-router-dom"
            <div className="beverages">
               {restaurant.beverages.map((item, index) => {
                   return (<div key={index} className="">
-                    <button onClick={() => setButtonPopUp(true)}><img src={item} alt="beverages" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
+                    <button onClick={() => setButtonPopUp(true)}><img src={restaurant.menuMainPics[index]} alt="beverages" className="rounded"/></button><figcaption className="textUnder">{item}</figcaption>
                     <FoodPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}><h1>{item}</h1><p>{item}</p></FoodPopUp>
                   </div> )
                 })}
