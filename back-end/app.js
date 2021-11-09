@@ -40,6 +40,8 @@ const restaurantsRoute = require("./routes/restaurants")
 const searchRoute = require("./routes/searchRoute")
 
 const usernameRoute = require("./routes/usernameRoute")
+
+const loginRoute = require("./routes/loginRoute")
 // ---------------- ROUTES  ---------------- 
 
 // Route for restaurant GET requests
@@ -47,6 +49,8 @@ app.use("/restaurants", restaurantsRoute);
 
 app.use("/search", searchRoute);
 
+// Route for login GET request
+app.use("/login/:email/:password", loginRoute); 
 
 //for jin: user_Retrieval route
 app.use("/myAccount/:username", usernameRoute);
