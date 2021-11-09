@@ -37,7 +37,7 @@ const getUsers = (req, res) => {
 });/*/
 
 // TEMPORARILY EXCLUDED TO TEST OPTIMAL API CALLS
-router.route("/login/:email/:password").get((req, res) => {
+router.route("/:email/:password").get((req, res) => {
     
     // Make call to retrieve all registered users (pre-defined/harcoded)
     const registeredUsers = getUsers(req, res);
@@ -49,7 +49,7 @@ router.route("/login/:email/:password").get((req, res) => {
     const password = req.params.password
 
     //Variable to hold whether the user trying to login entered the correct credentials
-    const isValidUser = false
+    let isValidUser = false
 
     registeredUsers.forEach(function (arrayItem) {
         if (arrayItem.email === email){
@@ -60,10 +60,10 @@ router.route("/login/:email/:password").get((req, res) => {
     });
 
     if (isValidUser === true){
-        res.send(true)
+        res.send("true")
     }
     else{
-        res.send(false)
+        res.send("false")
     }
     
 })
