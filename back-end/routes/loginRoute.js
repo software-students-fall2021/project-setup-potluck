@@ -51,14 +51,16 @@ router.route("/:email/:password").get((req, res) => {
     //Variable to hold whether the user trying to login entered the correct credentials
     let isValidUser = false
 
-    registeredUsers.forEach(function (arrayItem) {
-        if (arrayItem.email === email){
-            if (arrayItem.password === password){
+    for (let i=0; i<registeredUsers.length; i++) {
+        let registeredUser = registeredUsers[i]
+        if (registeredUser.email === email){
+            if (registeredUser.password === password){
                 isValidUser = true
+                break
             }
         }
-    });
-
+    }
+    
     if (isValidUser === true){
         res.send("true")
     }
