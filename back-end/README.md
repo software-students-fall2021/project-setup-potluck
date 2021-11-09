@@ -1,4 +1,4 @@
-# Potluck Backend (Express.js)
+# Potluck Back-end (Express.js)
  
 ## Available Scripts
 
