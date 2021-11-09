@@ -50,7 +50,7 @@ app.use("/restaurants", restaurantsRoute);
 app.use("/search", searchRoute);
 
 // Route for login GET request
-app.use("/login/:email/:password", loginRoute); 
+app.use("/login", loginRoute); 
 
 //for jin: user_Retrieval route
 app.use("/myAccount/:username", usernameRoute);
