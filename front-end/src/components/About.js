@@ -100,7 +100,7 @@ const About = () => {
                         {/* <p class="para">[short description]</p> */}
                         <p class="email">jhk742@nyu.edu
                         
-                        <span><a href="https://www.linkedin.com/in/jin-hyeong-kim-38959b221/" target="_blank">
+                        <span><a href="https://www.linkedin.com/in/jin-hyeong-kim/" target="_blank">
                         <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30" ></img>
                         </a></span>
                         
