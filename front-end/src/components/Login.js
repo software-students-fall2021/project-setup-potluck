@@ -9,7 +9,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
   const authenticateLogin = async (email, password) => {
       
     // Request for the particular restaurant using its id
-     await fetch(`http://localhost:3000/login/${email}/${password}`)
+     await fetch(`http://localhost:3001/login/${email}/${password}`)
      .then(data => data.json())
      .then(data => {
       console.log("logging data",data.body);
