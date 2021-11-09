@@ -97,7 +97,7 @@ const About = () => {
                     <img src="../team/jin.jpeg"></img>
                     <div class="container">
                         <h2 class="name">Jin Kim
-                            <span><a href="https://www.linkedin.com/in/jin-hyeong-kim-38959b221/" target="_blank">
+                            <span><a href="https://www.linkedin.com/in/jin-hyeong-kim/" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30" ></img>
                             </a></span>
                         </h2>
