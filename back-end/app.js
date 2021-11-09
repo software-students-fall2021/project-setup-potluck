@@ -39,7 +39,7 @@ const restaurantsRoute = require("./routes/restaurants")
 
 const searchRoute = require("./routes/searchRoute")
 
-const usernameRoute = require("./routes/usernameRoute")
+const userRoute = require("./routes/userRoute")
 // ---------------- ROUTES  ---------------- 
 
 // Route for restaurant GET requests
@@ -49,7 +49,7 @@ app.use("/search", searchRoute);
 
 
 //for jin: user_Retrieval route
-app.use("/myAccount/:username", usernameRoute);
+app.use("/user", userRoute);
 
 // Export the express app
 module.exports = app

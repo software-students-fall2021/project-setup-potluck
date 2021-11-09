@@ -10,6 +10,7 @@ import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
 import RestaurantPage from "./components/RestaurantPage"
+import GetData from "./components/MyAccountPage"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
 
@@ -19,9 +20,11 @@ function App() {
   // This array will be passed down as prop to RestaurantPage, RestaurantFeed, and Map
   // to avoid calling the backend API multiple times
   const [restaurants, setRestaurants] = useState([])
+
+  const [users, setUsers] = useState([])
   
   // Makes GET API call and sets data
-  useEffect( () => {
+  
     
     // Make GET request to the backend the get all restaurant JSON objects
     const initializeRestaurants = async () => {
@@ -34,9 +37,18 @@ function App() {
     
   
     }
-    
+
+    const initializeUser = async () => {
+      await fetch(`http://localhost:3001/user/`).then(response => response.json())
+      .then(data => {console.log(" logging users data", data);
+      setUsers(data)
+    })
+    }
+
+  useEffect( () => {
     initializeRestaurants()
-  
+    initializeUser()
+
   }, [])
 
   return (
@@ -71,7 +83,11 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          
+
+        <Route path="/users">
+          <GetData users={users}/>
+        </Route>
+
           {/* Route with restaurant id passed as a parameter */}
           <Route path="/restaurant/:id">
             <RestaurantPage restaurants={restaurants}/>
