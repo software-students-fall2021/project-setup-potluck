@@ -25,7 +25,7 @@ const About = () => {
                     <div class="container">
                         <h2 class="name">Wajahat Mirza </h2>
                         <p class="title">NYU Abu Dhabi</p>
-                        <p class="para">[short description]</p>
+                        {/* <p class="para">[short description]</p> */}
                         <p class="email">mwm356@nyu.edu
                             <span><a href="https://www.linkedin.com/in/wajahat-mirza/" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>
@@ -41,9 +41,9 @@ const About = () => {
         
                     <img src="../team/wajahat.jpg"></img>
                     <div class="container">
-                        <h2 class="name">Christian Weinschenk </h2>
+                        <h2 class="name">Christian </h2>
                         <p class="title">NYU CAS</p>
-                        <p class="para">[short description]</p>
+                        {/* <p class="para">[short description]</p> */}
                         <p class="email">cbw307@nyu.edu
                             <span><a href="https://www.linkedin.com/in/christian-w-229194127" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>
@@ -58,9 +58,9 @@ const About = () => {
         
                     <img src="../team/lauren.jpeg"></img>
                     <div class="container">
-                        <h2 class="name">Lauren Gatesman </h2>
+                        <h2 class="name">Lauren </h2>
                         <p class="title">NYU CAS</p>
-                        <p class="para">[short description]</p>
+                        {/* <p class="para">[short description]</p> */}
                         <p class="email">lkg282@nyu.edu
                              <span><a href="https://www.linkedin.com/in/lauren-gatesman/" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30" ></img>
@@ -77,7 +77,7 @@ const About = () => {
                     <div class="container">
                         <h2 class="name">Seunggun Lee</h2>
                         <p class="title">NYU CAS</p>
-                        <p class="para">[short description]</p>
+                        {/* <p class="para">[short description]</p> */}
                         <p class="email">sl6369@nyu.edu
                             <span><a href="https://www.linkedin.com/in/seunggunlee" target="_blank">
                             <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30"></img>
@@ -97,10 +97,10 @@ const About = () => {
                         <h2 class="name">Jin Kim
                         </h2>
                         <p class="title">NYU CAS</p>
-                        <p class="para">[short description]</p>
+                        {/* <p class="para">[short description]</p> */}
                         <p class="email">jhk742@nyu.edu
                         
-                        <span><a href="https://www.linkedin.com/in/jin-hyeong-kim-38959b221/" target="_blank">
+                        <span><a href="https://www.linkedin.com/in/jin-hyeong-kim/" target="_blank">
                         <img class="linkedin" src="../LI-In-Bug.png" width="30" height="30" ></img>
                         </a></span>
                         

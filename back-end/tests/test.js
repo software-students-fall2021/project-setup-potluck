@@ -134,6 +134,47 @@ const restaurantSchema = {
   },
 }
 
+const userDataSchema = {
+  title: "userDataSchema v1",
+  type: "object",
+  required: [
+    "id",
+    "username",
+    "first_name",
+    "last_name",
+    "email",
+    "password",
+    "gender",
+    "profilePic",
+  ],
+  properties: {
+    id: {
+      type: "number",
+    },
+    username: {
+      type: "string",
+    },
+    first_name: {
+      type: "string",
+    },
+    last_name: {
+      type: "string",
+    },
+    email: {
+      type: "string",
+    },
+    password: {
+      type: "string",
+    },
+    gender: {
+      type: "string",
+    },
+    profilePic: {
+      type: "string",
+    },
+  },
+}
+
 // ############### TESTS ###############
 
 //suite of tests for the search/feed route
@@ -288,6 +329,46 @@ describe("loginTests", () => {
     it("Request should return an array of length 5", (done) => {
       //Check to see if the length of the response is 5
       assert.equal(response.body.length, 5)
+      done()
+    })
+  })
+})
+
+describe("userData", () => {
+  describe("GET/", () => {
+    let error, response
+    //Makes request prior to all tests running
+    before((done) => {
+      //use chai to make a get request to search route
+      chai
+        .request(app)
+        .get("/user/")
+        .end((err, res) => {
+          //hoist error, response to the actual response, error variables
+          ;(error = err), (response = res)
+          //console.log(res);
+          done()
+        })
+    })
+
+    it("Request should return a valid 200 response", (done) => {
+      //use chai to make a get request to the restaurants route!
+      //checks if request returns a 200 level response
+      response.should.have.status(200)
+      done()
+    })
+
+    it("Request should return an array", (done) => {
+      //checks to see if the response is an array
+      response.body.should.be.a("array")
+      done()
+    })
+
+    it("All Elements in the array should be objects that adhere to the userDataSchema used by the mockaroo api, the frontend, and eventually (but not yet) mongoDB", (done) => {
+      //check to see if every element in the array is an object that adheres to a predefined schema
+      response.body.forEach((element) => {
+        element.should.be.jsonSchema(userDataSchema)
+      })
       done()
     })
   })
