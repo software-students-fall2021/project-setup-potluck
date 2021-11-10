@@ -10,7 +10,7 @@ import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
 import RestaurantPage from "./components/RestaurantPage"
-import GetData from "./components/MyAccountPage"
+import MyAccountPage from "./components/MyAccountPage"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
 
@@ -85,7 +85,7 @@ function App() {
           </Route>
 
         <Route path="/users">
-          <GetData users={users}/>
+          <MyAccountPage users={users}/>
         </Route>
 
           {/* Route with restaurant id passed as a parameter */}

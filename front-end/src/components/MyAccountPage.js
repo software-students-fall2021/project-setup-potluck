@@ -1,6 +1,6 @@
 import "./../styles/MyAccountPage.css"
 
-const GetData = ({ users }) => {
+const GetUserData = ({ users }) => {
     return (
         <div>
             <h1>{users}</h1>
@@ -8,5 +8,5 @@ const GetData = ({ users }) => {
     )
 }
 
-export default GetData
+export default MyAccountPage
 
