@@ -31,10 +31,10 @@ const getUsers = (req, res) => {
 // ------------------ ROUTE ENDPOINTS ------------------
 
 // Get all of the registered users
-/*router.route("/").get((req, res) => {
+router.route("/").get((req, res) => {
     const registeredUsers = getUsers(req, res);
     res.send(registeredUsers)
-});/*/
+});
 
 // TEMPORARILY EXCLUDED TO TEST OPTIMAL API CALLS
 router.route("/:email/:password").get((req, res) => {

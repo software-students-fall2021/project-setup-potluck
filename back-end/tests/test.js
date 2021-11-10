@@ -4,7 +4,6 @@ import { ApiError } from 'mockaroo/lib/errors';
 import app from "../app";
 import '@babel/polyfill'
 const assert = require("assert");
-const fetch = require("node-fetch")
 
 chai.use(chaiHttp);
 chai.should();
@@ -206,7 +205,40 @@ describe("restaurants", ()=>{
 
 //Suite of tests for login authentication (loginRoute)
 describe("loginTests", ()=>{
-    //Testing the get request to see if it returns 200 level status (that it went through properly)
+    //Testing the function that verifies the user is a valid, registered user
+    describe("GET/", ()=>{
+       
+        let error, response;
+
+        //Makes request prior to all tests running
+        before((done) =>{
+            //Use chai to make a get request to login route
+            chai.request(app).get("/login/lkg282@nyu.edu/Lauren").end((err, res)=>{
+                //hoist error, response to the actual response, error variables
+                error =err, response = res;
+                
+                done();
+            });
+        });
+
+        //The response should be a valid 200 response
+        it("Request should return a valid 200 response", (done) =>{  
+            //checks if request returns a 200 level response
+            response.should.have.status(200);
+            done();
+        });
+
+        //The response should be a boolean value
+        it("Request should return true or false", (done) =>{
+            //The response should be a boolean value
+            //true = user logs in, false = user cannot log in
+            response.body.should.be.a('boolean');
+            done();
+        })
+        
+    });
+
+    //Testing the function that gets and returns the array of registered users
     describe("GET/", ()=>{
        
         let error, response;
@@ -221,24 +253,34 @@ describe("loginTests", ()=>{
                 done();
             });
         });
+
+        //The response should be a valid 200 response
         it("Request should return a valid 200 response", (done) =>{
-            //use chai to make a get request to the search route!     
             //checks if request returns a 200 level response
             response.should.have.status(200);
             done();
         });
-        it("Request should return true or false", (done) =>{
+
+        //The response should be an array of objects
+        it("Request should return an array of objects", (done) =>{
             
-            //The response should be a boolean value
-            //true = user logs in, false = user cannot log in
-            console.log("response: ", response)
-            response.should.be.a('boolean');
+            //Check if the response is an array or not
+            response.body.should.be.a('array');
+            done();
+        })
+
+        //The response array should contain 5 objects
+        it("Request should return an array of length 5", (done) =>{
+            
+            //Check to see if the length of the response is 5
+            assert.equal(response.body.length, 5)
             done();
         })
         
     });
 
 });
+
 
 
 
