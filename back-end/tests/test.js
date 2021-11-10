@@ -285,10 +285,45 @@ describe("loginTests", () => {
     })
 
     //The response should be a boolean value
-    it("Request should return true or false", (done) => {
+    it("Request should return a boolean value", (done) => {
       //The response should be a boolean value
       //true = user logs in, false = user cannot log in
       response.body.should.be.a("boolean")
+      done()
+    })
+
+    //The response should be true, since we are sending valid email/password combination
+    it("Request should true", (done) => {
+      //The response should true since we provided valid login information
+      //true = user logs in
+      assert.equal(response.body, true)
+      done()
+    })
+  })
+
+  //Testing the function that verifies the user is a valid, registered user
+  //But this time with faulty login information
+  describe("GET/", () => {
+    let error, response
+
+    //Makes request prior to all tests running
+    before((done) => {
+      //Use chai to make a get request to login route
+      chai
+        .request(app)
+        .get("/login/lkg282@nyu.edu/fakePassword")
+        .end((err, res) => {
+          //hoist error, response to the actual response, error variables
+          ;(error = err), (response = res)
+
+          done()
+        })
+    })
+
+    //The response should be false, since we provided incorrect email/password combination
+    it("Request should return true or false", (done) => {
+      //The response should be false, since the password is incorrect
+      assert.equal(response.body, false)
       done()
     })
   })
