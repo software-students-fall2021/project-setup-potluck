@@ -4,10 +4,13 @@ import { ApiError } from 'mockaroo/lib/errors';
 import app from "../app";
 import '@babel/polyfill'
 const assert = require("assert");
+const fetch = require("node-fetch")
 
 chai.use(chaiHttp);
 chai.should();
 chai.use(require('chai-json-schema'));
+
+//Imports for testing login authentication
 
 // ############### SCHEMAS TO TEST DB RESULTS ###############
 
@@ -200,6 +203,44 @@ describe("restaurants", ()=>{
     });
 
 });
+
+//Suite of tests for login authentication (loginRoute)
+describe("loginTests", ()=>{
+    //Testing the get request to see if it returns 200 level status (that it went through properly)
+    describe("GET/", ()=>{
+       
+        let error, response;
+
+        //Makes request prior to all tests running
+        before((done) =>{
+            //use chai to make a get request to login route
+            chai.request(app).get("/login").end((err, res)=>{
+                //hoist error, response to the actual response, error variables
+                error =err, response = res;
+                
+                done();
+            });
+        });
+        it("Request should return a valid 200 response", (done) =>{
+            //use chai to make a get request to the search route!     
+            //checks if request returns a 200 level response
+            response.should.have.status(200);
+            done();
+        });
+        it("Request should return true or false", (done) =>{
+            
+            //The response should be a boolean value
+            //true = user logs in, false = user cannot log in
+            console.log("response: ", response)
+            response.should.be.a('boolean');
+            done();
+        })
+        
+    });
+
+});
+
+
 
 
 //basic primer for unit testing with mocha/chai:
