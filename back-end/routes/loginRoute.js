@@ -9,7 +9,7 @@ const getUsers = (req, res) => {
 
         // Create list of users (one for each member of team)
         // Name = member's first name, email = their nyu email, password = their last name
-        registeredUsers = [
+        var registeredUsers = [
 
             {"email": "lkg282@nyu.edu", "password": "Lauren" },
             {"email": "sl6369@nyu.edu", "password": "Seunggun" },
@@ -51,10 +51,10 @@ router.route("/:email/:password").get((req, res) => {
     //Variable to hold whether the user trying to login entered the correct credentials
     let isValidUser = false
 
-    for (let i=0; i<registeredUsers.length; i++) {
+    for (let i = 0; i < registeredUsers.length; i++) {
         let registeredUser = registeredUsers[i]
-        if (registeredUser.email === email){
-            if (registeredUser.password === password){
+        if (registeredUser.email.valueOf() == email.valueOf()){
+            if (registeredUser.password.valueOf() == password.valueOf()){
                 isValidUser = true
                 break
             }
@@ -62,10 +62,10 @@ router.route("/:email/:password").get((req, res) => {
     }
     
     if (isValidUser === true){
-        res.send("true")
+        res.send(true)
     }
     else{
-        res.send("false")
+        res.send(false)
     }
     
 })

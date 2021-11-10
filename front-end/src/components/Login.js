@@ -12,11 +12,9 @@ const Login = ({loggedIn, setLoggedIn}) => {
      await fetch(`http://localhost:3001/login/${email}/${password}`)
      .then(data => data.json())
      .then(data => {
-      console.log("logging data",data.body);
       if (data === true) {
         setLoggedIn(true)
       }
-      console.log("is the user logged in? ", loggedIn)
     })
   }
 
