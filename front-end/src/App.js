@@ -10,7 +10,12 @@ import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
+
+import RestaurantPage from "./components/RestaurantPage"
+import MyAccountPage from "./components/MyAccountPage"
+
 import GetData from "./components/MyAccountPage"
+
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
@@ -104,7 +109,11 @@ function App() {
           <About />
         </Route>
         <Route path="/users">
+
+          <MyAccountPage users={users}/>
+
           <GetData users={users} />
+
         </Route>
         {/* Route with restaurant id passed as a parameter */}
         <Route path="/restaurant/:id">
