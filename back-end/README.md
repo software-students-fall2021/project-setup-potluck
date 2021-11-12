@@ -1,5 +1,5 @@
 # Potluck Back-end (Express.js)
- 
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -11,11 +11,14 @@ This is necessary before running the app, since the 3rd-party dependency code is
 
 ### `npm run dev` - start the server locally
 
-Description of `npm run dev` here
+### `npm run test` - run developer-defined tests for the backend routes
+
+### `npm run coverage` - view a report of the code-coverage
 
 ---
 
 ## Dependencies
+
 Available in `package.json`
 
 ---
@@ -30,4 +33,3 @@ The example routes include:
 - `/users` - a route that servers all user data queried from the mockaroo API, available as an array of JSONs
 - `/login/:email/:password` - a route that authenticates the login information and responds with a true or false value to indicate authentication success or failure
 - `/search` - a route that serves all feed posts data queried from the mockaroo API, available as an array of JSONs
-
