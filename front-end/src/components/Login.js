@@ -3,19 +3,20 @@ import { Redirect } from "react-router-dom"
 import axios from "axios"
 import "../styles/Login.css"
 
-const Login = props => {
-  
-  //Create state variables to hold the email and password
-  const [status, setStatus] = useState({})
+const Login = ({loggedIn, setLoggedIn}) => {
 
-  // if the user's logged-in status changes, call the setuser function that was passed to this component from the PrimaryNav component.
-  useEffect(() => {
-    // if the login was a success, call the setuser function that was passed to this component as a prop
-    if (status.success) {
-      console.log(`User successfully logged in: ${status.email}`)
-      props.setuser(status)
-    }
-  }, [status])
+  // Make GET request to the backend
+  const authenticateLogin = async (email, password) => {
+      
+    // Request for the particular restaurant using its id
+     await fetch(`http://localhost:3001/login/${email}/${password}`)
+     .then(data => data.json())
+     .then(data => {
+      if (data === true) {
+        setLoggedIn(true)
+      }
+    })
+  }
 
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
@@ -25,30 +26,12 @@ const Login = props => {
     const email = e.target.email.value // gets the value of the field in the submitted form with name='email'
     const password = e.target.password.value // gets the value of the field in the submitted form with name='password'
 
-    // send form data to API to authenticate
-    const formData = new FormData()
-    formData.append("email", email)
-    formData.append("password", password)
+    authenticateLogin(email, password)
 
-    try {
-      // send the request to the server api to authenticate
-      const response = await axios({
-        method: "post",
-        url: "https://api.mockaroo.com/api/2364dc40?count=1000&key=e5beaaa0",
-        data: formData,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      // store the response data into the data state variable
-      console.log(response.data)
-      setStatus(response.data)
-    } catch (err) {
-      // throw an error
-      throw new Error(err)
-    }
   }
 
   // if the user is not logged in, show the login form
-  if (!status.success)
+  if (loggedIn === false)
     return (
       <div className="Login">
         <h1 class="title">Login</h1>
@@ -69,8 +52,7 @@ const Login = props => {
       </div>
     )
   // otherwise, if the user has successfully logged-in, redirect them to a different page
-  //Currently is set the about page for testing purposes
-  else return <Redirect to="/about" />
+  else return <Redirect to="/" />
 }
 
 export default Login
