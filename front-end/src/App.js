@@ -10,7 +10,8 @@ import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
 import RestaurantPage from "./components/RestaurantPage"
-import GetData from "./components/MyAccountPage"
+// import GetData from "./components/MyAccountPage"
+import PostFeed from "./components/PostFeed"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
 
@@ -30,7 +31,7 @@ function App() {
     const initializeRestaurants = async () => {
       
       // Request for the particular restaurant using its id
-       await fetch(`http://localhost:3001/restaurants/`).then(response => response.json())
+       await fetch(`http://localhost:3000/restaurants/`).then(response => response.json())
        .then(data => {console.log(" logging data",data);
         setRestaurants(data)
       })
@@ -39,7 +40,7 @@ function App() {
     }
 
     const initializeUser = async () => {
-      await fetch(`http://localhost:3001/user/`).then(response => response.json())
+      await fetch(`http://localhost:3000/user/`).then(response => response.json())
       .then(data => {console.log(" logging users data", data);
       setUsers(data)
     })
@@ -66,6 +67,7 @@ function App() {
               <a href="/restaurants">Restaurants</a>
               <a href="/map">Map</a>
               <a href="/about">About</a>
+              <a href="/post-feed">Post</a>
             </div>
           </nav>
 
@@ -83,10 +85,13 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/post-feed">
+            <PostFeed />
+          </Route>
 
-        <Route path="/users">
+        {/* <Route path="/users">
           <GetData users={users}/>
-        </Route>
+        </Route> */}
 
           {/* Route with restaurant id passed as a parameter */}
           <Route path="/restaurant/:id">
