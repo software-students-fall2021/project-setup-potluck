@@ -10,7 +10,7 @@ import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
 import RestaurantPage from "./components/RestaurantPage"
-// import GetData from "./components/MyAccountPage"
+import GetData from "./components/MyAccountPage"
 import PostFeed from "./components/PostFeed"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
