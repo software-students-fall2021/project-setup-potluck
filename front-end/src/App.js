@@ -85,6 +85,12 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/users">
+
+          <MyAccountPage users={users}/>
+
+          <GetData users={users} />
+          </Route>
           <Route path="/post-feed">
             <PostFeed />
           </Route>
