@@ -31,7 +31,7 @@ function App() {
     const initializeRestaurants = async () => {
       
       // Request for the particular restaurant using its id
-       await fetch(`http://localhost:3000/restaurants/`).then(response => response.json())
+       await fetch(`http://localhost:3001/restaurants/`).then(response => response.json())
        .then(data => {console.log(" logging data",data);
         setRestaurants(data)
       })
@@ -40,7 +40,7 @@ function App() {
     }
 
     const initializeUser = async () => {
-      await fetch(`http://localhost:3000/user/`).then(response => response.json())
+      await fetch(`http://localhost:3001/user/`).then(response => response.json())
       .then(data => {console.log(" logging users data", data);
       setUsers(data)
     })
