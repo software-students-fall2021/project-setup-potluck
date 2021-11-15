@@ -20,6 +20,7 @@ router.route("/").get((req, res) => {
 console.log("fine here")
 module.exports = router
 
+// ======Following is nodejs implmentation, a workaround if above gives errors===========================================================
 
 // app.post('/upload-photos', async (req, res) => {
 //     try {
