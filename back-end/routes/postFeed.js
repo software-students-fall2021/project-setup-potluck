@@ -13,7 +13,7 @@ const postfeed = async (req, res) => {
         res.send(error)
     }
 }
-
+//should be post
 router.route("/").get((req, res) => {
     postfeed(req, res);
 });
