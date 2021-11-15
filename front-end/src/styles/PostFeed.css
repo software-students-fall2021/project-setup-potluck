@@ -1,9 +1,8 @@
-/* @import "compass/css3"; */
 
-/* ===================== FILE INPUT ===================== */
 .file-area {
   width: 100%;
   position: relative;
+  background-image: linear-gradient(270deg,#8C33FF, #A467F2, indigo);
 }  
 input[type=file] {
     position: absolute;
@@ -17,39 +16,44 @@ input[type=file] {
     cursor: pointer;
   }
   
-  .file-dummy {
+.file-dummy {
     width: 100%;
     padding: 30px;
     background: rgba(255,255,255,0.2);
     border: 2px dashed rgba(255,255,255,0.2);
     text-align: center;
     transition: background 0.3s ease-in-out;
-  }    
+}    
+
 .success {
       display: none;
 }
   
 :hover .file-dummy {
-    background: rgba(255,255,255,0.1);
-  }
+    background-image: linear-gradient(270deg#A467F2, indigo);
+}
   
-  input[type=file]:focus + .file-dummy {
+input[type=file]:focus + .file-dummy {
     outline: 2px solid rgba(255,255,255,0.5);
     outline: -webkit-focus-ring-color auto 5px;
-  }
+}
   
-  input[type=file]:valid + .file-dummy {
+input[type=file]:valid + .file-dummy {
     border-color: rgba(0,255,0,0.4);
     background-color: rgba(0,255,0,0.3);
 
-  }.success {
-      display: inline-block;
-    }
-    .default {
-      display: none;
-    }
+}
+.success {
+    display: inline-block;
+}
+    
+.default {
+    display: none;
+}
   
-
+.form-group2{
+  color: #8C33FF;
+}
 
 
 
