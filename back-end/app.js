@@ -65,7 +65,7 @@ app.use("/search", searchRoute);
 
 
 //for jin: user_Retrieval route
-// app.use("/user", userRoute);
+app.use("/user", userRoute);
 
 app.use("/post-feed", postFeed)
 // Export the express app
