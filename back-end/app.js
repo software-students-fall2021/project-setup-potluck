@@ -12,6 +12,12 @@ require("dotenv").config({ silent: true }) // load environmental variables from 
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
 const { METHODS } = require("http")
 const mockaroo = require("mockaroo")
+
+// following are important for posting feeds by users
+const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
+const _ = require('lodash');
+
 import '@babel/polyfill'
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -24,6 +30,13 @@ app.use(cors());
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 
+// enable files upload
+app.use(fileUpload({
+    createParentPath: true
+}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(morgan('dev'));
 // ---------------- LOGIN CONFIGURATION  ---------------- 
 
 //Require passport initializer for login function
@@ -39,7 +52,9 @@ const restaurantsRoute = require("./routes/restaurants")
 
 const searchRoute = require("./routes/searchRoute")
 
-const userRoute = require("./routes/userRoute")
+// const userRoute = require("./routes/userRoute")
+const postFeed = require("./routes/postFeed")
+
 // ---------------- ROUTES  ---------------- 
 
 // Route for restaurant GET requests
@@ -49,7 +64,8 @@ app.use("/search", searchRoute);
 
 
 //for jin: user_Retrieval route
-app.use("/user", userRoute);
+// app.use("/user", userRoute);
 
+app.use("/post-feed", postFeed)
 // Export the express app
 module.exports = app
