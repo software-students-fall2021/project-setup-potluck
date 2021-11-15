@@ -18,7 +18,8 @@ const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 
-import '@babel/polyfill'
+require("@babel/polyfill")
+// import '@babel/polyfill'
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
 
@@ -52,7 +53,7 @@ const restaurantsRoute = require("./routes/restaurants")
 
 const searchRoute = require("./routes/searchRoute")
 
-// const userRoute = require("./routes/userRoute")
+const userRoute = require("./routes/userRoute")
 const postFeed = require("./routes/postFeed")
 
 // ---------------- ROUTES  ---------------- 
