@@ -10,6 +10,7 @@ import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
+//import Register from "./components/Register"
 
 import RestaurantPage from "./components/RestaurantPage"
 import MyAccountPage from "./components/MyAccountPage"
@@ -36,8 +37,6 @@ function App() {
 
     return result
   }
-
-  const [loggedIn, setLoggedIn] = useState(false)
 
   // State holding an array of restaurant JSON objects
   // This array will be passed down as prop to RestaurantPage, RestaurantFeed, and Map
@@ -98,7 +97,7 @@ function App() {
         <Route path="/feed">
           <TagButton />
           <Header />
-        </Route>
+        </Route> 
         <Route path="/restaurant">
           <RestaurantPage />
         </Route>

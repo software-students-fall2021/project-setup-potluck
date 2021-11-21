@@ -9,6 +9,6 @@ const Post = new mongoose.Schema({
     title:{type: String, unique: true},
     author:[{type:mongoose.Schema.Types.ObjectId, ref:'User'}],
     content:{type: String},
-    parentRestaurant: [{type:mongoose.Schema.Types.ObjectId, ref:'Restuarant'}],
+    parentRestaurant: [{type:mongoose.Schema.Types.ObjectId, ref:'Restaurant'}],
     imgs:[{type: String}]
 })

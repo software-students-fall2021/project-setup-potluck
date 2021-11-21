@@ -1,73 +1,41 @@
-// Routes for "/login"
-const router = require("express").Router(); // Router object to define a route
+// import and instantiate express
+const express = require("express") // CommonJS import style!
+const app = express() // instantiate an Express object
+const cors = require("cors") // middleware for enabling CORS (Cross-Origin Resource Sharing) requests.
+const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
+const path = require("path")
+require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
-// Function to randomly generate fake restaurant data
-// (To be replaced with proxy requests to MongoDB)
-const getUsers = (req, res) => {
-    try{
-        // ----- STORE LIST OF "REGISTERED" USERS - to be deleted -----
+// the following are used for authentication with JSON Web Tokens
+const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
+const jwt = require("jsonwebtoken")
+const passport = require("passport")
+app.use(passport.initialize()) // tell express to use passport middleware
 
-        // Create list of users (one for each member of team)
-        // Name = member's first name, email = their nyu email, password = their last name
-        var registeredUsers = [
+// load up some mock user data in an array... this would normally come from a database
+const users = require("./user_data.js")
 
-            {"email": "lkg282@nyu.edu", "password": "Lauren" },
-            {"email": "sl6369@nyu.edu", "password": "Seunggun" },
-            {"email": "cbw307@nyu.edu", "password": "Christian" },
-            {"email": "jhk742@nyu.edu", "password": "Jin" },
-            {"email": "mwm356@nyu.edu", "password": "Wajahat" }
+// use this JWT strategy within passport for authentication handling
+const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
+passport.use(jwtStrategy)
 
-        ]
+//Use passport to authenticate user and log them in
+//sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
+app.post('/login', passport.authenticate('local-signin', {
+  successRedirect: '/',
+  failureRedirect: '/signin'
+  })
+);
 
-        return registeredUsers
-    }
-    
-    catch(error){
-        return error
-    }
-    
-}
-
-// ------------------ ROUTE ENDPOINTS ------------------
-
-// Get all of the registered users
-router.route("/").get((req, res) => {
-    const registeredUsers = getUsers(req, res);
-    res.send(registeredUsers)
+// a route to handle logging out users
+app.get('/logout', function(req, res){
+  var name = req.user.username;
+  console.log("LOGGIN OUT " + req.user.username)
+  req.logout();
+  res.redirect('/');
+  req.session.notice = "You have successfully been logged out " + name + "!";
 });
 
-// TEMPORARILY EXCLUDED TO TEST OPTIMAL API CALLS
-router.route("/:email/:password").get((req, res) => {
-    
-    // Make call to retrieve all registered users (pre-defined/harcoded)
-    const registeredUsers = getUsers(req, res);
 
-    //The email sent by the user to login
-    const email = req.params.email
-
-    //The password entered by the user to login
-    const password = req.params.password
-
-    //Variable to hold whether the user trying to login entered the correct credentials
-    let isValidUser = false
-
-    for (let i = 0; i < registeredUsers.length; i++) {
-        let registeredUser = registeredUsers[i]
-        if (registeredUser.email.valueOf() == email.valueOf()){
-            if (registeredUser.password.valueOf() == password.valueOf()){
-                isValidUser = true
-                break
-            }
-        }
-    }
-    
-    if (isValidUser === true){
-        res.send(true)
-    }
-    else{
-        res.send(false)
-    }
-    
-})
-  
-module.exports = router
+// Export the express app we created to make it available to other modules
+module.exports = app // CommonJS export style!
