@@ -25,6 +25,32 @@ app.use(cors())
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
 
+// ---------------- MongoDB Connection  ----------------
+
+const mongoose = require("mongoose");
+
+// Get MongoDB URI Key
+const uri = process.env.ATLAS_URI;
+
+
+// Connect to MongoDB
+try {
+  // Mongoose.connect() is an async function - returns a Promise
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  // Create connection - similar to MySQL
+  const connection = mongoose.connection;
+  connection.once("open", () => {
+    console.log("MongoDB database connection established successfully!");
+  });
+} catch (error) {
+  console.log(error);
+}
+
+
 // ---------------- LOGIN CONFIGURATION  ----------------
 
 //Require passport initializer for login function
