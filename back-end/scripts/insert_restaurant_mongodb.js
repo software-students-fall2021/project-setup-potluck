@@ -1,104 +1,90 @@
 // Import Restaurant MongoDB model
 const Restaurant = require("../models/restaurantModel");
+const mongoose = require("mongoose")
+const fs = require('fs');
+require('dotenv').config()
 
-const addRestaurant = async (json) => {
-  const name = json.name
-  const description = req.body.description;
-  const duration = Number(req.body.duration);
-  const date = Date(req.body.date);
+const addRestaurant = async (restaurant) => {
+  const name = restaurant.name
+  const phone = restaurant.phone
+  const yelp_id = restaurant.id
+  const yelp_url = restaurant.url
+  const restaurant_img_url = restaurant.image_url
+  const transactions = restaurant.transactions
 
-  let exercise = new Exercise({ username, description, duration, date });
+  // Create Subdocument for location
+  const longitude = restaurant.coordinates.longitude
+  const latitude = restaurant.coordinates.latitude
+  const city = restaurant.location.city
+  const country = restaurant.location.country
+  const state = restaurant.location.state
+  const address1 = restaurant.location.address1
+  const zip_code = restaurant.location.zip_code
+  const categories = {
+      'alias': restaurant.categories[0].alias,
+      'title': restaurant.categories[0].title,
+  }
 
+  const location = {
+      coordinates: {
+          longitude: longitude,
+          latitude: latitude
+      },
+      address: address1,
+      city: city,
+      country: country,
+      state: state,
+      zip_code: zip_code
+  }
 
-  // Save restaurant
+  // Create new Restaurant document
+  let restaurantDoc = new Restaurant({ 'name': name, 'phone_number': phone, 'yelp_id': yelp_id, 'yelp_url': yelp_url, 'categories': categories, 'restaurant_img_url': restaurant_img_url, 'transactions': transactions, 'location': location, 'posts': [] });
+
+  // Save restaurant to DB
   try {
-    await exercise.save();
-    res.json(`Successfully added ${username}`);
+    await restaurantDoc.save();
+    console.log("saved " + name)
   } catch (err) {
-    res.status(400).json("Error " + err);
+    console.log("Error " + err);
   }
 };
 
-// // Import Schema from mongoose
-// const mongoose = require("mongoose");
-// const beautifyUnique = require('mongoose-beautiful-unique-validation');
-// const URLSlugs = require('mongoose-url-slugs');
 
-// const Schema = mongoose.Schema;
+// ---------------- MongoDB Connection  ----------------
+// Get MongoDB URI Key
+const uri = process.env.ATLAS_URI;
 
-// // Create exerciseSchema - we define the schema before compiling it into a model
-// // Data keys are a cleaned result from the Yelp API response (https://www.yelp.com/developers/documentation/v3/business_search)
-// const Restaurant = new Schema(
-//   {
-//     // Add the username field to the exerciseSchema schema
-//     name: {
-//       type: String,
-//       required: true,
-//     },
-//     address: {
-//       type: String,
-//       required: true,
-//     },
-//     yelp_id: {
-//       type: String,
-//       required: true,
-//       unique: true // To avoid duplicate restaurants
-//     },
-//     yelp_url : {
-//       type: String,
-//       required: true,
-//     },
-//     categories: {
-//       alias: {
-//         type: String,
-//         required: true
-//       }
-//     },
-//     restaurant_img_url: { // URL
-//       type: String,
-//       required: true,
-//     },
-//     location : {
-//       coordinates: {
-//         longitude: {
-//           type: Number,
-//           required: true,
-//         },
-//         latitude: {
-//           type: Number,
-//           required: true,
-//         },
-//       },
-//       city: {
-//         type: String,
-//         required: true
-//       },
-//       country: {
-//         type: String,
-//         required: true
-//       },
-//       address1: {
-//         type: String,
-//         required: true
-//       },
-//       zip_code: {
-//         type: String,
-//         required: true
-//       },
-//     },
-//     transactions: { // pickup, delivery
-//       type: String,
-//       required: true
-//     },
+// Connect to MongoDB
+try {
+  // Mongoose.connect() is an async function - returns a Promise
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
-//     posts: [  { type: Schema.Types.ObjectId, ref: 'Post' }]
-//   }
-// );
+  // Create connection - similar to MySQL
+  const connection = mongoose.connection;
+  connection.once("open", () => {
+    console.log("MongoDB database connection established successfully!");
+    const restaurants_file = fs.readFileSync('data.json');
+    const restaurants_obj = JSON.parse(restaurants_file);
 
+    const region_list = Object.keys(restaurants_obj)
 
-// Restaurant.plugin(beautifyUnique)
+    for (let i=0; i<region_list.length; i++) {
+        let region = region_list[i]
 
-// // Create a model called Exercise, compiled using the exerciseSchema - each instance of a Model is a document
-// const Restaurant = mongoose.model("Restaurant", Restaurant);
+        let restaurants = restaurants_obj[region]
+        
+        for (let j=0; j<restaurants.length; j++) {
+            let restaurant = restaurants[j]
+            addRestaurant(restaurant)
+            
+        }
 
-// module.exports = Restaurant;
+    // Read data from .json file
+    }
+  });
+} catch (error) {
+  console.log(error);
+}

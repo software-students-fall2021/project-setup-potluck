@@ -18,10 +18,6 @@ const Restaurant = new Schema(
       type: String,
       required: true
     },
-    address: {
-      type: String,
-      required: true
-    },
     yelp_id: {
       type: String,
       required: true,
@@ -70,7 +66,7 @@ const Restaurant = new Schema(
         type: String,
         required: true
       },
-      address1: {
+      address: {
         type: String,
         required: true
       },
