@@ -12,13 +12,6 @@ const jwt = require("jsonwebtoken")
 const passport = require("passport")
 app.use(passport.initialize()) // tell express to use passport middleware
 
-// load up some mock user data in an array... this would normally come from a database
-const users = require("./user_data.js")
-
-// use this JWT strategy within passport for authentication handling
-const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
-passport.use(jwtStrategy)
-
 //Use passport to authenticate user and log them in
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
 app.post('/login', passport.authenticate('local-signin', {

@@ -1,29 +1,51 @@
-/*import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import axios from "axios"
 
-const Register = ({loggedIn, setLoggedIn}) => {
+const Register = props => {
 
-    // TODO: Make POST request to the backend
-    const registerUser = async (email, password) => {
-        
+    // create state variables to hold username and password
+  const [response, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
+  const [errorMessage, setErrorMessage] = useState("")
+
+  // if the user's logged-in status changes, save the token we receive from the server
+  useEffect(() => {
+    // if the user is logged-in, save the token to local storage
+    if (response.success && response.token) {
+      console.log(`User successfully registered in: ${response.username}`)
+      localStorage.setItem("token", response.token) // store the token into localStorage
     }
-  
-    //Function that is called when user presses "submit" button on registration form
-    const handleSubmit = async e => {
-      // prevent the HTML form from actually submitting... we use React's javascript code instead
-      e.preventDefault()
-  
-      // get the entered first name, last name, username, email, and password from the form fields
-      const firstName = e.target.firstName.value
-      const lastName = e.target.lastName.value
-      const username = e.target.username.value
-      const email = e.target.email.value // gets the value of the field in the submitted form with name='email'
-      const password = e.target.password.value // gets the value of the field in the submitted form with name='password'
-  
-      registerUser(email, password)
-  
+  }, [response])
+
+  // what to do when the user clicks the submit buton on the form
+  const handleSubmit = async e => {
+    // prevent the HTML form from actually submitting... we use React's javascript code instead
+    e.preventDefault()
+
+    try {
+      // create an object with the data we want to send to the server
+      const requestData = {
+        firstName: e.target.firstName.value,
+        lastName: e.target.lastName.value,
+        username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
+        email: e.target.email.value,
+        password: e.target.password.value, // gets the value of the field in the submitted form with name='password',      
+      }
+      // send a POST request with the data to the server api to authenticate
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND}/register`,
+        requestData
+      )
+      // store the response data into the data state variable
+      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
+      setResponse(response.data)
+    } catch (err) {
+      // request failed... user entered invalid credentials
+      setErrorMessage(
+        "You entered invalid registration credentials. Please try again."
+      )
     }
+  }
   
     // if the user is not logged in, show the login form
     if (loggedIn === false)
@@ -59,4 +81,4 @@ const Register = ({loggedIn, setLoggedIn}) => {
     else return <Redirect to="/" />
   }
   
-  export default Register*/
+  export default Register
