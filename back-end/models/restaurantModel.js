@@ -20,7 +20,8 @@ const Restaurant = new Schema(
     },
     yelp_id: {
       type: String,
-      required: true
+      required: true,
+      unique: true // To avoid duplicate restaurants
     },
     yelp_url : {
       type: String,
@@ -68,10 +69,6 @@ const Restaurant = new Schema(
       type: String,
       required: true
     },
-    no_posts: {
-      type: Number,
-      required: true,
-    },
 
     posts: [  { type: Schema.Types.ObjectId, ref: 'Post' }]
   }
@@ -81,6 +78,6 @@ const Restaurant = new Schema(
 Restaurant.plugin(beautifyUnique)
 
 // Create a model called Exercise, compiled using the exerciseSchema - each instance of a Model is a document
-const Exercise = mongoose.model("Restaurant", Restaurant);
+const Restaurant = mongoose.model("Restaurant", Restaurant);
 
-module.exports = Exercise;
+module.exports = Restaurant;
