@@ -1,11 +1,13 @@
 // Import Schema from mongoose
 const mongoose = require("mongoose");
+const beautifyUnique = require('mongoose-beautiful-unique-validation');
+const URLSlugs = require('mongoose-url-slugs');
 
 const Schema = mongoose.Schema;
 
 // Create exerciseSchema - we define the schema before compiling it into a model
 // Data keys are a cleaned result from the Yelp API response (https://www.yelp.com/developers/documentation/v3/business_search)
-const restaurantSchema = new Schema(
+const Restaurant = new Schema(
   {
     // Add the username field to the exerciseSchema schema
     name: {
@@ -75,7 +77,10 @@ const restaurantSchema = new Schema(
   }
 );
 
+
+Restaurant.plugin(beautifyUnique)
+
 // Create a model called Exercise, compiled using the exerciseSchema - each instance of a Model is a document
-const Exercise = mongoose.model("Exercise", exerciseSchema);
+const Exercise = mongoose.model("Restaurant", Restaurant);
 
 module.exports = Exercise;
