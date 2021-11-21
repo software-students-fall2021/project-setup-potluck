@@ -1,11 +1,13 @@
 // Import Schema from mongoose
 const mongoose = require("mongoose");
+const beautifyUnique = require('mongoose-beautiful-unique-validation');
+const URLSlugs = require('mongoose-url-slugs');
 
 const Schema = mongoose.Schema;
 
 // Create exerciseSchema - we define the schema before compiling it into a model
 // Data keys are a cleaned result from the Yelp API response (https://www.yelp.com/developers/documentation/v3/business_search)
-const restaurantSchema = new Schema(
+const Restaurant = new Schema(
   {
     // Add the username field to the exerciseSchema schema
     name: {
@@ -18,7 +20,8 @@ const restaurantSchema = new Schema(
     },
     yelp_id: {
       type: String,
-      required: true
+      required: true,
+      unique: true // To avoid duplicate restaurants
     },
     yelp_url : {
       type: String,
@@ -66,16 +69,15 @@ const restaurantSchema = new Schema(
       type: String,
       required: true
     },
-    no_posts: {
-      type: Number,
-      required: true,
-    },
 
     posts: [  { type: Schema.Types.ObjectId, ref: 'Post' }]
   }
 );
 
-// Create a model called Exercise, compiled using the exerciseSchema - each instance of a Model is a document
-const Exercise = mongoose.model("Exercise", exerciseSchema);
 
-module.exports = Exercise;
+Restaurant.plugin(beautifyUnique)
+
+// Create a model called Exercise, compiled using the exerciseSchema - each instance of a Model is a document
+const Restaurant = mongoose.model("Restaurant", Restaurant);
+
+module.exports = Restaurant;
