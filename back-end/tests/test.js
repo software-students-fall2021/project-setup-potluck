@@ -38,7 +38,6 @@ const restaurantSchema = {
   required: [
     "id",
     "name",
-    "number",
     "address",
     "no_posts",
     "backgroundPic",
@@ -55,7 +54,6 @@ const restaurantSchema = {
   properties: {
     id: { type: "number" },
     name: { type: "string" },
-    number: { type: "string" },
     address: { type: "string" },
     no_posts: { type: "number" },
     backgroundPic: { type: "string" },

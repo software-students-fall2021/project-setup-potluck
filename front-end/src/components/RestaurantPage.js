@@ -40,7 +40,6 @@ import { useParams } from "react-router-dom"
           <div className="restaurantNameAddr">
             <h2>{restaurant.name}</h2>
             <h4>{restaurant.address}</h4>
-            <h4>{restaurant.number}</h4>
             <h6># of Posts: {restaurant.no_posts}</h6>
           </div>
           <div>
