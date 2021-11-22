@@ -125,7 +125,7 @@ function App() {
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/">
           <InitialView />
-          <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Login />
         </Route>
       </Switch>
       <Footer />
