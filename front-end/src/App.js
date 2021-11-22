@@ -10,9 +10,9 @@ import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
-//import Register from "./components/Register"
+import Register from "./components/Register"
 
-import RestaurantPage from "./components/RestaurantPage"
+//import RestaurantPage from "./components/RestaurantPage"
 import MyAccountPage from "./components/MyAccountPage"
 
 import GetData from "./components/MyAccountPage"
@@ -90,6 +90,7 @@ function App() {
           <a href="/restaurant">Restaurant</a>
           <a href="/map">Map</a>
           <a href="/about">About</a>
+          <a href="/register">Register</a>
         </div>
       </nav>
 
@@ -114,6 +115,9 @@ function App() {
           <GetData users={users} />
 
         </Route>
+        <Route path="/register">
+          <Register/>
+        </Route>  
         {/* Route with restaurant id passed as a parameter */}
         <Route path="/restaurant/:id">
           <RestaurantPage restaurants={restaurants} />

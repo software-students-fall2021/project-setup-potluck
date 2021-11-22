@@ -12,7 +12,7 @@ const Register = props => {
   useEffect(() => {
     // if the user is logged-in, save the token to local storage
     if (response.success && response.token) {
-      console.log(`User successfully registered in: ${response.username}`)
+      console.log(`User successfully registered: ${response.username}`)
       localStorage.setItem("token", response.token) // store the token into localStorage
     }
   }, [response])
@@ -48,7 +48,7 @@ const Register = props => {
   }
   
     // if the user is not logged in, show the login form
-    if (loggedIn === false)
+    if (!response.success)
       return (
         <div className="Register">
           <h1 class="title">Create An Account</h1>
