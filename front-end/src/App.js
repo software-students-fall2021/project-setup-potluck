@@ -5,7 +5,7 @@ import "./App.css"
 import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
-import RestaurantPage from "./components/RestaurantPage"
+
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
@@ -48,7 +48,7 @@ function App() {
   // Makes GET API call and sets data
 
   // Make GET request to the backend the get all restaurant JSON objects
-  const initializeRestaurants = async () => {
+  /*const initializeRestaurants = async () => {
     // Request for the particular restaurant using its id
     await fetch(`http://localhost:3001/restaurants/`)
       .then((response) => response.json())
@@ -65,12 +65,12 @@ function App() {
         console.log(" logging users data", data)
         setUsers(data)
       })
-  }
+  }*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     initializeRestaurants()
     initializeUser()
-  }, [])
+  }, [])*/
 
   useEffect(() => {
     console.log("LIST O' USERS", listOfUsers)
@@ -121,7 +121,7 @@ function App() {
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/">
           <InitialView />
-          <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Login/>
         </Route>
       </Switch>
       <Footer />

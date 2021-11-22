@@ -8,5 +8,5 @@ const GetUserData = ({ users }) => {
     )
 }
 
-export default MyAccountPage
+export default GetUserData
 
