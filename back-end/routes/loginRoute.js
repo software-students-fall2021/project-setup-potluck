@@ -12,25 +12,18 @@ const jwt = require("jsonwebtoken")
 const passport = require("passport")
 app.use(passport.initialize()) // tell express to use passport middleware
 
-// load up some mock user data in an array... this would normally come from a database
-const users = require("./user_data.js")
-
-// use this JWT strategy within passport for authentication handling
-const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
-passport.use(jwtStrategy)
-
 //Use passport to authenticate user and log them in
 //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
 app.post('/login', passport.authenticate('local-signin', {
   successRedirect: '/',
-  failureRedirect: '/signin'
+  failureRedirect: '/login'
   })
 );
 
 // a route to handle logging out users
 app.get('/logout', function(req, res){
   var name = req.user.username;
-  console.log("LOGGIN OUT " + req.user.username)
+  console.log("logging out: " + req.user.username)
   req.logout();
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name + "!";
