@@ -51,8 +51,9 @@ function App() {
   const initializeRestaurants = async () => {
     // Check if restaurants have already been stored in local storage
     const savedRestaurants = JSON.parse(localStorage.getItem("restaurants"))
-    // 
-    if (savedRestaurants) {
+
+    // check that at least 1000 restaurants have bene loaded
+    if (savedRestaurants && savedRestaurants.length > 1000) {
       console.log("Found old version of savedRestaurants!", savedRestaurants)
       console.log('updating restaurants now..')
       setRestaurants(savedRestaurants)
@@ -65,7 +66,7 @@ function App() {
           setRestaurants(data)
 
           console.log('saving data to localStorage!')
-          localStorage.setItem("restaurants", JSON.stringify(restaurants));
+          localStorage.setItem("restaurants", JSON.stringify(data));
         })
     }
   }
@@ -116,9 +117,9 @@ function App() {
           <TagButton />
           <Header />
         </Route> 
-        <Route path="/restaurant">
+        {/* <Route path="/restaurant">
           <RestaurantPage />
-        </Route>
+        </Route> */}
         <Route path="/map">
           <Map restaurants={restaurants}/>
         </Route>
@@ -136,9 +137,9 @@ function App() {
           <Register/>
         </Route>  
         {/* Route with restaurant id passed as a parameter */}
-        <Route path="/restaurant/:id">
+        {/* <Route path="/restaurant/:id">
           <RestaurantPage restaurants={restaurants} />
-        </Route>
+        </Route> */}
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/">
           <InitialView />
