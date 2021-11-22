@@ -49,13 +49,25 @@ function App() {
 
   // Make GET request to the backend the get all restaurant JSON objects
   const initializeRestaurants = async () => {
-    // Request for the particular restaurant using its id
-    await fetch(`http://localhost:3001/restaurants/`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(" logging data", data)
-        setRestaurants(data)
-      })
+    // Check if restaurants have already been stored in local storage
+    const savedRestaurants = JSON.parse(localStorage.getItem("restaurants"))
+    // 
+    if (savedRestaurants) {
+      console.log("Found old version of savedRestaurants!", savedRestaurants)
+      console.log('updating restaurants now..')
+      setRestaurants(savedRestaurants)
+    } else {
+      // Request for the particular restaurant using its id
+      await fetch(`http://localhost:3001/restaurants/`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(" logging data", data)
+          setRestaurants(data)
+
+          console.log('saving data to localStorage!')
+          localStorage.setItem("restaurants", JSON.stringify(restaurants));
+        })
+    }
   }
 
   const initializeUser = async () => {
@@ -70,7 +82,12 @@ function App() {
   useEffect(() => {
     initializeRestaurants()
     initializeUser()
+    console.log("so wtf is restaurants:", restaurants)
   }, [])
+
+  useEffect(() => {
+    console.log('OOP! restaurants updated:', restaurants)
+  }, [restaurants])
 
   useEffect(() => {
     console.log("LIST O' USERS", listOfUsers)
@@ -103,7 +120,7 @@ function App() {
           <RestaurantPage />
         </Route>
         <Route path="/map">
-          <Map />
+          <Map restaurants={restaurants}/>
         </Route>
         <Route path="/about">
           <About />
