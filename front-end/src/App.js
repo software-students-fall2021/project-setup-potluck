@@ -58,6 +58,11 @@ function App() {
       console.log('updating restaurants now..')
       setRestaurants(savedRestaurants)
     } else {
+      // Local Storage is not properly populated -> fetch data from the back-end and populate localStorage
+      
+      // Clean localStorage of possible corrupt data
+      localStorage.clear()
+
       // Request for the particular restaurant using its id
       await fetch(`http://localhost:3001/restaurants/`)
         .then((response) => response.json())
