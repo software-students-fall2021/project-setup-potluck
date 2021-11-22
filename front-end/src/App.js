@@ -14,7 +14,7 @@ import Register from "./components/Register"
 
 //import RestaurantPage from "./components/RestaurantPage"
 import MyAccountPage from "./components/MyAccountPage"
-
+import PostFeed from "./components/PostFeed"
 import GetData from "./components/MyAccountPage"
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
@@ -115,6 +115,7 @@ function App() {
           <a href="/map">Map</a>
           <a href="/about">About</a>
           <a href="/register">Register</a>
+          <a href="/postfeed">PostFeed</a>
         </div>
       </nav>
 
@@ -141,7 +142,10 @@ function App() {
         </Route>
         <Route path="/register">
           <Register/>
-        </Route>  
+        </Route> 
+        <Route path="/postfeed">
+          <PostFeed/>
+        </Route>
         {/* Route with restaurant id passed as a parameter */}
         {/* <Route path="/restaurant/:id">
           <RestaurantPage restaurants={restaurants} />
