@@ -5,14 +5,14 @@ import "./App.css"
 import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
-import RestaurantPage from "./components/RestaurantPage"
+
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
-//import Register from "./components/Register"
+import Register from "./components/Register"
 
-import RestaurantPage from "./components/RestaurantPage"
+//import RestaurantPage from "./components/RestaurantPage"
 import MyAccountPage from "./components/MyAccountPage"
 
 import GetData from "./components/MyAccountPage"
@@ -48,14 +48,33 @@ function App() {
   // Makes GET API call and sets data
 
   // Make GET request to the backend the get all restaurant JSON objects
+
   const initializeRestaurants = async () => {
-    // Request for the particular restaurant using its id
-    await fetch(`http://localhost:3001/restaurants/`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(" logging data", data)
-        setRestaurants(data)
-      })
+    // Check if restaurants have already been stored in local storage
+    const savedRestaurants = JSON.parse(localStorage.getItem("restaurants"))
+
+    // check that at least 1000 restaurants have bene loaded
+    if (savedRestaurants && savedRestaurants.length > 1000) {
+      console.log("Found old version of savedRestaurants!", savedRestaurants)
+      console.log('updating restaurants now..')
+      setRestaurants(savedRestaurants)
+    } else {
+      // Local Storage is not properly populated -> fetch data from the back-end and populate localStorage
+      
+      // Clean localStorage of possible corrupt data
+      localStorage.clear()
+
+      // Request for the particular restaurant using its id
+      await fetch(`http://localhost:3001/restaurants/`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(" logging data", data)
+          setRestaurants(data)
+
+          console.log('saving data to localStorage!')
+          localStorage.setItem("restaurants", JSON.stringify(data));
+        })
+    }
   }
 
   const initializeUser = async () => {
@@ -70,7 +89,12 @@ function App() {
   useEffect(() => {
     initializeRestaurants()
     initializeUser()
+    console.log("so what is restaurants:", restaurants)
   }, [])
+
+  useEffect(() => {
+    console.log('OOP! restaurants updated:', restaurants)
+  }, [restaurants])
 
   useEffect(() => {
     console.log("LIST O' USERS", listOfUsers)
@@ -87,9 +111,10 @@ function App() {
         <div id="hamitems">
           <a href="/">Initial view</a>
           <a href="/feed">Feed</a>
-          <a href="/restaurant">Restaurant</a>
+          {/* <a href="/restaurant">Restaurant</a> */}
           <a href="/map">Map</a>
           <a href="/about">About</a>
+          <a href="/register">Register</a>
         </div>
       </nav>
 
@@ -98,11 +123,11 @@ function App() {
           <TagButton />
           <Header />
         </Route> 
-        <Route path="/restaurant">
+        {/* <Route path="/restaurant">
           <RestaurantPage />
-        </Route>
+        </Route> */}
         <Route path="/map">
-          <Map />
+          <Map restaurants={restaurants}/>
         </Route>
         <Route path="/about">
           <About />
@@ -114,14 +139,17 @@ function App() {
           <GetData users={users} />
 
         </Route>
+        <Route path="/register">
+          <Register/>
+        </Route>  
         {/* Route with restaurant id passed as a parameter */}
-        <Route path="/restaurant/:id">
+        {/* <Route path="/restaurant/:id">
           <RestaurantPage restaurants={restaurants} />
-        </Route>
+        </Route> */}
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/">
           <InitialView />
-          <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Login/>
         </Route>
       </Switch>
       <Footer />
