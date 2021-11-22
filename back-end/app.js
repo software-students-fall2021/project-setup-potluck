@@ -80,8 +80,8 @@ app.use("/search", searchRoute)
 // Route for login request
 app.use("/login", loginRoute)
 
-// Route for registration request
-app.use("/register", registerRoute)
+// // Route for registration request
+// app.use("/register", registerRoute)
 
 // Route for user requests
 app.use("/user", userRoute)
