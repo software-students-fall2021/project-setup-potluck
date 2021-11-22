@@ -6,16 +6,17 @@ const URLSlugs = require('mongoose-url-slugs');
 
 const Post = new mongoose.Schema({
     //not sure if unique needs to be here
-    title:{type: String, unique: true},
+    title:{type: String, require:true},
     author:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
     content:{type: String},
     parentRestaurant: [{type:mongoose.Schema.Types.ObjectId, ref:'Restuarant'}],
     imgs:[{type: String}]
 })
 
-Post.plugin(beautifyUnique)
+
+//Post.plugin(beautifyUnique)
 
 const postModel = mongoose.model("Post", Post)
 
-module.exports= postModel 
+module.exports= {"postStuff" : postModel}
 

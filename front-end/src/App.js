@@ -5,7 +5,7 @@ import "./App.css"
 import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
-import RestaurantPage from "./components/RestaurantPage"
+
 import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
@@ -48,6 +48,7 @@ function App() {
   // Makes GET API call and sets data
 
   // Make GET request to the backend the get all restaurant JSON objects
+
   const initializeRestaurants = async () => {
     // Check if restaurants have already been stored in local storage
     const savedRestaurants = JSON.parse(localStorage.getItem("restaurants"))
@@ -88,7 +89,7 @@ function App() {
   useEffect(() => {
     initializeRestaurants()
     initializeUser()
-    console.log("so wtf is restaurants:", restaurants)
+    console.log("so what is restaurants:", restaurants)
   }, [])
 
   useEffect(() => {
@@ -148,7 +149,7 @@ function App() {
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/">
           <InitialView />
-          <Login />
+          <Login/>
         </Route>
       </Switch>
       <Footer />
