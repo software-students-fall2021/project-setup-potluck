@@ -35,6 +35,7 @@ const uri = process.env.ATLAS_URI;
 
 // Connect to MongoDB
 try {
+  console.log("Attempting to connect to the MongoDB database..")
   // Mongoose.connect() is an async function - returns a Promise
   mongoose.connect(uri, {
     useNewUrlParser: true,
@@ -62,7 +63,7 @@ try {
 
 // ---------------- IMPORT ROUTES  ----------------
 
-const restaurantsRoute = require("./routes/restaurants")
+const restaurantsRoute = require("./routes/restaurantsRoute")
 const searchRoute = require("./routes/searchRoute")
 const userRoute = require("./routes/userRoute")
 const loginRoute = require("./routes/loginRoute")
