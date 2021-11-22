@@ -105,7 +105,7 @@ function App() {
         <div id="hamitems">
           <a href="/">Initial view</a>
           <a href="/feed">Feed</a>
-          <a href="/restaurant">Restaurant</a>
+          {/* <a href="/restaurant">Restaurant</a> */}
           <a href="/map">Map</a>
           <a href="/about">About</a>
           <a href="/register">Register</a>
