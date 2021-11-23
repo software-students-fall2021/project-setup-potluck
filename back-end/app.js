@@ -97,9 +97,9 @@ app.use("/user", userRoute)
 
 // Route for posting feedPage
 
-var multer = require('multer');
+const multer = require('multer');
   
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads')
     },
@@ -108,7 +108,7 @@ var storage = multer.diskStorage({
     }
 });
   
-var upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 app.get('/postfeed', (req, res) => {
     postModel.find({}, (err, items) => {
