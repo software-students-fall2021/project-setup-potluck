@@ -29,6 +29,9 @@ app.use("/static", express.static("public"))
 
 const mongoose = require("mongoose");
 
+const bodyParser = require('body-parser');
+const fs = require('fs');
+
 // Get MongoDB URI Key
 const uri = process.env.ATLAS_URI;
 
@@ -61,6 +64,11 @@ try {
 // app.use(passport.initialize());
 // app.use(passport.session());
 
+// Set EJS as templating engine 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.set("view engine", "ejs");
+
 // ---------------- IMPORT ROUTES  ----------------
 
 const restaurantsRoute = require("./routes/restaurantsRoute")
@@ -68,8 +76,9 @@ const searchRoute = require("./routes/searchRoute")
 const userRoute = require("./routes/userRoute")
 const loginRoute = require("./routes/loginRoute")
 const registerRoute = require("./routes/registerRoute")
-
+const postfeed = require("./routes/postFeedRoute")
 // ---------------- ROUTES  ----------------
+const postModel = require("../models/postModel")
 
 // Route for restaurant requests
 app.use("/restaurants", restaurantsRoute)
@@ -86,5 +95,57 @@ app.use("/login", loginRoute)
 // Route for user requests
 app.use("/user", userRoute)
 
+// Route for posting feedPage
+
+var multer = require('multer');
+  
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+  
+var upload = multer({ storage: storage });
+
+app.get('/postfeed', (req, res) => {
+    postModel.find({}, (err, items) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('An error occurred', err);
+        }
+        else {
+            res.render('', { items: items });
+        }
+    });
+});
+
+  
+app.post('/postfeed', upload.single('image'), (req, res, next) => {
+  
+    var obj = {
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content,
+        restaurant: req.body.parentRestaurant,
+        imgs: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            // contentType: 'image/png'
+        }
+    }
+    postModel.create(obj, (err, item) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            // item.save();
+            res.redirect('/');
+        }
+    });
+});
+
+// app.post("/postfeed", postfeed)
 // Export the express app
 module.exports = app
