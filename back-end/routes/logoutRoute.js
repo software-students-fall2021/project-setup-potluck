@@ -1,3 +1,4 @@
+import User from "../models/userModel"
 // import and instantiate express
 const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
@@ -12,27 +13,13 @@ const firstStrategy = require('passport-local').Strategy;
 app.use(passport.initialize()) // tell express to use passport middleware
 app.use(passport.session());
 
-//Function that attempts to log in the user
-const attemptLogin = async (req, res) => {
+passport.use(new firstStrategy(User.authenticate()));
 
-  passport.authenticate('local',
-  { successRedirect: '/register', failureRedirect: '/login' });
-
-}
-
-router.route("/").post((req, res) => {
-    attemptLogin(req, res);
+// a route to handle logging out users
+router.route("/logout").get((req, res) => {
+    var name = req.user.username;
+    console.log("Logging out: " + req.user.username)
+    req.logout();
+    res.redirect('/');  //TODO: Does this redirection need to occur in the front-end?
+    req.session.notice = "You have successfully been logged out " + name + "!";
 });
-
-router.route("/login").post((req, res) => {
-
-  try {
-    attemptLogin(req, res);
-  }
-  catch (err){
-    res.send(err)
-  }
-    
-})
-
-module.exports = router;

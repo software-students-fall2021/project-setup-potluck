@@ -67,6 +67,7 @@ const restaurantsRoute = require("./routes/restaurantsRoute")
 const searchRoute = require("./routes/searchRoute")
 const userRoute = require("./routes/userRoute")
 const loginRoute = require("./routes/loginRoute")
+const logoutRoute = require("./routes/logoutRoute")
 const registerRoute = require("./routes/registerRoute")
 
 // ---------------- ROUTES  ----------------
@@ -80,8 +81,11 @@ app.use("/search", searchRoute)
 // Route for login request
 app.use("/login", loginRoute)
 
+// Route for login request
+//app.use("/logout", logoutRoute)
+
 // // Route for registration request
-// app.use("/register", registerRoute)
+app.use("/register", registerRoute)
 
 // Route for user requests
 app.use("/user", userRoute)

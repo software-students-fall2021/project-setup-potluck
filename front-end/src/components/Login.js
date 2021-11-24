@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import axios from "axios"
 
-
 const Login = props => {
 
   // create state variables to hold username and password
@@ -31,7 +30,7 @@ const Login = props => {
       }
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND}/login`,
+        `http://localhost:3001/login`,
         requestData
       )
       // store the response data into the data state variable
@@ -49,7 +48,7 @@ const Login = props => {
   if (!response.success)
     return (
       <div className="Login">
-        <h1>Log in</h1>
+        <h1>Log In</h1>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
           <form onSubmit={handleSubmit}>

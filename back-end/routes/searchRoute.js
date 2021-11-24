@@ -10,8 +10,6 @@ let client = new mockaroo.Client({
     apiKey: "329a3210"
 })
 
-
-
 const getSearch = async (req, res) =>{
     try{
         

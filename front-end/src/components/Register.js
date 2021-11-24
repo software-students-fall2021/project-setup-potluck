@@ -31,16 +31,20 @@ const Register = props => {
         email: e.target.email.value,
         password: e.target.password.value, // gets the value of the field in the submitted form with name='password',      
       }
+
+      console.log("requestData: ", requestData);
+
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND}/register`,
+        `http://localhost:3001/register/`,
         requestData
       )
       // store the response data into the data state variable
-      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
+      //console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
       setResponse(response.data)
+      console.log("Response data: ", response.data);
     } catch (err) {
-      // request failed... user entered invalid credentials
+      // Request failed... user entered invalid credentials
       setErrorMessage(
         "You entered invalid registration credentials. Please try again."
       )
@@ -51,7 +55,7 @@ const Register = props => {
     if (!response.success)
       return (
         <div className="Register">
-          <h1 class="title">Create An Account</h1>
+          <h1 class="title">Create an Account</h1>
           <section className="main-content">
             <form onSubmit={handleSubmit}>
               {
@@ -72,7 +76,7 @@ const Register = props => {
               <label>Password: </label>
               <input type="password" name="password" placeholder="Enter your password" />
               <br />
-              <input type="submit" value="Login" />
+              <input type="submit" value="Create an account" />
             </form>
           </section>
         </div>
