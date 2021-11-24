@@ -127,3 +127,6 @@ typings/
 
 
 .vscode
+/venv
+data.json
+*.pkl

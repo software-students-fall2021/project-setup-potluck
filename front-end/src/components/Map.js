@@ -10,8 +10,6 @@ require("dotenv").config()
 // which is a React wrapper package for deck.gl
 const Map = ( {restaurants} ) => {
 
-  const [restaurantsLoaded, setRestaurantsLoaded] = useState(false)
-
   // Initialize history to program navigation - to render clicked restaurants
   let history = useHistory()
 
@@ -43,14 +41,9 @@ const Map = ( {restaurants} ) => {
     top: 40
   };
 
-  // Rerender Map when restaurants is loaded / changed
-  useEffect(() => {
-    restaurants ? setRestaurantsLoaded(true) : setRestaurantsLoaded(false)
-    console.log(restaurantsLoaded)
-  }, [restaurants])
-  
+
   return (
-    restaurantsLoaded ? (
+    restaurants ? (
       <ReactMapGl
         // Spread all values of the viewport as prop for <ReactMapGl />
         {...viewport}
@@ -78,10 +71,10 @@ const Map = ( {restaurants} ) => {
             // Callback function to detect a click on any of the markers
             return (
             <Marker
-                key={restaurant.id}
-                latitude={restaurant.location.latitude}
-                longitude={restaurant.location.longitude}
-                onClick={() => restaurantClicked(restaurant.id)}
+                key={restaurant._id}
+                latitude={restaurant.location.coordinates.latitude}
+                longitude={restaurant.location.coordinates.longitude}
+                onClick={() => restaurantClicked(restaurant._id)}
             >
               <Pin size={15} />
             </Marker>)
