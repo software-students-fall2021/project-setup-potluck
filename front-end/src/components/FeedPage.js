@@ -78,30 +78,30 @@ export const Search = ({search, onSearch}) =>(
 );
 //The feed passes all of the search results to individual posts and displays them
 export const PostFeed = ({list}) =>{
-    
+    console.log(list)
     return(<div className={"myFeed"}>
-    {list.map(item => <Post key={item.objectID} item={item} />)}
+    {list.map((item, iterator) => <Post key={iterator} item={item} />)}
     </div>)
 }
 //Individual posts take all the details about the post and display them.
-export const Post = ({ item })=>(
+export const Post = ({ item })=>{console.log(item.author[0].username); return(
 
-  
+    // <div>{item.title}</div>
       
         
 
-                <Card className={"myPost"} key ={item.objectID}>
+                <Card className={"myPost"} >
                 
                 <Card.Img  className={"rImage"}src={item.imageURL}></Card.Img>
 
                 <div className ={"postName"}> <a href={item.url}>{item.title}</a></div>
-                <span>{item.author}</span>
-                <span>{item.tags}</span>
+                <span>{item.author[0].username}</span>
+                <span>{item.content}</span>
                 </Card>
            
        
      
-    );
+    )};
 
 
 

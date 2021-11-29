@@ -14,6 +14,7 @@ const morgan = require("morgan") // middleware for nice logging of incoming HTTP
 const { METHODS } = require("http")
 const mockaroo = require("mockaroo")
 require("@babel/polyfill")
+const base64Img = require('base64-img')
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
 
@@ -95,56 +96,7 @@ app.use("/login", loginRoute)
 // Route for user requests
 app.use("/user", userRoute)
 
-// Route for posting feedPage
 
-// const multer = require('multer');
-  
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + '-' + Date.now())
-//     }
-// });
-  
-// const upload = multer({ storage: storage });
-
-// app.get('/postfeed', (req, res) => {
-//     postfeed.find({}, (err, items) => {
-//         if (err) {
-//             console.log(err);
-//             res.status(500).send('An error occurred', err);
-//         }
-//         else {
-//             res.render('', { items: items });
-//         }
-//     });
-// });
-
-  
-// app.post('/postfeed', upload.single('image'), (req, res, next) => {
-  
-//     var obj = {
-//         title: req.body.title,
-//         author: req.body.author,
-//         content: req.body.content,
-//         restaurant: req.body.parentRestaurant,
-//         imgs: {
-//             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-//             // contentType: 'image/png'
-//         }
-//     }
-//     postfeed.create(obj, (err, item) => {
-//         if (err) {
-//             console.log(err);
-//         }
-//         else {
-//             // item.save();
-//             res.redirect('/');
-//         }
-//     });
-// });
 
 app.use("/postfeed", postfeed)
 // Export the express app

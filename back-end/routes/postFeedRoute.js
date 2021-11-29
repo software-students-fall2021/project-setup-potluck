@@ -4,71 +4,40 @@ const mockaroo = require("mockaroo")
 const axios = require("axios")
 const postModel = require("../models/postModel")
 const app = express();
-// console.log("fine here")
-// const postfeed = async (req, res) => {
-//     try {
-//         console.log("AXIOS RESULTS")
-//         // const response = await axios('https://api.mockaroo.com/api/6876d7a0?count=1000&key=f9dbb980')
-//         // const data = response.data // Extract data from mockaroo
-//         const data = await postModel.find({}).exec();
-//         res.send(data)
-//         console.log("fine here 3")
-//     } catch (error) {
-//         res.send(error)
-//     }
-// }
-
-// router.route("/").post((req, res) => {
-//     postfeed(req, res);
-// });
-console.log("fine here")
-
+require("dotenv").config({ silent: true })
 const multer = require('multer');
   
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-});
-  
-const upload = multer({ storage: storage });
 
-app.get('/postfeed', (req, res) => {
-    postModel.find({}, (err, items) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send('An error occurred', err);
-        }
-        else {
-            res.render('', { items: items });
-        }
-    });
-});
 
+var Storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '_' + Date.now()+path.extname(file.originalname));
+  }
+});
+var upload = multer({ storage: Storage }).single('file')
   
-app.post('/postfeed', upload.single('image'), (req, res, next) => {
+app.post('/postfeed', upload, (req, res) => {
   
     var obj = {
         title: req.body.title,
         author: req.body.author,
-        content: req.body.content,
+        
+        content: req.body.caption,
+
         restaurant: req.body.parentRestaurant,
+        imageURL: req.body.imageURL,
         imgs: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            data: fs.readFile(path.join(__dirname + '/uploads/' + req.file.filename)),
             // contentType: 'image/png'
         }
     }
-    postModel.create(obj, (err, item) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            // item.save();
-            res.redirect('/');
-        }
-    });
+    const new_post = new postModel({obj})
+    console.log("new_posI m t")
+    new_post.save(err => { if(err) console.log('Unable to upload') });
+    
+    res.redirect(url.format({
+        pathname:"http://localhost:3000/feed"
+    }));
 });
 module.exports = app;

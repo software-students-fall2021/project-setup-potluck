@@ -6,7 +6,7 @@ import "../styles/PostFeed.css"
 
 const PostFeed = () => {
     return (    
-        <form action method="post">
+        <form action="/postfeed" method="post">
 
             <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
 
