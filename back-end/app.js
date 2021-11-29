@@ -78,7 +78,7 @@ const loginRoute = require("./routes/loginRoute")
 const registerRoute = require("./routes/registerRoute")
 const postfeed = require("./routes/postFeedRoute")
 // ---------------- ROUTES  ----------------
-const postModel = require("../models/postModel")
+// const postModel = require("../models/postModel")
 
 // Route for restaurant requests
 app.use("/restaurants", restaurantsRoute)
@@ -97,55 +97,55 @@ app.use("/user", userRoute)
 
 // Route for posting feedPage
 
-const multer = require('multer');
+// const multer = require('multer');
   
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// });
   
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
-app.get('/postfeed', (req, res) => {
-    postModel.find({}, (err, items) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send('An error occurred', err);
-        }
-        else {
-            res.render('', { items: items });
-        }
-    });
-});
+// app.get('/postfeed', (req, res) => {
+//     postfeed.find({}, (err, items) => {
+//         if (err) {
+//             console.log(err);
+//             res.status(500).send('An error occurred', err);
+//         }
+//         else {
+//             res.render('', { items: items });
+//         }
+//     });
+// });
 
   
-app.post('/postfeed', upload.single('image'), (req, res, next) => {
+// app.post('/postfeed', upload.single('image'), (req, res, next) => {
   
-    var obj = {
-        title: req.body.title,
-        author: req.body.author,
-        content: req.body.content,
-        restaurant: req.body.parentRestaurant,
-        imgs: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            // contentType: 'image/png'
-        }
-    }
-    postModel.create(obj, (err, item) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            // item.save();
-            res.redirect('/');
-        }
-    });
-});
+//     var obj = {
+//         title: req.body.title,
+//         author: req.body.author,
+//         content: req.body.content,
+//         restaurant: req.body.parentRestaurant,
+//         imgs: {
+//             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+//             // contentType: 'image/png'
+//         }
+//     }
+//     postfeed.create(obj, (err, item) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             // item.save();
+//             res.redirect('/');
+//         }
+//     });
+// });
 
-// app.post("/postfeed", postfeed)
+app.use("/postfeed", postfeed)
 // Export the express app
 module.exports = app
