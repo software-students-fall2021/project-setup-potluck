@@ -137,78 +137,58 @@ const restaurantSchema = {
   // Schema config
   title: "restaurantSchema v1",
   type: "object",
-  required: [
-    "categories",
-    "alias",
-    "title",
-    "location",
-    "coordinates",
-    "longitude",
-    "latitude",
-    "city",
-    "country",
-    "state",
-    "address",
-    "zip_code",
-    "_id",
-    "name",
-    "phone_number",
-    "yelp_id",
-    "yelp_url",
-    "restaurant_img_url",
-    "transactions",
-    "posts",
-    "__v"
-  ],
   properties: {
-    categories: {type: "json",
+    categories: {type: "object",
         minItems: 2,
         uniqueItems: false,
         items: {
           alias: {type: "string"},
           title: {type: "string"}
-        }
+        },
+        required: true
     },
-    location: {type: "json",
+    location: {type: "object",
       minItems: 1,
       uniqueItems: false,
       items: {
-        coordinates: {type: "json",
+        coordinates: {type: "object",
           minItems: 6,
           uniqueItems: false,
           items: {
-            longitude: {type: "float"},
-            latitude: {type: "float"}
+            longitude: {type: "float", required: true}, 
+            latitude: {type: "float", required: true}
           }
         },
-        city: {type: "string"},
-        country: {type: "string"},
-        state: {type: "string"},
-        address: {type: "string"},
-        zip_code: {type: "number"}
-      }
+        city: {type: "string", required: true},
+        country: {type: "string", required: true},
+        state: {type: "string", required: true},
+        address: {type: "string", required: true},
+        zip_code: {type: "number", required: true}
+      },
     },
-    _id: {type: "string"},
-    name: {type: "string"},
-    phone_number: {type: "string"},
-    yelp_id: {type: "string"},
-    yelp_url: {type: "string"},
-    restaurant_img_url: { type: "string" },
+    _id: {type: "string", required: true},
+    name: {type: "string", required: true},
+    phone_number: {type: "string", required: true},
+    yelp_id: {type: "string", required: true},
+    yelp_url: {type: "string", required: true},
+    restaurant_img_url: { type: "string", required: true},
     transactions: {type: "array",
-        minItems: 1,
+        minItems: 0,
         uniqueItems: false,
         items: {
           type: "string"
-        }
+        },
+        required: true
     },
     posts: {type: "array",
-        minItems: 1,
+        minItems: 0,
         uniqueItems: false,
         items: {
           type: "number"
-        }
+        },
+        required: true
     },
-    __v: {type: "number"}
+    __v: {type: "number", required: true}
   }
     
 }
