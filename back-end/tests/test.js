@@ -306,7 +306,7 @@ describe("restaurants", () => {
       done()
     })
 
-    it("All Elements in the array should be objects that adhere to the restaurantSchema used by the mockaroo api, the frontend, and eventually (but not yet) mongoDB", (done) => {
+    it("All Elements in the array should be objects that adhere to the restaurantSchema in MongoDB", (done) => {
       //check to see if every element in the array is an object that adheres to a predefined schema
       response.body.forEach((element) => {
         element.should.be.jsonSchema(restaurantSchema)
