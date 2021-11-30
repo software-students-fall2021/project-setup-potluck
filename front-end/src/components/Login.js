@@ -61,13 +61,11 @@ const Login = props => {
             }
             <label>Username: </label>
             <input type="text" name="username" placeholder="Enter your username here" />
-            <br />
-            <br />
+
             <label>Password: </label>
             <input type="password" name="password" placeholder="Enter your password here" />
-            <br />
-            <br />
-            <input type="submit" value="Log In" />
+
+            <input class="submit" type="submit" value="Log In"/>
           </form>
         </section>
       </div>
