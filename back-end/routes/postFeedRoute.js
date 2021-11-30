@@ -8,36 +8,49 @@ require("dotenv").config({ silent: true })
 const multer = require('multer');
   
 
-
+// cb with destination...?
 var Storage = multer.diskStorage({
   destination: "./uploads/",
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '_' + Date.now()+path.extname(file.originalname));
   }
 });
-var upload = multer({ storage: Storage }).single('file')
-  
-app.post('/postfeed', upload, (req, res) => {
-  
+var upload = multer({ storage: Storage })
+
+// const posting = 
+app.post('/postfeed', upload.single('file'), (req, res) => {
+    console.log("heelo")
     var obj = {
         title: req.body.title,
-        author: req.body.author,
-        
+        author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // id or username from user schema
         content: req.body.caption,
-
-        restaurant: req.body.parentRestaurant,
-        imageURL: req.body.imageURL,
-        imgs: {
-            data: fs.readFile(path.join(__dirname + '/uploads/' + req.file.filename)),
-            // contentType: 'image/png'
-        }
+        parentRestaurant: {type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant'}, // get id from restaruant schema, arrays of mongoose ID objects
+        imageURL: req.file.filename
     }
-    const new_post = new postModel({obj})
-    console.log("new_posI m t")
-    new_post.save(err => { if(err) console.log('Unable to upload') });
+    if (obj.author == null || obj.author == ""){
+        res.redirect(url.format({
+            pathname: "http://localhost:3000/register"
+        }));
+    }
+    else {
+        const new_post = new postModel({obj})
+        console.log("new_post")
+        new_post.save(err => { if(err) console.log('Unable to upload') });
+        
+        res.redirect(url.format({
+            pathname:"http://localhost:3000/feed"
+        }));
+    }
     
-    res.redirect(url.format({
-        pathname:"http://localhost:3000/feed"
-    }));
 });
-module.exports = app;
+
+// Image Get Routes
+app.get('/postfeed/:filename', (req, res) => {
+    res.json('/postfeed/:filename');
+});
+
+console.log("I m here")
+router.route("/").post((req, res) => {
+    posting(req, res);
+});
+module.exports = router;

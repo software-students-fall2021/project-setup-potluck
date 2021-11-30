@@ -31,7 +31,6 @@ const PostFeed = () => {
             <div class="form-group2">
                 <button type="submit">Post</button>
             </div>
-
             </form>
 
 

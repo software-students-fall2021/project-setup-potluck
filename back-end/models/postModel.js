@@ -14,7 +14,7 @@ const Post = new mongoose.Schema({
     parentRestaurant: [{type:mongoose.Schema.Types.ObjectId, ref:'Restaurant'}],
     tags: [{type : String}],
     //can hold multiple images if neccessary instead of just one
-    //imgs:[{type: String}]
+    // imgs:[{type: String}]
 })
 
 
