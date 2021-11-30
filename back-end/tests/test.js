@@ -31,6 +31,7 @@ const postSchema = {
 }
 
 // schema to test api call against the restaurant's schema
+{/*
 const restaurantSchema = {
   // Schema config
   title: "restaurantSchema v1",
@@ -130,6 +131,86 @@ const restaurantSchema = {
       },
     },
   },
+} */}
+
+const restaurantSchema = {
+  // Schema config
+  title: "restaurantSchema v1",
+  type: "object",
+  required: [
+    "categories",
+    "alias",
+    "title",
+    "location",
+    "coordinates",
+    "longitude",
+    "latitude",
+    "city",
+    "country",
+    "state",
+    "address",
+    "zip_code",
+    "_id",
+    "name",
+    "phone_number",
+    "yelp_id",
+    "yelp_url",
+    "restaurant_img_url",
+    "transactions",
+    "posts",
+    "__v"
+  ],
+  properties: {
+    categories: {type: "json",
+        minItems: 2,
+        uniqueItems: false,
+        items: {
+          alias: {type: "string"},
+          title: {type: "string"}
+        }
+    },
+    location: {type: "json",
+      minItems: 1,
+      uniqueItems: false,
+      items: {
+        coordinates: {type: "json",
+          minItems: 6,
+          uniqueItems: false,
+          items: {
+            longitude: {type: "float"},
+            latitude: {type: "float"}
+          }
+        },
+        city: {type: "string"},
+        country: {type: "string"},
+        state: {type: "string"},
+        address: {type: "string"},
+        zip_code: {type: "number"}
+      }
+    },
+    _id: {type: "string"},
+    name: {type: "string"},
+    phone_number: {type: "string"},
+    yelp_id: {type: "string"},
+    yelp_url: {type: "string"},
+    restaurant_img_url: { type: "string" },
+    transactions: {type: "array",
+        minItems: 1,
+        uniqueItems: false,
+        items: {
+          type: "string"
+        }
+    },
+    posts: {type: "array",
+        minItems: 1,
+        uniqueItems: false,
+        items: {
+          type: "number"
+        }
+    },
+    __v: {type: "number"}
+  }
+    
 }
 
 const userDataSchema = {
