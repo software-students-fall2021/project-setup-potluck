@@ -25,13 +25,12 @@ import { useParams } from "react-router-dom"
     // Make GET request to grab specific restaurant JSON object
     return (
       // Conditionally render restaurant if data has been fetched
-      
       restaurant ? (
       <div className="restaurantPage">
         <div className="dishImage">
           <img
             className="dishPic"
-            src={restaurant.backgroundPic}
+            src={restaurant.restaurant_img_url}
             alt="new"
           ></img>
         </div>
@@ -39,22 +38,66 @@ import { useParams } from "react-router-dom"
         <div className="restaurantInfo">
           <div className="restaurantNameAddr">
             <h2>{restaurant.name}</h2>
-            <h4>{restaurant.address}</h4>
-            <h6># of Posts: {restaurant.no_posts}</h6>
+            <h4>Find Us Here!</h4>
+            <h6>{restaurant.location.address}</h6>
+            <h6>{restaurant.location.zip_code}</h6>
+            <h6>{restaurant.phone_number}</h6>
+            <p>Available Transactions: </p>
+            <p>{restaurant.transactions}</p>
           </div>
+{/*                     ************** MOST RECENT COMMENT **************
+
+        (1) COMMENTED OUT logo_pic that shows up next to restaurant 
+            name, location, phone#, etc. bc the live DB that is actually
+            in use when rendering this info includes only one picture of
+            the restaurant (which is already used in div/classname="dishImage")   
+
+        (2) RestaurantPage.js (THIS PAGE) was initially intended to provide users
+            with a roster of dishes served at a specific restaurant and other users' posts
+            about said-restaurant's respective dishes. Our current and modified plan, 
+            creating a mini pop-up within the "Map" page of our app that merely lists metadata
+            of the restaurant, has rendered our previous intention obsolete. 
+            (Main reason for change: could not find open source data for menus). 
+            
+        (3) Before deployment, this component will be altered to serve new goal (mentioned in point #2)
+
+
+        *All unnecessary code has been commented out AND MAY BE DELETED* << will do so after team's approval*
+
+
+
+
           <div>
             <img
               src={restaurant.logoPic}
               alt="new"
               className="roundedCorners"
             ></img>
-          </div>
+          </div> 
+*/} 
         </div>
-        {/* what used to be separate component calls within these three compartments (Popular Dishes, Main Dishes, 
+      </div>
+      ) : ( // Otherwise, render loading screen
+        <div>
+          <h1>Loading Restaurant</h1>
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+        
+        )) 
+      } 
+        {/* 
+        What used to be separate component calls within these three compartments (Popular Dishes, Main Dishes, 
         Beverages -> all found between the <h1> tags have now been deleted and replaced with actual code within the
         RestaurantPage.js component itself. Through the use of the "FeedPage" & "initializeRestaurants," all functions 
         defined within this same component, we receive an array of JSON objects via restaurant.js, a file found within
-        the project's back-end directory. */}
+        the project's back-end directory. 
+      
+      
+      
+      */}
+{/*     FIRST OMIT    
         <div className="mostPopularDishses">
           <h1 className="indent">Popular Dishes:</h1>
           <div className="popDishes"> 
@@ -71,10 +114,11 @@ import { useParams } from "react-router-dom"
             }
 
           </div>
-        </div>
-
+          </div>
+*/}
         {/* As shown above, the .map function is utilized to render in the exact number of dishes/beverages of each respective
         restaurant as opposed to the initial approach, hard-code (which kept us from implementing a more dynamic approach). */}
+{/*        SECOND OMIT
         <div className="mainDishes">
           <h1 className="indent">Main Dishes:</h1>
           <div className="allDishes">
@@ -98,6 +142,7 @@ import { useParams } from "react-router-dom"
            </div>
         </div>
       </div>
+
     ) : ( // Otherwise, render loading screen
     <div>
       <h1>Loading Restaurant</h1>
@@ -106,8 +151,8 @@ import { useParams } from "react-router-dom"
       </Spinner>
     </div>
     
-    ))
-  }
+    )) 
+  } */}
   
   /* Integration between the back-end and front-end has been achieved, but there still exist some actions which 
   keeps the component from running coherently.
