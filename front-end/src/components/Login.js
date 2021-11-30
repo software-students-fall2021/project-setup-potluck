@@ -50,7 +50,9 @@ const Login = props => {
   if (!response.success)
     return (
       <div className="Login">
+        <br/>
         <h1 className="headerText" style={{justifyContent: 'center', textAlign: 'center'}}>Log In</h1>
+        <br/>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
           <form onSubmit={handleSubmit}>
@@ -72,7 +74,7 @@ const Login = props => {
     )
   // otherwise, if the user has successfully logged-in, redirect them to a different page
   // in this example, we simply redirect to the home page, but a real app would redirect to a page that shows content only available to logged-in users
-  else return <Redirect to="/" />
+  else return <Redirect to="/feed" />
 }
 
 export default Login
