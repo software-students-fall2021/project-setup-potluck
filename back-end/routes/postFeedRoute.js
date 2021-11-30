@@ -7,6 +7,7 @@ const app = express();
 require("dotenv").config({ silent: true })
 const multer = require('multer');
   
+const { body, validationResult, expressValidator} = require('express-validator');
 
 // cb with destination...?
 var Storage = multer.diskStorage({
@@ -17,9 +18,31 @@ var Storage = multer.diskStorage({
 });
 var upload = multer({ storage: Storage })
 
-// const posting = 
-app.post('/postfeed', upload.single('file'), (req, res) => {
+const posting = app.post('/postfeed', upload.single('file'), (req, res) => {
     console.log("heelo")
+    
+
+    check('file')
+        .custom((value, {req}) => {
+                if(req.file.mimetype === 'application/png'
+                ){
+                    return '.png'; 
+                }
+                else if(req.file.mimetype === 'application/jpeg'
+                ){
+                    return '.jpeg'; 
+                }
+                else if(req.file.mimetype === 'application/jpg'
+                ){
+                    return '.jpg'; 
+                }
+                
+                else{
+                    return false; // return "falsy" value to indicate invalid data
+                }
+            })
+        .withMessage('Please only submit valid photos.')
+
     var obj = {
         title: req.body.title,
         author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // id or username from user schema
