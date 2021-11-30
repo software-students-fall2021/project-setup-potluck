@@ -66,7 +66,7 @@ const Map = ( {restaurants} ) => {
         />
         {
           // Conditionally display Restaurants if restaurants state is loaded  
-          restaurants.map((restaurant) => {
+          restaurants.map((restaurant, idx) => {
           
             // Callback function to detect a click on any of the markers
             return (
@@ -74,7 +74,7 @@ const Map = ( {restaurants} ) => {
                 key={restaurant._id}
                 latitude={restaurant.location.coordinates.latitude}
                 longitude={restaurant.location.coordinates.longitude}
-                onClick={() => restaurantClicked(restaurant._id)}
+                onClick={() => restaurantClicked(idx)}
             >
               <Pin size={15} />
             </Marker>)

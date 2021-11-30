@@ -12,7 +12,7 @@ import About from "./components/About"
 import Footer from "./components/Footer"
 import Register from "./components/Register"
 
-//import RestaurantPage from "./components/RestaurantPage"
+import RestaurantPage from "./components/RestaurantPage"
 import MyAccountPage from "./components/MyAccountPage"
 
 import GetData from "./components/MyAccountPage"
@@ -123,10 +123,10 @@ function App() {
           <Register/>
         </Route>  
         {/* Route with restaurant id passed as a parameter */}
-        {/* <Route path="/restaurant/:id">
+        <Route path="/restaurant/:id">
           <RestaurantPage restaurants={restaurants} />
-        </Route> */}
-        {/* Dont add routes after the base route they wont work*/}
+        </Route>
+        {/* Dont add routes after the base route they wont work */}
         <Route path="/">
           <InitialView />
           <Login/>
