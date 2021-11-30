@@ -52,15 +52,6 @@ try {
 }
 
 
-// ---------------- LOGIN CONFIGURATION  ----------------
-
-//Require passport initializer for login function
-// const passport = require('passport')
-// const LocalStrategy = require('passport-local').Strategy;
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 // ---------------- IMPORT ROUTES  ----------------
 
 const restaurantsRoute = require("./routes/restaurantsRoute")
@@ -80,6 +71,10 @@ app.use("/search", searchRoute)
 
 // Route for login request
 app.use("/login", loginRoute)
+
+app.use("/loginFail", loginRoute)
+
+app.use("/loginSuccess", loginRoute)
 
 // Route for login request
 //app.use("/logout", logoutRoute)

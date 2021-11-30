@@ -40,7 +40,7 @@ const InitialView = () =>{
     //passes search functionality to Search child component and search results to PostFeed
       return(
         <div>
-
+            <br/>
             <h1 class="headerText" style={{textAlign: 'center', fontSize: '75px'}}>
                 What is Potluck?
             </h1>   
@@ -62,54 +62,19 @@ const InitialView = () =>{
             <div style={{display: 'flex', justifyContent: 'center', alignItem: 'center'}}>
                 <img src="../Logos/TextOnlyBlack.png" height="100px"/>
             </div>
-
-            <Search search={keyWord} onSearch={executeSearch}/>
-            <br></br>
-            <PostFeed list={matchedPosts}/>
-
+            <br/>
+            <br/>
+            <br/>
             <div style={{display: 'flex', justifyContent: 'center', alignItem: 'center'}}>
-                <Button>Login / Sign Up</Button>
+                <a href="/register"><Button>Create an account</Button></a>
+                <p style={{margin: '8px'}}>or</p>
+                <a href="/login"><Button>Log in</Button></a>
             </div>
-           
-
+            <br/>
+            <br/>
+            <br/>
         </div>
       )
 }
-
-//Search component that recieves the search keyword and the search function itself is called every time the input changes
-export const Search = ({search, onSearch}) =>(
-<div>
-    <label htmlFor="search">Search:</label>
-    <input
-    id="search"
-    type="text"
-    value={search}
-    onChange={onSearch}
-    />
-</div>
-
-);
-//The feed passes all of the search results to individual posts and displays them
-export const PostFeed = ({list}) =>
-    list.map(item => <Post key={item.objectID} item={item} />);
-
-//Individual posts take all the details about the post and display them.
-export const Post = ({ item })=>(
-
-    <div>
-    
-        <div key ={item.objectID}>
-        <span>
-        <a href={item.url}>{item.title}</a>
-        </span>
-        <span>
-        <img src={item.imageURL}></img>
-        </span>
-        <span>{item.author}</span>
-        <span>{item.tags}</span>
-        </div> 
-    
-    </div>
-);
 
 export default InitialView;

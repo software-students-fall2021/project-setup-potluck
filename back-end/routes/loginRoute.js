@@ -9,19 +9,40 @@ const _ = require("lodash") // the lodash module has some convenience functions 
 const jwt = require("jsonwebtoken")
 const passport = require("passport")
 const firstStrategy = require('passport-local').Strategy;
+const { response } = require("../app");
 app.use(passport.initialize()) // tell express to use passport middleware
 app.use(passport.session());
 
-//Function that attempts to log in the user
 const attemptLogin = async (req, res) => {
-
+  console.log("here");
+  console.log(`Server response: ${JSON.stringify(res.hasOwnProperty('body'))}`)
   passport.authenticate('local',
-  { successRedirect: '/register', failureRedirect: '/login' });
-
+  { successRedirect: '/loginSuccess', failureRedirect: '/loginFail' });
 }
 
+router.route("/loginFail").post((req, res) => {
+
+  console.log("fail!")
+  res.send('failure');
+
+});
+
+router.route("/loginSuccess").post((req, res) => {
+
+  console.log("success!")
+  res.send('success');
+
+});
+
 router.route("/").post((req, res) => {
+
+  try {
     attemptLogin(req, res);
+  }
+  catch (err){
+    res.send(err)
+  }
+
 });
 
 router.route("/login").post((req, res) => {
