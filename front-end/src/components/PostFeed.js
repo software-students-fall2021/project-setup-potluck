@@ -6,7 +6,7 @@ import "../styles/PostFeed.css"
 
 const PostFeed = () => {
     return (    
-        <form action method="post">
+        <form action="http://localhost:3001/postfeed" method="POST" enctype="multipart/form-data">
 
             <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
 
@@ -31,7 +31,6 @@ const PostFeed = () => {
             <div class="form-group2">
                 <button type="submit">Post</button>
             </div>
-
             </form>
 
 
