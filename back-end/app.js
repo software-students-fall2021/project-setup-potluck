@@ -25,7 +25,8 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 app.use(cors())
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
-
+const passport = require('passport')
+app.use(passport.initialize())
 // ---------------- MongoDB Connection  ----------------
 
 const mongoose = require("mongoose");
@@ -66,9 +67,9 @@ try {
 // app.use(passport.session());
 
 // Set EJS as templating engine 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.set("view engine", "ejs");
+// app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.json())
+// app.set("view engine", "ejs");
 
 
 // ---------------- IMPORT ROUTES  ----------------
@@ -77,6 +78,7 @@ const restaurantsRoute = require("./routes/restaurantsRoute")
 const searchRoute = require("./routes/searchRoute")
 const userRoute = require("./routes/userRoute")
 const loginRoute = require("./routes/loginRoute")
+const logoutRoute = require("./routes/logoutRoute")
 const registerRoute = require("./routes/registerRoute")
 const postfeed = require("./routes/postFeedRoute")
 // ---------------- ROUTES  ----------------
@@ -91,8 +93,15 @@ app.use("/search", searchRoute)
 // Route for login request
 app.use("/login", loginRoute)
 
+app.use("/loginFail", loginRoute)
+
+app.use("/loginSuccess", loginRoute)
+
+// Route for login request
+//app.use("/logout", logoutRoute)
+
 // // Route for registration request
-// app.use("/register", registerRoute)
+app.use("/register", registerRoute)
 
 // Route for user requests
 app.use("/user", userRoute)

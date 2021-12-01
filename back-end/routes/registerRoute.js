@@ -1,49 +1,69 @@
-// import User from "../models/userModel"
-// // import and instantiate express
-// const express = require("express") // CommonJS import style!
-// const app = express() // instantiate an Express object
-// require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
+import User from "../models/userModel"
+// import and instantiate express
+const express = require("express") // CommonJS import style!
+const app = express() // instantiate an Express object
+const router = require("express").Router(); // Router object to define a route
+require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
-// // the following are used for authentication with JSON Web Tokens
-// const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
-// const jwt = require("jsonwebtoken")
-// const passport = require("passport")
-// Strategy = require('passport-local').Strategy;
-// app.use(passport.initialize()) // tell express to use passport middleware
-// app.use(passport.session());
+// the following are used for authentication with JSON Web Tokens
+const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
+const jwt = require("jsonwebtoken")
+const passport = require("passport")
+const firstStrategy = require('passport-local').Strategy;
+app.use(passport.initialize()) // tell express to use passport middleware
+app.use(passport.session());
 
-// passport.use(new Strategy(User.authenticate()));
+passport.use(new firstStrategy(User.authenticate()));
 
-// passport.serializeUser(function (user, cb) {
-//     cb(null, user.id);
-// });
+passport.serializeUser(function (user, cb) {
+    cb(null, user.id);
+});
 
-// passport.deserializeUser(function (id, cb) {
-//     User.findById(id, function (err, user) {
-//         if (err) { return cb(err); }
-//         cb(null, user);
-//     });
-// });
+passport.deserializeUser(function (id, cb) {
+    User.findById(id, function (err, user) {
+        if (err) { return cb(err); }
+        cb(null, user);
+    });
+});
 
-// app.post('/register', (req, res) => {
+//Function that sends new user to database
+const postNewUser = async (req, res) => {
 
-//     console.log('registering user')
-//     User.register(new User({ username: req.body.username, email: req.body.email, image: "", posts: [] }), req.body.password, (err) => {
-//         if (err){
-//             console.log("error in registration process.")
-//         }
-//         else{
-//             console.log("user successfully registered");
+    User.register(new User({ username: req.body.username, email: req.body.email, image: "", posts: [] }), req.body.password, (err) => {
+        if (err){
+            console.log("Error in registration process: ", err)
+            res.send(err)
+            //return res;
+        }
+        else{
+            console.log("User successfully registered");
 
-//             //Since the user is now registered, log them in
-//             req.login(user, function(err){
-//                 if (err) { return next(err); }
-//                 return res.redirect('/');
-//             });
+            //Since the user is now registered, log them in
+            req.login(User, function(err){
+                if (err) { return next(err); }
+                return res;
+            });
 
-//             res.redirect('/login');
-//         }
+            res.json({status: "Success", redirect: '/'});
+        }
     
-//     });
+    });
+    
+}
 
-// });
+router.route("/").post((req, res) => {
+    postNewUser(req, res);
+});
+
+router.route("/register").post((req, res) => {
+
+    try {
+        postNewUser(req, res);
+    }
+    catch (err){
+        res.send(err)
+    }
+    
+})
+
+module.exports = router;
