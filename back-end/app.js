@@ -30,6 +30,9 @@ app.use("/static", express.static("public"))
 
 const mongoose = require("mongoose");
 
+const bodyParser = require('body-parser');
+const fs = require('fs');
+
 // Get MongoDB URI Key
 const uri = process.env.ATLAS_URI;
 
@@ -62,6 +65,12 @@ try {
 // app.use(passport.initialize());
 // app.use(passport.session());
 
+// Set EJS as templating engine 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.set("view engine", "ejs");
+
+
 // ---------------- IMPORT ROUTES  ----------------
 
 const restaurantsRoute = require("./routes/restaurantsRoute")
@@ -69,8 +78,9 @@ const searchRoute = require("./routes/searchRoute")
 const userRoute = require("./routes/userRoute")
 const loginRoute = require("./routes/loginRoute")
 const registerRoute = require("./routes/registerRoute")
-
+const postfeed = require("./routes/postFeedRoute")
 // ---------------- ROUTES  ----------------
+// const postModel = require("../models/postModel")
 
 // Route for restaurant requests
 app.use("/restaurants", restaurantsRoute)
@@ -87,5 +97,8 @@ app.use("/login", loginRoute)
 // Route for user requests
 app.use("/user", userRoute)
 
+
+
+app.use("/postfeed", postfeed)
 // Export the express app
 module.exports = app

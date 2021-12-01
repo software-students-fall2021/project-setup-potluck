@@ -84,7 +84,7 @@ export const PostFeed = ({list}) =>{
     </div>)
 }
 //Individual posts take all the details about the post and display them.
-export const Post = ({ item })=>{console.log(item.author[0].username); return(
+export const Post = ({ item })=>{console.log(item.parentRestaurant[0]); return(
 
     // <div>{item.title}</div>
       
@@ -95,8 +95,9 @@ export const Post = ({ item })=>{console.log(item.author[0].username); return(
                 <Card.Img  className={"rImage"}src={item.imageURL}></Card.Img>
 
                 <div className ={"postName"}> <a href={item.url}>{item.title}</a></div>
-                <span>{item.author[0].username}</span>
+                <span>{item.author.username}</span>
                 <span>{item.content}</span>
+                <span>{item.parentRestaurant.map((element, iterator)=> <p key={"name"+iterator}>Restaurant: {element.name}</p>)}</span>
                 </Card>
            
        
