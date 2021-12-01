@@ -32,6 +32,7 @@ const postNewUser = async (req, res) => {
     User.register(new User({ username: req.body.username, email: req.body.email, image: "", posts: [] }), req.body.password, (err) => {
         if (err){
             console.log("Error in registration process: ", err)
+            res.send(err)
             //return res;
         }
         else{
@@ -43,7 +44,7 @@ const postNewUser = async (req, res) => {
                 return res;
             });
 
-            res.redirect('/');
+            res.json({status: "Success", redirect: '/'});
         }
     
     });
