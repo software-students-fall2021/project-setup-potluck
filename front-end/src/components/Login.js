@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { Redirect } from "react-router-dom"
+import { Redirect, useHistory } from "react-router-dom"
 import axios from "axios"
 
 const Login = props => {
+  
+  // Initialize history to control navigation
+  let history = useHistory()
+
 
   // create state variables to hold username and password
   const [response, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
@@ -21,18 +25,29 @@ const Login = props => {
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault()
-
+    console.log('attempting to handle user login')
     try {
       // create an object with the data we want to send to the server
       const requestData = {
         username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
         password: e.target.password.value, // gets the value of the field in the submitted form with name='password',
       }
+      console.log('requestData', requestData)
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
         `http://localhost:3001/login`,
         requestData
       )
+      history.push('/map')
+      console.log('response is', response)
+
+      // // Redirect ONLY  if user logs in
+      // if (response.status == 200) {
+        
+      // } else {
+      //   alert('login failed')
+      // }
+
       // store the response data into the data state variable
       console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
       setResponse(response.data)
