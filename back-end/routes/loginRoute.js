@@ -9,10 +9,10 @@ const _ = require("lodash") // the lodash module has some convenience functions 
 const jwt = require("jsonwebtoken")
 const passport = require("passport")
 const firstStrategy = require('passport-local').Strategy;
+const { response } = require("../app");
 app.use(passport.initialize()) // tell express to use passport middleware
 app.use(passport.session());
 
-//Function that attempts to log in the user
 const attemptLogin = async (req, res) => {
 
   passport.authenticate('local', ()=> {

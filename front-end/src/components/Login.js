@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Redirect, useHistory } from "react-router-dom"
 import axios from "axios"
+import "../styles/Login.css";
+import "../App.css";
 
 const Login = props => {
   
@@ -49,8 +51,8 @@ const Login = props => {
       // }
 
       // store the response data into the data state variable
-      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
       setResponse(response.data)
+      console.log(`Server response.body in front end: ${JSON.stringify(response.hasOwnProperty('body'))}`)
     } catch (err) {
       // request failed... user entered invalid credentials
       setErrorMessage(
@@ -63,7 +65,9 @@ const Login = props => {
   if (!response.success)
     return (
       <div className="Login">
-        <h1>Log In</h1>
+        <br/>
+        <h1 className="headerText" style={{justifyContent: 'center', textAlign: 'center'}}>Log In</h1>
+        <br/>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
           <form onSubmit={handleSubmit}>
@@ -71,21 +75,19 @@ const Login = props => {
               //handle error condition
             }
             <label>Username: </label>
-            <input type="text" name="username" placeholder="username" />
-            <br />
-            <br />
+            <input type="text" name="username" placeholder="Enter your username here" />
+
             <label>Password: </label>
-            <input type="password" name="password" placeholder="password" />
-            <br />
-            <br />
-            <input type="submit" value="Log In" />
+            <input type="password" name="password" placeholder="Enter your password here" />
+
+            <input class="submit" type="submit" value="Log In"/>
           </form>
         </section>
       </div>
     )
   // otherwise, if the user has successfully logged-in, redirect them to a different page
   // in this example, we simply redirect to the home page, but a real app would redirect to a page that shows content only available to logged-in users
-  else return <Redirect to="/" />
+  else return <Redirect to="/feed" />
 }
 
 export default Login

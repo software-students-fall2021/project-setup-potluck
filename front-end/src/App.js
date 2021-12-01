@@ -113,11 +113,11 @@ function App() {
           <About />
         </Route>
         <Route path="/users">
-
           <MyAccountPage users={users}/>
-
           <GetData users={users} />
-
+        </Route>
+        <Route path="/login">
+          <Login/>
         </Route>
         <Route path="/register">
           <Register/>
@@ -129,7 +129,6 @@ function App() {
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/">
           <InitialView />
-          <Login/>
         </Route>
       </Switch>
       <Footer />

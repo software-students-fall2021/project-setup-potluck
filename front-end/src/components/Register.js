@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import axios from "axios"
+import "../App.css";
 
 const Register = props => {
 
@@ -32,7 +33,7 @@ const Register = props => {
         password: e.target.password.value, // gets the value of the field in the submitted form with name='password',      
       }
 
-      console.log("requestData: ", requestData);
+      //console.log("requestData: ", requestData);
 
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
@@ -41,8 +42,8 @@ const Register = props => {
       )
       // store the response data into the data state variable
       //console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
+      console.log("Response: ", response);
       setResponse(response.data)
-      console.log("Response data: ", response.data);
     } catch (err) {
       // Request failed... user entered invalid credentials
       setErrorMessage(
@@ -55,7 +56,9 @@ const Register = props => {
     if (!response.success)
       return (
         <div className="Register">
-          <h1 class="title">Create an Account</h1>
+          <br/>
+          <h1 class="headerText" style={{justifyContent: 'center', textAlign: 'center'}}>Create an Account</h1>
+          <br/>
           <section className="main-content">
             <form onSubmit={handleSubmit}>
               {
@@ -63,20 +66,20 @@ const Register = props => {
               }
               <label>First Name: </label>
               <input type="text" name="firstName" placeholder="Enter your first name" />
-              <br />
+
               <label>Last Name: </label>
               <input type="text" name="lastName" placeholder="Enter your last name" />
-              <br />
+
               <label>Username: </label>
               <input type="text" name="username" placeholder="Enter your username" />
-              <br />
+
               <label>Email: </label>
               <input type="text" name="email" placeholder="Enter your email" />
-              <br />
+
               <label>Password: </label>
               <input type="password" name="password" placeholder="Enter your password" />
-              <br />
-              <input type="submit" value="Create an account" />
+
+              <input type="submit" value="Create account"/>
             </form>
           </section>
         </div>
