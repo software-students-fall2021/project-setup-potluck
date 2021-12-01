@@ -15,19 +15,42 @@ app.use(passport.session());
 //Function that attempts to log in the user
 const attemptLogin = async (req, res) => {
 
-  passport.authenticate('local',
-  { successRedirect: '/register', failureRedirect: '/login' });
+  passport.authenticate('local', ()=> {
+    
+  });
 
+  console.log('authenticated!')
 }
 
-router.route("/").post((req, res) => {
-    attemptLogin(req, res);
-});
+
+router.route("/").post( passport.authenticate('local'), 
+    // Function runs when authentication succeeds
+    function (req, res)  {
+      console.log('authentication successful!')
+      res.json({status: "Success", redirect: '/'});
+    }
+  )
+
+// router.route("/").options(
+//   passport.authenticate('local', 
+//     {
+//       successRedirect: 'http://localhost:3000/map',
+//       failureRedirect: 'http://localhost:3000/feed',
+//       failureFlash: true 
+//     }
+//   )
+// )
+
+// router.route("/").post((req, res) => {
+//     console.log('POST req received for login')
+//     attemptLogin(req, res);
+// });
 
 router.route("/login").post((req, res) => {
 
   try {
-    attemptLogin(req, res);
+    console.log('POST req received for login')
+    attemptLogin(req, res); 
   }
   catch (err){
     res.send(err)
