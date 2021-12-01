@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { Redirect } from "react-router-dom"
+import { Redirect, useHistory } from "react-router-dom"
 import axios from "axios"
 import "../App.css";
 
 const Register = props => {
+
+  let history = useHistory()
 
     // create state variables to hold username and password
   const [response, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
@@ -44,6 +46,9 @@ const Register = props => {
       //console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`)
       console.log("Response: ", response);
       setResponse(response.data)
+
+      history.push('/login')
+    
     } catch (err) {
       // Request failed... user entered invalid credentials
       setErrorMessage(
