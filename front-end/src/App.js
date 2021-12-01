@@ -21,23 +21,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 function App() {
-  // State for Sign Up - Array of all users who have registered already
-  console.log("INITIALIZING LIST O USERS WOOOOO")
-  const [listOfUsers, setListOfUsers] = useState([])
-
-  const checkUsername = (newUser, history) => {
-    let result = true
-    //For each object in the listOfUsers, check if its email is equal to newUser.email
-    listOfUsers.forEach(function (arrayItem) {
-      console.log("LOOP STARTED")
-      if (arrayItem.email === newUser.email) {
-        result = false //if they match, the users are not all unique
-      }
-    })
-
-    return result
-  }
-
+  
   // State holding an array of restaurant JSON objects
   // This array will be passed down as prop to RestaurantPage, RestaurantFeed, and Map
   // to avoid calling the backend API multiple times
@@ -77,28 +61,24 @@ function App() {
     }
   }
 
-  const initializeUser = async () => {
+  /*const initializeUser = async () => {
     await fetch(`http://localhost:3001/user/`)
       .then((response) => response.json())
       .then((data) => {
         console.log(" logging users data", data)
         setUsers(data)
       })
-  }
+  }*/
 
   useEffect(() => {
     initializeRestaurants()
-    initializeUser()
+    //initializeUser()
     console.log("so what is restaurants:", restaurants)
   }, [])
 
   useEffect(() => {
     console.log('OOP! restaurants updated:', restaurants)
   }, [restaurants])
-
-  useEffect(() => {
-    console.log("LIST O' USERS", listOfUsers)
-  }, [listOfUsers])
 
   return (
     <Router>
@@ -134,11 +114,11 @@ function App() {
           <About />
         </Route>
         <Route path="/users">
-
           <MyAccountPage users={users}/>
-
           <GetData users={users} />
-
+        </Route>
+        <Route path="/login">
+          <Login/>
         </Route>
         <Route path="/register">
           <Register/>
@@ -153,7 +133,6 @@ function App() {
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/">
           <InitialView />
-          <Login/>
         </Route>
       </Switch>
       <Footer />

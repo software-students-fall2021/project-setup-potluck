@@ -1,34 +1,61 @@
 // import and instantiate express
 const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
-const cors = require("cors") // middleware for enabling CORS (Cross-Origin Resource Sharing) requests.
-const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
-const path = require("path")
+const router = require("express").Router(); // Router object to define a route
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
 // the following are used for authentication with JSON Web Tokens
 const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
 const jwt = require("jsonwebtoken")
 const passport = require("passport")
+const firstStrategy = require('passport-local').Strategy;
+const { response } = require("../app");
 app.use(passport.initialize()) // tell express to use passport middleware
+app.use(passport.session());
 
-//Use passport to authenticate user and log them in
-//sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
-app.post('/login', passport.authenticate('local-signin', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-  })
-);
+const attemptLogin = async (req, res) => {
 
-// a route to handle logging out users
-app.get('/logout', function(req, res){
-  var name = req.user.username;
-  console.log("logging out: " + req.user.username)
-  req.logout();
-  res.redirect('/');
-  req.session.notice = "You have successfully been logged out " + name + "!";
-});
+  passport.authenticate('local', ()=> {
+    
+  });
+
+  console.log('authenticated!')
+}
 
 
-// Export the express app we created to make it available to other modules
-module.exports = app // CommonJS export style!
+router.route("/").post( passport.authenticate('local'), 
+    // Function runs when authentication succeeds
+    function (req, res)  {
+      console.log('authentication successful!')
+      res.json({status: "Success", redirect: '/'});
+    }
+  )
+
+// router.route("/").options(
+//   passport.authenticate('local', 
+//     {
+//       successRedirect: 'http://localhost:3000/map',
+//       failureRedirect: 'http://localhost:3000/feed',
+//       failureFlash: true 
+//     }
+//   )
+// )
+
+// router.route("/").post((req, res) => {
+//     console.log('POST req received for login')
+//     attemptLogin(req, res);
+// });
+
+router.route("/login").post((req, res) => {
+
+  try {
+    console.log('POST req received for login')
+    attemptLogin(req, res); 
+  }
+  catch (err){
+    res.send(err)
+  }
+    
+})
+
+module.exports = router;

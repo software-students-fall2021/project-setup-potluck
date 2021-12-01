@@ -112,7 +112,8 @@ const getSearch = async (req, res) =>{
 
 
     
-                res.json(allPosts)
+        res.json(allPosts)
+
         
         //console.log(mySrc)
 
