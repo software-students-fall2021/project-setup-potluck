@@ -81,13 +81,14 @@ const getSearch = async (req, res) =>{
         // })
         
      
-       const post= await Post.findOne({"title": "I like OBAO"}).populate("author").populate("parentRestaurant")
+       const post= await Post.findOne({"title": "GUCCIGUCCIGUCCI"}).populate("author").populate("parentRestaurant")
       // console.log(post.imageURL)
         //const mySrc = "nothing";
         //for some reason async doesnt work here will investigate later
         //const src = base64Img.base64(post.imageURL, function(err, data) { console.log(data); mySrc = data})
         //const src = base64Img.base64Sync(post.imageURL)
         //console.log(src)
+        console.log(post)
         const myPosts = await Post.find({}).populate("author").populate("parentRestaurant")
         //console.log( myPosts[0])
         const allPosts = myPosts.map((element, iterator)=>
