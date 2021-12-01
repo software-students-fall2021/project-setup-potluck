@@ -31,6 +31,7 @@ const postSchema = {
 }
 
 // schema to test api call against the restaurant's schema
+{/*
 const restaurantSchema = {
   // Schema config
   title: "restaurantSchema v1",
@@ -130,6 +131,66 @@ const restaurantSchema = {
       },
     },
   },
+} */}
+
+const restaurantSchema = {
+  // Schema config
+  title: "restaurantSchema v1",
+  type: "object",
+  properties: {
+    categories: {type: "object",
+        minItems: 2,
+        uniqueItems: false,
+        items: {
+          alias: {type: "string"},
+          title: {type: "string"}
+        },
+        required: true
+    },
+    location: {type: "object",
+      minItems: 1,
+      uniqueItems: false,
+      items: {
+        coordinates: {type: "object",
+          minItems: 6,
+          uniqueItems: false,
+          items: {
+            longitude: {type: "float", required: true}, 
+            latitude: {type: "float", required: true}
+          }
+        },
+        city: {type: "string", required: true},
+        country: {type: "string", required: true},
+        state: {type: "string", required: true},
+        address: {type: "string", required: true},
+        zip_code: {type: "number", required: true}
+      },
+    },
+    _id: {type: "string", required: true},
+    name: {type: "string", required: true},
+    phone_number: {type: "string", required: true},
+    yelp_id: {type: "string", required: true},
+    yelp_url: {type: "string", required: true},
+    restaurant_img_url: { type: "string", required: true},
+    transactions: {type: "array",
+        minItems: 0,
+        uniqueItems: false,
+        items: {
+          type: "string"
+        },
+        required: true
+    },
+    posts: {type: "array",
+        minItems: 0,
+        uniqueItems: false,
+        items: {
+          type: "number"
+        },
+        required: true
+    },
+    __v: {type: "number", required: true}
+  }
+    
 }
 
 const userDataSchema = {
@@ -245,7 +306,7 @@ describe("restaurants", () => {
       done()
     })
 
-    it("All Elements in the array should be objects that adhere to the restaurantSchema used by the mockaroo api, the frontend, and eventually (but not yet) mongoDB", (done) => {
+    it("All Elements in the array should be objects that adhere to the restaurantSchema in MongoDB", (done) => {
       //check to see if every element in the array is an object that adheres to a predefined schema
       response.body.forEach((element) => {
         element.should.be.jsonSchema(restaurantSchema)
