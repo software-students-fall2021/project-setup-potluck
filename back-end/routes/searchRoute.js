@@ -112,7 +112,7 @@ const getSearch = async (req, res) =>{
 
 
     
-        res.json({status: "Success", redirect: '/'});
+        res.json(allPosts)
 
         
         //console.log(mySrc)
