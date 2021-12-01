@@ -14,10 +14,10 @@ const Restaurant = require("../models/restaurantModel")
 const User = require("../models/userModel")
 const path = require('path')
 const { body, validationResult, expressValidator} = require('express-validator');
-console.log(__dirname);
+// console.log(__dirname);
+
 // cb with destination...?
 const Storage = multer.diskStorage({
-  //destination: "../uploads/",
    destination: function (req, file, callback) {
        console.log(__dirname);
         callback(null,  '../uploads/');
@@ -38,26 +38,16 @@ const getInfo = async (restaurantname, username) => {
     // Query User from DB
     let user = await User.findOne({ username: username })
 
-    //console.log('RESTAURANT INSIDE FUNCTION', restaurant)
-    //console.log('USER INSIDE FUNCTION', user)
-
     return {'restaurant': restaurant, 'user':user}
 
   } catch (err) {
-    //console.log("========RESTAURANT and USERNAME MONGODB fetch failed")
-    //console.log(err)
-    return err
+        return err
   }
 } 
 
 
 
 const posting =  async (req, res)  => {
-  //console.log("POST req for postfeed received")
-
-    // Upload file
-    // upload.single('file')
-    console.log(__dirname);
 
     // check('file')
     //   .custom((value, {req}) => {
@@ -106,28 +96,18 @@ const posting =  async (req, res)  => {
         let new_post = new Post(obj)
 
         let models = await getInfo(RESTAURANTNAME, USERNAME)
-        //console.log('DICTIONARY IS ', models)
         const user = models['user']
         const restaurant = models['restaurant']
-
-       // console.log('======= USER IS ',user)
-        //console.log('======= RESTAURANT IS ',restaurant)
           
         // Add Restaurant & User data
         new_post.author = user['_id']
         new_post.parentRestaurant.push(restaurant['_id'])
 
-        //console.log("new_post")
-        //console.log(new_post)
         try {
           await new_post.save(err => { if(err) console.log(err) });
-        //   res.send('postFeed works') 
+         
           res.redirect("/search");
-        } catch (err) {
-          //console.log("=======MONGODB SAVE FOR POST FAILED")
-         // console.log(err)
-         // console.log("==================")
-       }
+        } catch (err) {}
         
     }   
 }
@@ -137,14 +117,11 @@ router.get('/postfeed/:filename', (req, res) => {
     res.json('/postfeed/:filename');
 });
 
-console.log("I m here")
 router.route("/").post( upload.single('images'), async (req, res) => {
-    console.log('POST request received at postRoute')
     posting(req, res);
 });
 
 router.route("/").get((req, res) => {
     posting(req, res)
-    res.send('GET REQ WORKS')
 })
 module.exports = router;
