@@ -121,15 +121,14 @@ const posting =  async (req, res)  => {
         //console.log(new_post)
         try {
           await new_post.save(err => { if(err) console.log(err) });
-          res.send('postFeed works') 
+        //   res.send('postFeed works') 
+          res.redirect("/search");
         } catch (err) {
           //console.log("=======MONGODB SAVE FOR POST FAILED")
          // console.log(err)
          // console.log("==================")
        }
-    //     res.redirect(url.format({
-    //         pathname:"http://localhost:3000/feed"
-    //     }));
+        
     }   
 }
 
