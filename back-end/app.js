@@ -24,7 +24,8 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 app.use(cors())
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"))
-
+const passport = require('passport')
+app.use(passport.initialize())
 // ---------------- MongoDB Connection  ----------------
 
 const mongoose = require("mongoose");
