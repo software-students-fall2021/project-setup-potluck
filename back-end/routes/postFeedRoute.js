@@ -116,16 +116,26 @@ const posting =  async (req, res)  => {
         // Add Restaurant & User data
         new_post.author = user['_id']
         new_post.parentRestaurant.push(restaurant['_id'])
+        
 
         //console.log("new_post")
         //console.log(new_post)
         try {
-          await new_post.save(err => { if(err) console.log(err) });
+        //changed saves to be async await for easier manipulation
+         const newPost = await new_post.save();
         //   res.send('postFeed works') 
+
+            //console.log(newPost["_id"]);
+        //updated the author user's profile to record that they have made this post!
+        user.posts.push(newPost["_id"])
+        const updatedUser = user.save();
+
+         
+         //let currPost = await Post.findOne(req.body.title) ; 
           res.redirect("/search");
         } catch (err) {
           //console.log("=======MONGODB SAVE FOR POST FAILED")
-         // console.log(err)
+         console.log(err)
          // console.log("==================")
        }
         

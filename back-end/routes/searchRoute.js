@@ -88,9 +88,9 @@ const getSearch = async (req, res) =>{
         //const src = base64Img.base64(post.imageURL, function(err, data) { console.log(data); mySrc = data})
         //const src = base64Img.base64Sync(post.imageURL)
         //console.log(src)
-        console.log(post)
+        //onsole.log(post)
         const myPosts = await Post.find({}).populate("author").populate("parentRestaurant")
-        //console.log( myPosts[0])
+        console.log( myPosts)
         const allPosts = myPosts.map((element, iterator)=>
         
             {return(
