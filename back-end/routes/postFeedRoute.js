@@ -12,7 +12,7 @@ const postModel = require("../models/postModel")
 const Post = postModel['postStuff']
 const Restaurant = require("../models/restaurantModel")
 const User = require("../models/userModel")
-
+const path = require('path')
 const { body, validationResult, expressValidator} = require('express-validator');
 console.log(__dirname);
 // cb with destination...?
@@ -52,7 +52,7 @@ const getInfo = async (restaurantname, username) => {
 
 
 
-const posting =  async  upload.single('file'), (req, res)  => {
+const posting =  async (req, res)  => {
   //console.log("POST req for postfeed received")
 
     // Upload file
@@ -139,7 +139,7 @@ router.get('/postfeed/:filename', (req, res) => {
 });
 
 console.log("I m here")
-router.route("/").post( async (req, res) => {
+router.route("/").post( upload.single('images'), async (req, res) => {
     console.log('POST request received at postRoute')
     posting(req, res);
 });
