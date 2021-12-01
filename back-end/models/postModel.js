@@ -7,7 +7,7 @@ const URLSlugs = require('mongoose-url-slugs');
 const Post = new mongoose.Schema({
     //not sure if unique needs to be here
     title:{type: String, require:true},
-    author:[{type:mongoose.Schema.Types.ObjectId, ref:'User'}],
+    author:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
     imageURL: {type: "string"},
     url:{type: "string"},
     content:{type: String},
