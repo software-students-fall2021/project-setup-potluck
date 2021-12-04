@@ -10,11 +10,58 @@ require("dotenv").config()
 // which is a React wrapper package for deck.gl
 const Map = ( {restaurants} ) => {
 
-  // States for Modal
+  // STATES FOR MODAL
+
+  // Show or hide modal
   const [show, setShow] = useState(false);
 
+  // Restaurant data - default as first restaurant
+
+  // Default restaurant
+  const defaultRestaurant = {
+    "categories": {
+        "alias": "vietnamese",
+        "title": "Vietnamese"
+    },
+    "location": {
+        "coordinates": {
+            "longitude": -73.991332,
+            "latitude": 40.7606544
+        },
+        "city": "New York",
+        "country": "US",
+        "state": "NY",
+        "address": "647 9th Ave",
+        "zip_code": "10036"
+      },
+      "_id": "619acccc58529672c5748621",
+      "name": "OBAO",
+      "phone_number": "+12122458880",
+      "yelp_id": "NN3mOWF5e_pnR1ArqM2bHQ",
+      "yelp_url": "https://www.yelp.com/biz/obao-new-york-3?adjust_creative=JIfUwiIJQQHBe5CcyapAhg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=JIfUwiIJQQHBe5CcyapAhg",
+      "restaurant_img_url": "https://s3-media4.fl.yelpcdn.com/bphoto/CpVI2XJLrvg09Fm83bfPog/o.jpg",
+      "transactions": [
+          "pickup",
+          "delivery"
+      ],
+      "posts": [],
+      "__v": 0
+  }
+
+  const [restaurant, setRestaurant] = useState(defaultRestaurant)
+  
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (idx) => {
+  
+    // Extract new restaurant
+    let restaurant = restaurants[idx]
+
+    // Set new restaurant
+    setRestaurant(restaurant)
+
+    // Show Modal
+    setShow(true)
+  };
 
 
   // Initialize history to program navigation - to render clicked restaurants
@@ -52,6 +99,7 @@ const Map = ( {restaurants} ) => {
   return (
     restaurants ? (
     <>
+      
       <Modal
         show={show}
         onHide={handleClose}
@@ -59,17 +107,16 @@ const Map = ( {restaurants} ) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title>{restaurant.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
-          escape key.
+          {restaurant.phone_number}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Understood</Button>
+          <Button variant="primary">See Releveant Posts</Button>
         </Modal.Footer>
       </Modal>
       <ReactMapGl
@@ -94,15 +141,15 @@ const Map = ( {restaurants} ) => {
         />
         {
           // Conditionally display Restaurants if restaurants state is loaded  
-          restaurants.map((restaurant, idx) => {
+          restaurants.map((r, idx) => {
           
             // Callback function to detect a click on any of the markers
             return (
             <Marker // Component for the Red Pin
-                key={restaurant._id}
-                latitude={restaurant.location.coordinates.latitude}
-                longitude={restaurant.location.coordinates.longitude}
-                onClick = {handleShow}
+                key={r._id}
+                latitude={r.location.coordinates.latitude}
+                longitude={r.location.coordinates.longitude}
+                onClick = {() => handleShow(idx)}
                 // onClick={() => restaurantClicked(idx)}
             >
               <Pin size={15} />
