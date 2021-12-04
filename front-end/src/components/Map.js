@@ -2,13 +2,20 @@ import React, { useCallback, useEffect, useState } from "react"
 import ReactMapGl, { Marker, GeolocateControl } from "react-map-gl"
 import { useHistory } from "react-router-dom"
 import Pin from "./Pin"
-import { Spinner } from "react-bootstrap"
+import { Spinner, Modal, Button } from "react-bootstrap"
 // Load API key from .env file (WHICH SHOULD BE IN .gitignore)
 require("dotenv").config()
 
 // This component loads an interactive map using react-map-gl
 // which is a React wrapper package for deck.gl
 const Map = ( {restaurants} ) => {
+
+  // States for Modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   // Initialize history to program navigation - to render clicked restaurants
   let history = useHistory()
@@ -44,6 +51,27 @@ const Map = ( {restaurants} ) => {
 
   return (
     restaurants ? (
+    <>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          I will not close if you click outside me. Don't even try to press
+          escape key.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
       <ReactMapGl
         // Spread all values of the viewport as prop for <ReactMapGl />
         {...viewport}
@@ -70,11 +98,12 @@ const Map = ( {restaurants} ) => {
           
             // Callback function to detect a click on any of the markers
             return (
-            <Marker
+            <Marker // Component for the Red Pin
                 key={restaurant._id}
                 latitude={restaurant.location.coordinates.latitude}
                 longitude={restaurant.location.coordinates.longitude}
-                onClick={() => restaurantClicked(idx)}
+                onClick = {handleShow}
+                // onClick={() => restaurantClicked(idx)}
             >
               <Pin size={15} />
             </Marker>)
@@ -82,6 +111,7 @@ const Map = ( {restaurants} ) => {
         } 
         
       </ReactMapGl>
+      </>
     ) : (
       // Display loading screen if async call to GET restaurants is incomplete
       <div>
