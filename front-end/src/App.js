@@ -71,6 +71,9 @@ function App() {
   }*/
 
   useEffect(() => {
+
+    initializeToken()
+
     initializeRestaurants()
     //initializeUser()
     console.log("so what is restaurants:", restaurants)

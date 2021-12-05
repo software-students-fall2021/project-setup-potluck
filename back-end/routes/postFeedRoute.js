@@ -116,10 +116,12 @@ const posting =  async (req, res)  => {
 
 
          //let currPost = await Post.findOne(req.body.title) ;
-          res.redirect("/search");
+        
+         res.send('success');
         } catch (err) {
           //console.log("=======MONGODB SAVE FOR POST FAILED")
          console.log(err)
+         res.send(err)
          // console.log("==================")
        }
 
