@@ -63,21 +63,6 @@ function App() {
     }
   }
 
-  const initializeToken = async () => {
-
-    // Grab Javascript Web Token from localStorage
-    const savedToken = JSON.parse(localStorage.getItem("token"))
-
-    // Check if Javascript Web Token exists
-    if (savedToken) {
-      console.log('Found existing token! -> loading into state')
-      
-      // Store token into state
-    } else{
-      console.log('token not found.. creating and saving one now')
-      localStorage.setItem("token", JSON.stringify("iamatoken"))  
-    }
-  }
   /*const initializeUser = async () => {
     await fetch(`http://localhost:3001/user/`)
       .then((response) => response.json())
@@ -88,24 +73,27 @@ function App() {
   }*/
 
   useEffect(() => {
-
-    // Check to see if token has been created -> if not, hide PostFeed
-    initializeToken()
-
     // Check to see if restaurants are saved in localStorage
     initializeRestaurants()
   }, [])
 
 
-  // Conditionally render or hide postfeed link based on login state
-  const PostFeedLink = () => {
+  // Conditionally render or hide links based on login state
+  const ConditionalNavBar = () => {
     const token = JSON.parse(localStorage.getItem("token"))
     return (
+      // If logged in, show PostFeed and Log Out. If logged out, show Register and Login
       token ? (
-        <a href="/postfeed">PostFeed</a>
+        <>
+          <a href="/postfeed">PostFeed</a>
+          <a href="/logout">Log out</a>
+        </>
       ) : (
-        <></>
-      )
+        <>
+         <a href="/register">Register</a>
+         <a href="/login">Login</a>
+        </>
+        )
     )
   }
 
@@ -134,9 +122,7 @@ function App() {
           {/* <a href="/restaurant">Restaurant</a> */}
           <a href="/map">Map</a>
           <a href="/about">About</a>
-          <a href="/register">Register</a>
-          <PostFeedLink/>
-          <a href="/logout">Log out</a>
+          <ConditionalNavBar/>
         </div>
       </nav>
       <Switch>
