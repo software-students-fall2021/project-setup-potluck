@@ -53,6 +53,10 @@ const Login = props => {
       // store the response data into the data state variable
       setResponse(response.data)
       console.log(`Server response.body in front end: ${JSON.stringify(response.hasOwnProperty('body'))}`)
+
+      // Add token to localStorage
+      localStorage.setItem("token", JSON.stringify("iamatoken"))  
+
     } catch (err) {
       // request failed... user entered invalid credentials
       setErrorMessage(
