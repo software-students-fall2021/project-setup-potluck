@@ -3,6 +3,7 @@ import React from "react"
 import { Button } from 'react-bootstrap';
 import "../styles/FeedPage.css"
 import "../App.css"
+import Logout from "./Logout.js"
 
 const InitialView = () =>{
 
