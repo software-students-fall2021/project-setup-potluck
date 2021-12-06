@@ -14,6 +14,8 @@ const morgan = require("morgan") // middleware for nice logging of incoming HTTP
 const { METHODS } = require("http")
 const mockaroo = require("mockaroo")
 require("@babel/polyfill")
+const jwt = require('jsonwebtoken')
+//require("./passport");
 const base64Img = require('base64-img')
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
