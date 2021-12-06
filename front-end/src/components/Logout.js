@@ -1,5 +1,5 @@
 const { useEffect } = require("react")
-const { Navigate } = require("react-router-dom")
+const { Redirect } = require("react-router-dom")
 
 //NOTE: Logging out with JWT authentication requires nothing from the backend, it is
 //entirely handled in the front-end (this file)
@@ -13,7 +13,7 @@ const Logout = props => {
   // navigate the user to the home page after logging them out
   return (
     <>
-      <Navigate to="/" />
+      <Redirect to="/" />
     </>
   )
 }
