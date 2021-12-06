@@ -18,8 +18,10 @@ import PostFeed from "./components/PostFeed"
 import GetData from "./components/MyAccountPage"
 import Logout from "./components/Logout"
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 import { useState, useEffect } from "react"
+
+
 
 function App() {
   
@@ -27,7 +29,6 @@ function App() {
   // This array will be passed down as prop to RestaurantPage, RestaurantFeed, and Map
   // to avoid calling the backend API multiple times
   const [restaurants, setRestaurants] = useState([])
-
   const [users, setUsers] = useState([])
 
   // Makes GET API call and sets data
@@ -62,6 +63,21 @@ function App() {
     }
   }
 
+  const initializeToken = async () => {
+
+    // Grab Javascript Web Token from localStorage
+    const savedToken = JSON.parse(localStorage.getItem("token"))
+
+    // Check if Javascript Web Token exists
+    if (savedToken) {
+      console.log('Found existing token! -> loading into state')
+      
+      // Store token into state
+    } else{
+      console.log('token not found.. creating and saving one now')
+      localStorage.setItem("token", JSON.stringify("iamatoken"))  
+    }
+  }
   /*const initializeUser = async () => {
     await fetch(`http://localhost:3001/user/`)
       .then((response) => response.json())
@@ -72,18 +88,41 @@ function App() {
   }*/
 
   useEffect(() => {
+
+    // Check to see if token has been created -> if not, hide PostFeed
+    initializeToken()
+
+    // Check to see if restaurants are saved in localStorage
     initializeRestaurants()
-    //initializeUser()
-    console.log("so what is restaurants:", restaurants)
   }, [])
 
-  useEffect(() => {
-    console.log('OOP! restaurants updated:', restaurants)
-  }, [restaurants])
+
+  // Conditionally render or hide postfeed link based on login state
+  const PostFeedLink = () => {
+    const token = JSON.parse(localStorage.getItem("token"))
+    return (
+      token ? (
+        <a href="/postfeed">PostFeed</a>
+      ) : (
+        <></>
+      )
+    )
+  }
+
+  const PostFeedRoute = () => {
+    const token = JSON.parse(localStorage.getItem("token"))
+    console.log('PostFeedRoute token is', token)
+    return (
+      token ? (
+        <PostFeed/>
+      ) : (
+        <Redirect to='/login'/>
+      )
+    )
+  }
 
   return (
-    <Router>
-      {/* <div> */}
+    <Router>  
       <nav id="hamnav">
         <label for="hamburger">&#9776;</label>
         <input type="checkbox" id="hamburger" />
@@ -96,11 +135,10 @@ function App() {
           <a href="/map">Map</a>
           <a href="/about">About</a>
           <a href="/register">Register</a>
-          <a href="/postfeed">PostFeed</a>
+          <PostFeedLink/>
           <a href="/logout">Log out</a>
         </div>
       </nav>
-
       <Switch>
         <Route path="/feed">
           <TagButton />
@@ -124,19 +162,18 @@ function App() {
         </Route>
         <Route path="/register">
           <Register/>
-        </Route> 
-        <Route path="/postfeed">
-          <PostFeed/>
         </Route>
-        <Route path="/logout">
-          <Logout/>
-        </Route>
-
         {/* Route with restaurant id passed as a parameter */}
         <Route path="/restaurant/:id">
           <RestaurantPage restaurants={restaurants} />
         </Route>
         {/* Dont add routes after the base route they wont work*/}
+        <Route path="/postfeed">
+          <PostFeedRoute/>
+        </Route>
+        <Route path="/logout">
+          <Logout/>
+        </Route>
         <Route path="/">
           <InitialView />
         </Route>
