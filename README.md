@@ -39,8 +39,35 @@ Want to **contribute** to our project? [Find out how!](https://github.com/softwa
 
 ## Build Potluck
 
-_To be filled.._
+### Using Github
+1. Clone this repository with
+```bash
+git clone https://github.com/software-students-fall2021/project-setup-potluck.git
+```
+2. Follow [these instructions](https://github.com/software-students-fall2021/project-setup-potluck/blob/master/back-end/README.md) to install and run the **back-end** 
+3. Follow [these instructions](https://github.com/software-students-fall2021/project-setup-potluck/blob/master/front-end/README.md) to install and run the **front-end** 
 
+### Using a Docker Image
+1. Install [Docker](https://docs.docker.com/get-docker/)
+2. Clone the [backend-end docker repository]((https://hub.docker.com/r/seungguini/potluck-backendend)) with
+```bash
+docker pull seungguini/potluck-backend
+```
+3. Clone the [front-end docker repository]((https://hub.docker.com/r/seungguini/potluck-frontend)) with
+```bash
+docker pull seungguini/potluck-frontend
+```
+4. Create `.env.backend` and populate with the respective backend-end environment variables.
+5. Create `.env.frontend` and populate with the respective front-end environment variables.
+6. Run the back-end image with
+```bash
+docker run -p 3001:3001/tcp --env-file=.env.backend seungguini/potluck-backend:latest
+```
+7. Run the front-end image with
+```bash
+docker run -p 3001:3001/tcp --env-file=.env.frontend seungguini/potluck-frontend:latest
+```
+8. Visit the website at [localhost:3001](localhost:3001)
 ## Test Potluck
 
 _To be filled.._
