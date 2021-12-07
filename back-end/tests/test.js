@@ -19,17 +19,38 @@ const postSchema = {
   //schema configuration
   title: "postSchema v1",
   type: "object",
-  required: ["title", "imageURL", "url", "author", "tags", "objectID"],
+  required: ["title", "imageURL", "content", "author", "tags","parentRestaurant"],
   //the schema itself
   properties: {
     title: { type: "string" },
+    author: { type: "object",
+      minItems: 4,
+      uniqueItems: false,
+      items:{
+        email: {type: 'string'},
+        image: {type:'string'},
+        posts: {type: 'array'},
+        username: {type: 'string'}
+      }
+    },
     imageURL: { type: "string" },
-    url: { type: "string" },
-    author: { type: "string" },
-    tags: { type: "number" },
-    object: { type: "number" },
+    content: { type: "string" },
+    parentRestuarant: {type: "object"},
+    tags: { type: "array" },
+
+    
   },
 }
+
+// categories: {type: "object",
+//         minItems: 2,
+//         uniqueItems: false,
+//         items: {
+//           alias: {type: "string"},
+//           title: {type: "string"}
+//         },
+//         required: true
+//     },
 
 // schema to test api call against the restaurant's schema
 {/*
@@ -263,6 +284,8 @@ describe("searchTests", () => {
     })
     it("Request should return an array", (done) => {
       //checks to see if the response is an array
+      //console.log(typeof(response.body))
+      //console.log(response.body)
       response.body.should.be.a("array")
       done()
     })
