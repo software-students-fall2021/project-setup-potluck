@@ -14,6 +14,7 @@
 }
 
 .modal-footer {
+    display: flex;
     align-items: center;
     background-color: rgba(155, 110, 234, 5);
 }
@@ -21,9 +22,5 @@
 .modal-lower-relevant-post-btn {
     align-items: center;
     outline: none;
-    background-color: rgba(155, 110, 234, 5);
-}
-
-.modal-lower-close-btn {
     background-color: rgba(155, 110, 234, 5);
 }

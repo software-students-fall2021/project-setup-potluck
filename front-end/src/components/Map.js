@@ -123,7 +123,8 @@ const Map = ( {restaurants} ) => {
           {restaurant.location.address}
           <br/>
           {restaurant.location.zip_code}
-          </p> 
+          </p>
+          <a href={restaurant.yelp_url}>Check us out on Yelp!</a>
         </Container>
         </Modal.Body>
         <Modal.Footer className="modal-footer">
