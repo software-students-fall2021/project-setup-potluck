@@ -29,22 +29,7 @@ router.route("/").post( passport.authenticate('local'),
       console.log('authentication successful!')
       res.json({status: "Success", redirect: '/'});
     }
-  )
-
-// router.route("/").options(
-//   passport.authenticate('local', 
-//     {
-//       successRedirect: 'http://localhost:3000/map',
-//       failureRedirect: 'http://localhost:3000/feed',
-//       failureFlash: true 
-//     }
-//   )
-// )
-
-// router.route("/").post((req, res) => {
-//     console.log('POST req received for login')
-//     attemptLogin(req, res);
-// });
+)
 
 router.route("/login").post((req, res) => {
 
