@@ -67,7 +67,7 @@ docker run -p 3001:3001/tcp --env-file=.env.backend seungguini/potluck-backend:l
 ```bash
 docker run -p 3000:3000/tcp --env-file=.env.frontend seungguini/potluck-frontend:latest
 ```
-8. Visit the website at [localhost:3001](localhost:3001)
+8. Visit the website at [localhost:3000](http://localhost:3001)
 ## Test Potluck
 
 _To be filled.._
