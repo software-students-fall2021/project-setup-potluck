@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useState } from "react"
 import ReactMapGl, { Marker, GeolocateControl } from "react-map-gl"
 import { useHistory } from "react-router-dom"
 import Pin from "./Pin"
-import { Spinner, Modal, Button } from "react-bootstrap"
+import { Spinner, Modal, Button, Container, Row, Col } from "react-bootstrap"
+import "./../styles/Maps.css"
 // Load API key from .env file (WHICH SHOULD BE IN .gitignore)
 require("dotenv").config()
 
@@ -17,7 +18,7 @@ const Map = ( {restaurants} ) => {
 
   // Restaurant data - default as first restaurant
 
-  // Default restaurant
+  // Default restaurant - filler 
   const defaultRestaurant = {
     "categories": {
         "alias": "vietnamese",
@@ -48,7 +49,7 @@ const Map = ( {restaurants} ) => {
       "__v": 0
   }
 
-  const [restaurant, setRestaurant] = useState(defaultRestaurant)
+  const [restaurant, setRestaurant] = useState(defaultRestaurant) // << state: designates which restaurant to show (via modal)
   
   const handleClose = () => setShow(false);
   const handleShow = (idx) => {
@@ -106,17 +107,30 @@ const Map = ( {restaurants} ) => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>{restaurant.name}</Modal.Title>
+        <Modal.Header closeButton className="modal-top-row">
+          <Modal.Title className="modal-res-name">
+            {restaurant.name}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {restaurant.phone_number}
+        <Modal.Body className='modal-body'>
+
+        <Container>
+          <img width="100%" height="100%" src={restaurant.restaurant_img_url}></img>
+          <br/>
+          <h4>Where to Find Us</h4>
+          <p>{restaurant.phone_number}
+          <br/>
+          {restaurant.location.address}
+          <br/>
+          {restaurant.location.zip_code}
+          </p> 
+        </Container>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className="modal-footer">
+       {/*  <Button variant="secondary" onClick={handleClose} className="modal-lower-close-btn">
             Close
-          </Button>
-          <Button variant="primary">See Releveant Posts</Button>
+    </Button> */}
+          <Button variant="primary" className="modal-lower-relevant-post-btn">See Releveant Posts</Button>
         </Modal.Footer>
       </Modal>
       <ReactMapGl
