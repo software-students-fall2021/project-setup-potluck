@@ -127,9 +127,6 @@ const Map = ( {restaurants} ) => {
         </Container>
         </Modal.Body>
         <Modal.Footer className="modal-footer">
-       {/*  <Button variant="secondary" onClick={handleClose} className="modal-lower-close-btn">
-            Close
-    </Button> */}
           <Button variant="primary" className="modal-lower-relevant-post-btn">See Releveant Posts</Button>
         </Modal.Footer>
       </Modal>
