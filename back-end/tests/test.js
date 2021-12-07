@@ -321,6 +321,7 @@ describe("restaurants", () => {
 //This test sends valid login information, and should receive a 200 response
 describe("loginTestsValidCredentials", () => {
 
+  //These are valid user credentials because a user with these credentials exists in the database
   const validUserCredentials = {
     username: 'cereal', 
     password: 'cereal'
@@ -351,15 +352,14 @@ describe("loginTestsValidCredentials", () => {
       response.should.have.status(200)
       done()
     })
-
-    //Possibly: check for successful redirect to "/"
   })
  
 })
 
-//This test sends valid login information, and should receive a 200 response
+//Suite of tests for an unsuccessful login (loginRoute)
 describe("loginTestsInvalidCredentials", () => {
 
+  //These are invalid credentials because a user with these credentials does not exist in the databse
   const invalidUserCredentials = {
     username: 'fakeUsername', 
     password: 'fakePassword'
@@ -391,12 +391,11 @@ describe("loginTestsInvalidCredentials", () => {
       done()
     })
 
-    //Possibly: check for successful redirect to "/"
   })
  
 })
 
-//Suite of tests for login authentication (loginRoute)
+//Suite of tests for successful registration (registerRoute)
 describe("registerTests", () => {
 
   const validRegistrationCredentials = {
@@ -411,7 +410,7 @@ describe("registerTests", () => {
     let error, response
     //Makes request prior to all tests running
     before((done) => {
-      //use chai to make a get request to login route
+      //use chai to make a get request to register route
       chai
         .request(app)
         .post("/register")
@@ -424,15 +423,13 @@ describe("registerTests", () => {
         })
     })
 
-    //Write test here for checking that status is Success when given VALID registration credentials
+    //Write test here for checking that status is 200 when given registration credentials
     it("Request should return a valid 200 response", (done) => {
       //use chai to make a get request to the restaurants route!
       //checks if request returns a 200 level response
       response.should.have.status(200)
       done()
     })
-
-    //Not sure if there's anything I can test for when given invalid registration credentials ?
 
   })
  
