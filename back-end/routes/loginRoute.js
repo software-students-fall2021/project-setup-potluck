@@ -60,11 +60,7 @@ router.route("/").post( async(req,response)=>{
       }
     })
   }
-  
-  
-  
-}
-)
+})
 
 // router.route("/").options(
 //   passport.authenticate('local', 

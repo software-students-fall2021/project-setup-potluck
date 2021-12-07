@@ -3,6 +3,7 @@ import chaiHttp from "chai-http"
 import { ApiError } from "mockaroo/lib/errors"
 import app from "../app"
 import "@babel/polyfill"
+import { Console } from "console"
 const assert = require("assert")
 
 chai.use(chaiHttp)
@@ -317,115 +318,124 @@ describe("restaurants", () => {
 })
 
 //Suite of tests for login authentication (loginRoute)
-describe("loginTests", () => {
-  //Testing the function that verifies the user is a valid, registered user
-  describe("GET/", () => {
+//This test sends valid login information, and should receive a 200 response
+describe("loginTestsValidCredentials", () => {
+
+  const validUserCredentials = {
+    username: 'cereal', 
+    password: 'cereal'
+  }
+  
+  describe("POST/", () => {
     let error, response
-
-    //Makes request prior to all tests running
-    before((done) => {
-      //Use chai to make a get request to login route
-      chai
-        .request(app)
-        .get("/login/lkg282@nyu.edu/Lauren")
-        .end((err, res) => {
-          //hoist error, response to the actual response, error variables
-          ;(error = err), (response = res)
-
-          done()
-        })
-    })
-
-    //The response should be a valid 200 response
-    it("Request should return a valid 200 response", (done) => {
-      //checks if request returns a 200 level response
-      response.should.have.status(200)
-      done()
-    })
-
-    //The response should be a boolean value
-    it("Request should return a boolean value", (done) => {
-      //The response should be a boolean value
-      //true = user logs in, false = user cannot log in
-      response.body.should.be.a("boolean")
-      done()
-    })
-
-    //The response should be true, since we are sending valid email/password combination
-    it("Request should true", (done) => {
-      //The response should true since we provided valid login information
-      //true = user logs in
-      assert.equal(response.body, true)
-      done()
-    })
-  })
-
-  //Testing the function that verifies the user is a valid, registered user
-  //But this time with faulty login information
-  describe("GET/", () => {
-    let error, response
-
-    //Makes request prior to all tests running
-    before((done) => {
-      //Use chai to make a get request to login route
-      chai
-        .request(app)
-        .get("/login/lkg282@nyu.edu/fakePassword")
-        .end((err, res) => {
-          //hoist error, response to the actual response, error variables
-          ;(error = err), (response = res)
-
-          done()
-        })
-    })
-
-    //The response should be false, since we provided incorrect email/password combination
-    it("Request should return true or false", (done) => {
-      //The response should be false, since the password is incorrect
-      assert.equal(response.body, false)
-      done()
-    })
-  })
-
-  //Testing the function that gets and returns the array of registered users
-  describe("GET/", () => {
-    let error, response
-
     //Makes request prior to all tests running
     before((done) => {
       //use chai to make a get request to login route
       chai
         .request(app)
-        .get("/login")
+        .post("/login")
+        .send(validUserCredentials)
         .end((err, res) => {
           //hoist error, response to the actual response, error variables
           ;(error = err), (response = res)
-
+          //console.log(res);
           done()
         })
     })
 
-    //The response should be a valid 200 response
+    //Write test here for checking that status is Success when given VALID login credentials
+    //The question is: how do I do valid login credentials??
     it("Request should return a valid 200 response", (done) => {
+      //use chai to make a get request to the restaurants route!
       //checks if request returns a 200 level response
       response.should.have.status(200)
       done()
     })
 
-    //The response should be an array of objects
-    it("Request should return an array of objects", (done) => {
-      //Check if the response is an array or not
-      response.body.should.be.a("array")
+    //Possibly: check for successful redirect to "/"
+  })
+ 
+})
+
+//This test sends valid login information, and should receive a 200 response
+describe("loginTestsInvalidCredentials", () => {
+
+  const invalidUserCredentials = {
+    username: 'fakeUsername', 
+    password: 'fakePassword'
+  }
+  
+  describe("POST/", () => {
+    let error, response
+    //Makes request prior to all tests running
+    before((done) => {
+      //use chai to make a get request to login route
+      chai
+        .request(app)
+        .post("/login")
+        .send(invalidUserCredentials)
+        .end((err, res) => {
+          //hoist error, response to the actual response, error variables
+          ;(error = err), (response = res)
+          //console.log(res);
+          done()
+        })
+    })
+
+    //Write test here for checking that status is Success when given VALID login credentials
+    //The question is: how do I do valid login credentials??
+    it("Request should return a valid 401 response because of invalid credentials", (done) => {
+      //use chai to make a get request to the restaurants route!
+      //checks if request returns a 200 level response
+      response.should.have.status(401)
       done()
     })
 
-    //The response array should contain 5 objects
-    it("Request should return an array of length 5", (done) => {
-      //Check to see if the length of the response is 5
-      assert.equal(response.body.length, 5)
+    //Possibly: check for successful redirect to "/"
+  })
+ 
+})
+
+//Suite of tests for login authentication (loginRoute)
+describe("registerTests", () => {
+
+  const validRegistrationCredentials = {
+    firstName: 'Mister',
+    lastName: 'Rogers',
+    username: 'mrogers', 
+    email: 'mrogers@gmail.com',
+    password: 'neighborhood'
+  }
+  
+  describe("POST/", () => {
+    let error, response
+    //Makes request prior to all tests running
+    before((done) => {
+      //use chai to make a get request to login route
+      chai
+        .request(app)
+        .post("/register")
+        .send(validRegistrationCredentials)
+        .end((err, res) => {
+          //hoist error, response to the actual response, error variables
+          ;(error = err), (response = res)
+          //console.log(res);
+          done()
+        })
+    })
+
+    //Write test here for checking that status is Success when given VALID registration credentials
+    it("Request should return a valid 200 response", (done) => {
+      //use chai to make a get request to the restaurants route!
+      //checks if request returns a 200 level response
+      response.should.have.status(200)
       done()
     })
+
+    //Not sure if there's anything I can test for when given invalid registration credentials ?
+
   })
+ 
 })
 
 describe("userData", () => {
