@@ -57,15 +57,15 @@ docker pull seungguini/potluck-backend
 ```bash
 docker pull seungguini/potluck-frontend
 ```
-4. Create `.env.backend` and populate with the respective backend-end environment variables.
-5. Create `.env.frontend` and populate with the respective front-end environment variables.
+4. Create `.env.backend` and populate necessary backend-end environment variables
+5. Create `.env.frontend` and populate necessary front-end environment variables
 6. Run the back-end image with
 ```bash
 docker run -p 3001:3001/tcp --env-file=.env.backend seungguini/potluck-backend:latest
 ```
 7. Run the front-end image with
 ```bash
-docker run -p 3001:3001/tcp --env-file=.env.frontend seungguini/potluck-frontend:latest
+docker run -p 3000:3000/tcp --env-file=.env.frontend seungguini/potluck-frontend:latest
 ```
 8. Visit the website at [localhost:3001](localhost:3001)
 ## Test Potluck
