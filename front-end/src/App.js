@@ -72,7 +72,7 @@ function App() {
 
   useEffect(() => {
 
-    initializeToken()
+    // initializeToken()
 
     initializeRestaurants()
     //initializeUser()
