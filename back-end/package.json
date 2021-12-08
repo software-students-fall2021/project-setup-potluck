@@ -21,10 +21,6 @@
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
     "image-to-base64": "^2.2.0",
-<<<<<<< HEAD
-=======
-    "express-validator": "^6.13.0",
->>>>>>> login-regis-tests
     "jsonwebtoken": "^8.5.1",
     "mockaroo": "^0.1.7",
     "mongoose": "^6.0.13",
