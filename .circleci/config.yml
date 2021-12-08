@@ -47,7 +47,7 @@ jobs:
           password: $DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout
-      - setup_remote_docker:
+      - setup_remote_docker
       - run: echo "we're pulling, building, and pushing the docker images!"
 
       # pull build and push docker
