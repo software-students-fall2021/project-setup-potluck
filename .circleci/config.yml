@@ -25,9 +25,9 @@ jobs:
   build-react-js:
     docker:
       - image: cimg/node:16.13.0 # latest stable node at the time of writing
-        # auth:
-        #   username: mydockerhub-user
-        #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        auth:
+          username: user
+          password: DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "this is the build react.js job"
@@ -46,13 +46,9 @@ jobs:
       - image: cimg/node:16.13.0
     steps:
       - checkout
-      - setup_remote_docker:
-        version: 20.10.11
+      - setup_remote_docker
       - run: echo "we're pulling, building, and pushing the docker images!"
 
-      # Authenticate docker
-      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-      
       # pull build and push docker
       - run: |
           cd back-end
@@ -72,12 +68,10 @@ jobs:
     docker:
       - image: cimg/node:16.13.0
     steps:
-      - checkout
-      - setup_remote_docker:
-        version: 20.10.11
-      
-
+      - checkout   
+      - setup_remote_docker
       - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
+      
 
 # Orchestrate our job run sequence
 workflows:
