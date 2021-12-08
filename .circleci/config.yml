@@ -39,9 +39,6 @@ jobs:
           cd front-end
           npm install # install all dependencies listed in package.json
           npm run build # have react build the stand-alone front-end code
-      - run: |
-          docker build -t seungguini/potluck-frontend .
-          docker push seungguini/potluck-frontend
   
   # Build & push Docker image
   pull-build-push:
