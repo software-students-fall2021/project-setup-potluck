@@ -87,10 +87,17 @@ workflows:
       - build-react-js
   build-push-deploy-docker:
     filters:
-      branches:
-        only:
-        - master
-        - docker-Implementation
+      
     jobs:
-      - pull-build-push
-      - deploy
+      - pull-build-push:
+        filters:
+          branches:
+            only:
+              - master
+              - docker-Implementation
+      - deploy:
+        filters:
+          branches:
+            only:
+              - master
+              - docker-Implementation
