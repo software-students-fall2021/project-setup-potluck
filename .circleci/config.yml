@@ -21,6 +21,7 @@ jobs:
           cd back-end
           npm install # install all dependencies listed in package.json
           npm test # run all unit tests
+
   build-react-js:
     docker:
       - image: cimg/node:16.13.0 # latest stable node at the time of writing
@@ -38,6 +39,43 @@ jobs:
           cd front-end
           npm install # install all dependencies listed in package.json
           npm run build # have react build the stand-alone front-end code
+      - run: |
+          docker build -t seungguini/potluck-frontend .
+          docker push seungguini/potluck-frontend
+  
+  # Build & push Docker image
+  pull-build-push:
+    docker:
+      - image: cimg/node:16.13.0
+    steps:
+      - checkout
+      - run: echo "we're pulling, building, and pushing the docker images!"
+
+      # Authenticate docker
+      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      
+      # pull build and push docker
+      - run: |
+          cd back-end
+          docker pull seungguini/potluck-backend
+          docker build -t seungguini/potluck-backend .
+          docker push seungguini/potluck-backend
+
+      - run: |
+          cd front-end
+          docker pull seungguini/potluck-front-end
+          docker build -t seungguini/potluck-frontend .
+          docker push seungguini/potluck-frontend
+
+  # Pull & build docker on server
+  deploy:
+    docker:
+      - image: cimg/node:16.13.0
+    steps:
+      - checkout
+      - run: Deploying docker on the server!
+
+      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
 
 # Orchestrate our job run sequence
 workflows:
@@ -47,3 +85,11 @@ workflows:
   build-front-end:
     jobs:
       - build-react-js
+  build-push-deploy-docker:
+    filters:
+      branches:
+        - master
+        - docker-Implementation
+    jobs:
+      - pull-build-push
+      - deploy
