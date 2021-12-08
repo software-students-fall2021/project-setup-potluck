@@ -25,9 +25,7 @@ jobs:
   build-react-js:
     docker:
       - image: cimg/node:16.13.0 # latest stable node at the time of writing
-        auth:
-          username: user
-          password: DOCKER_PASS  # context / project UI env-var reference
+        
     steps:
       - checkout
       - run: echo "this is the build react.js job"
@@ -44,6 +42,9 @@ jobs:
   pull-build-push:
     docker:
       - image: cimg/node:16.13.0
+      auth:
+          username: root
+          password: DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker
@@ -67,6 +68,9 @@ jobs:
   deploy:
     docker:
       - image: cimg/node:16.13.0
+      auth:
+          username: root
+          password: DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout   
       - setup_remote_docker
