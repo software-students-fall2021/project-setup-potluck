@@ -54,14 +54,14 @@ jobs:
       - run: |
           cd back-end
           docker pull seungguini/potluck-backend
-          docker build -t seungguini/potluck-backend .
+          docker build --platform linux/amd64 -t seungguini/potluck-backend .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push seungguini/potluck-backend
 
       - run: |
           cd front-end
           docker pull seungguini/potluck-frontend
-          docker build -t seungguini/potluck-frontend .
+          docker build --platform linux/amd6 -t seungguini/potluck-frontend .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push seungguini/potluck-frontend
       
@@ -76,7 +76,9 @@ jobs:
     steps:
       - checkout   
       - setup_remote_docker
-      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
+      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP 
+      - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+      - run: "./deploy.sh"
       
 
 # Orchestrate our job run sequence
