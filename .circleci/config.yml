@@ -60,7 +60,7 @@ jobs:
 
       - run: |
           cd front-end
-          docker pull seungguini/potluck-front-end
+          docker pull seungguini/potluck-frontend
           docker build -t seungguini/potluck-frontend .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push seungguini/potluck-frontend
