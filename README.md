@@ -1,7 +1,7 @@
 # Project Repository
 
 ---
-
+[![CircleCI](https://circleci.com/gh/software-students-fall2021/project-setup-potluck/tree/master.svg?style=svg)](https://circleci.com/gh/software-students-fall2021/project-setup-potluck/tree/master)
 ## Description
 
 **Potluck** is a school-specific social media platform for students to find and share their experiences with food around campus. Users can post recipes, items they bought from local grocery stores, food from local restaurants, or anything else they want to share. Students can also discuss in the feed area, Sample topics include: Street Food, Bubble Tea, Italian food, 3-ingredient meals, et cetera.

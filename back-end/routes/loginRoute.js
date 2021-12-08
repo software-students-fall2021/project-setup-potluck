@@ -42,7 +42,6 @@ router.route("/").post( async(req,response)=>{
 
   let isUser = await User.findOne({username: username});
   if(!isUser){
-    console.log("LMAO")
     response.status(401).json({success: false, message: 'user doesnt exist'})
   }
   else{
@@ -50,7 +49,6 @@ router.route("/").post( async(req,response)=>{
       if(err){console.log(err)}
       if(res){
         //sign me some jwt
-        //console.log("kill me")
         const token = genToken(isUser)
         console.log(token)
         response.status(200).json({token})
@@ -60,37 +58,6 @@ router.route("/").post( async(req,response)=>{
       }
     })
   }
-  
-  
-  
-}
-)
-
-// router.route("/").options(
-//   passport.authenticate('local', 
-//     {
-//       successRedirect: 'http://localhost:3000/map',
-//       failureRedirect: 'http://localhost:3000/feed',
-//       failureFlash: true 
-//     }
-//   )
-// )
-
-// router.route("/").post((req, res) => {
-//     console.log('POST req received for login')
-//     attemptLogin(req, res);
-// });
-
-// router.route("/login").post((req, res) => {
-
-//   try {
-//     console.log('POST req received for login')
-//     attemptLogin(req, res); 
-//   }
-//   catch (err){
-//     res.send(err)
-//   }
-    
-// })
+})
 
 module.exports = router;
