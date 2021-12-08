@@ -86,7 +86,6 @@ workflows:
     jobs:
       - build-react-js
   build-push-deploy-docker:
-    filters:
       
     jobs:
       - pull-build-push:
