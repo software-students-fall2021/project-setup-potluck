@@ -88,6 +88,7 @@ workflows:
   build-push-deploy-docker:
     filters:
       branches:
+        only:
         - master
         - docker-Implementation
     jobs:
