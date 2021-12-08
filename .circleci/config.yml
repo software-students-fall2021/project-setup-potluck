@@ -54,16 +54,14 @@ jobs:
       - run: |
           cd back-end
           docker pull seungguini/potluck-backend
-          docker build -t potluck-backend .
-          docker tag potluck-backend seungguini/potluck-backend
+          docker build -t seungguini/potluck-backend .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push seungguini/potluck-backend
 
       - run: |
           cd front-end
           docker pull seungguini/potluck-front-end
-          docker build -t potluck-frontend .
-          docker tag potluck-frontend seungguini/potluck-frontend
+          docker build -t seungguini/potluck-frontend .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push seungguini/potluck-frontend
       
