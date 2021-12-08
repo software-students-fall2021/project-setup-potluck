@@ -1,5 +1,5 @@
-import User from "../models/userModel"
-import genToken from "../passportStrategies/tokenGenerator";
+const User = require("../models/userModel")
+const genToken = require( "../passportStrategies/tokenGenerator")
 // import and instantiate express
 const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
