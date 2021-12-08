@@ -43,7 +43,7 @@ jobs:
     docker:
       - image: cimg/node:16.13.0
         auth:
-          username: root
+          username: $DOCKER_USER
           password: $DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout
@@ -69,7 +69,7 @@ jobs:
     docker:
       - image: cimg/node:16.13.0
         auth:
-          username: root
+          username: $DOCKER_USER
           password: $DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout   
