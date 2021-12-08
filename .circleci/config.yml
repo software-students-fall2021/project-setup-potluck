@@ -86,17 +86,18 @@ workflows:
     jobs:
       - build-react-js
   build-push-deploy-docker:
-      
     jobs:
       - pull-build-push:
-        filters:
-          branches:
-            only:
-              - master
-              - docker-Implementation
+          filters:
+            branches:
+              only:
+                - master
+                - docker-Implementation
       - deploy:
-        filters:
-          branches:
-            only:
-              - master
-              - docker-Implementation
+          requires:
+            - pull-build-push # run this job only when docker has been built and pushed onto Dockerhub
+          filters:
+            branches:
+              only:
+                - master
+                - docker-Implementation

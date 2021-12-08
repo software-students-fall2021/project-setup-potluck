@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "preinstall": "npm i nodemon -g",
+    "preinstall": "npm i nodemon",
     "test": "mocha --require babel-register tests/*.js --timeout 100000 --exit",
     "dev": "nodemon --exec babel-node --presets babel-preset-env ./server.js",
     "coverage": "cross-env NODE=development nyc --reporter=html --reporter=text npm test --exit"
