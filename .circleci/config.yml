@@ -42,9 +42,9 @@ jobs:
   pull-build-push:
     docker:
       - image: cimg/node:16.13.0
-      auth:
+        auth:
           username: root
-          password: DOCKER_PASS  # context / project UI env-var reference
+          password: $DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker
@@ -68,9 +68,9 @@ jobs:
   deploy:
     docker:
       - image: cimg/node:16.13.0
-      auth:
+        auth:
           username: root
-          password: DOCKER_PASS  # context / project UI env-var reference
+          password: $DOCKER_PASS  # context / project UI env-var reference
     steps:
       - checkout   
       - setup_remote_docker
