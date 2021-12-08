@@ -42,119 +42,6 @@ const postSchema = {
   },
 }
 
-// categories: {type: "object",
-//         minItems: 2,
-//         uniqueItems: false,
-//         items: {
-//           alias: {type: "string"},
-//           title: {type: "string"}
-//         },
-//         required: true
-//     },
-
-// schema to test api call against the restaurant's schema
-{/*
-const restaurantSchema = {
-  // Schema config
-  title: "restaurantSchema v1",
-  type: "object",
-  required: [
-    "id",
-    "name",
-    "address",
-    "no_posts",
-    "backgroundPic",
-    "location",
-    "logoPic",
-    "menuPopular",
-    "recipesPopular",
-    "menuPopularPics",
-    "menuMain",
-    "recipesMain",
-    "menuMainPics",
-    "beverages",
-  ],
-  properties: {
-    id: { type: "number" },
-    name: { type: "string" },
-    address: { type: "string" },
-    no_posts: { type: "number" },
-    backgroundPic: { type: "string" },
-    colors: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-    location: {
-      type: "object",
-      items: {
-        longitude: { type: "number" },
-        latitude: { type: "number" },
-      },
-    },
-    logoPic: { type: "string" },
-    menuPopular: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-    recipesPopular: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-    menuPopularPics: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-    menuMain: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-    recipesMain: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-    menuMainPics: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-    beverages: {
-      type: "array",
-      minItems: 1,
-      uniqueItems: false,
-      items: {
-        type: "string",
-      },
-    },
-  },
-} */}
-
 const restaurantSchema = {
   // Schema config
   title: "restaurantSchema v1",
@@ -420,46 +307,47 @@ describe("loginTestsInvalidCredentials", () => {
 })
 
 //Suite of tests for login authentication (loginRoute)
-describe("registerTests", () => {
+// describe("registerTests", () => {
 
-  const validRegistrationCredentials = {
-    firstName: 'Mister',
-    lastName: 'Rogers',
-    username: 'mrogers', 
-    email: 'mrogers@gmail.com',
-    password: 'neighborhood'
-  }
+//   const validRegistrationCredentials = {
+//     firstName: 'Mister',
+//     lastName: 'Rogers',
+//     username: 'mrogers', 
+//     email: 'mrogers@gmail.com',
+//     password: 'neighborhood'
+//   }
   
-  describe("POST/", () => {
-    let error, response
-    //Makes request prior to all tests running
-    before((done) => {
-      //use chai to make a get request to login route
-      chai
-        .request(app)
-        .post("/register")
-        .send(validRegistrationCredentials)
-        .end((err, res) => {
-          //hoist error, response to the actual response, error variables
-          ;(error = err), (response = res)
-          //console.log(res);
-          done()
-        })
-    })
+//   describe("POST/", () => {
+//     let error, response
+//     //Makes request prior to all tests running
+//     before((done) => {
+//       //use chai to make a get request to login route
+//       chai
+//         .request(app)
+//         .post("/register")
+//         .send(validRegistrationCredentials)
+//         .end((err, res) => {
+//           //hoist error, response to the actual response, error variables
+//           ;(error = err), (response = res)
+//           console.log(res);
+//           console.log(err)
+//           done()
+//         })
+//     })
 
-    //Write test here for checking that status is Success when given VALID registration credentials
-    it("Request should return a valid 200 response", (done) => {
-      //use chai to make a get request to the restaurants route!
-      //checks if request returns a 200 level response
-      response.should.have.status(200)
-      done()
-    })
+//     //Write test here for checking that status is Success when given VALID registration credentials
+//     it("Request should return a valid 200 response", (done) => {
+//       //use chai to make a get request to the restaurants route!
+//       //checks if request returns a 200 level response
+//       response.should.have.status(200)
+//       done()
+//     })
 
-    //Not sure if there's anything I can test for when given invalid registration credentials ?
+//     //Not sure if there's anything I can test for when given invalid registration credentials ?
 
-  })
+//   })
  
-})
+// })
 
 describe("userData", () => {
   describe("GET/", () => {
