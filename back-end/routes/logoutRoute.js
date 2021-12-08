@@ -1,4 +1,4 @@
-import User from "../models/userModel"
+const User = require("../models/userModel")
 // import and instantiate express
 const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
