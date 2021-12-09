@@ -21,12 +21,11 @@ jobs:
           cd back-end
           npm install # install all dependencies listed in package.json
           npm test # run all unit tests
+
   build-react-js:
     docker:
       - image: cimg/node:16.13.0 # latest stable node at the time of writing
-        # auth:
-        #   username: mydockerhub-user
-        #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        
     steps:
       - checkout
       - run: echo "this is the build react.js job"
@@ -38,6 +37,49 @@ jobs:
           cd front-end
           npm install # install all dependencies listed in package.json
           npm run build # have react build the stand-alone front-end code
+  
+  # Build & push Docker image
+  pull-build-push:
+    docker:
+      - image: cimg/node:16.13.0
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: echo "we're pulling, building, and pushing the docker images!"
+
+      # pull build and push docker
+      - run: |
+          cd back-end
+          docker pull seungguini/potluck-backend
+          docker build -t seungguini/potluck-backend .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push seungguini/potluck-backend
+
+      - run: |
+          cd front-end
+          docker pull seungguini/potluck-frontend
+          docker build -t seungguini/potluck-frontend .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push seungguini/potluck-frontend
+      
+
+  # Pull & build docker on server
+  deploy:
+    docker:
+      - image: cimg/node:16.13.0
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS  # context / project UI env-var reference
+    steps:
+      - checkout   
+      - setup_remote_docker
+      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP 
+      - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+      - run: "./deploy.sh"
+      
 
 # Orchestrate our job run sequence
 workflows:
@@ -47,3 +89,19 @@ workflows:
   build-front-end:
     jobs:
       - build-react-js
+  build-push-deploy-docker:
+    jobs:
+      - pull-build-push:
+          filters:
+            branches:
+              only:
+                - master
+                - docker-Implementation
+      - deploy:
+          requires:
+            - pull-build-push # run this job only when docker has been built and pushed onto Dockerhub
+          filters:
+            branches:
+              only:
+                - master
+                - docker-Implementation

@@ -13,7 +13,6 @@ const PostFeed = () => {
   // what to do when the user clicks the submit buton on the form
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
-    e.preventDefault()
     try{
       history.push('/map')
 
@@ -46,7 +45,7 @@ const PostFeed = () => {
             </div>
 
             <div class="form-group file-area">
-                    {/* <label for="images">Add Images</label> */}
+                {/* <label for="images">Add Images</label> */}
                 <input type="file" name="images" id="images" required="required" multiple="multiple"/>
                 <div class="file-dummy">
                 <div class="success">Click here to upload</div>
