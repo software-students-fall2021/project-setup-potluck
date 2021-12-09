@@ -76,9 +76,10 @@ jobs:
     steps:
       - checkout   
       - setup_remote_docker
-      - run: ssh -oStrictHostKeyChecking=no -v $USER@$IP 
-      - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-      - run: "./deploy.sh"
+      - run: |
+          ssh -oStrictHostKeyChecking=no -v $USER@$IP 
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          "./deploy.sh"
       
 
 # Orchestrate our job run sequence
