@@ -1,13 +1,20 @@
-FROM node:14-slim
-ENV NODE_ENV=development
+#Base Image off of Node.JS project
+FROM node:16
+
+# Create app directory
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm config set unsafe-perm true 
-RUN npm install --development --silent && mv node_modules ../
-RUN npm install --global nodemon 
-RUN npm install --global babel-cli
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
 COPY . .
+
 EXPOSE 3001
-RUN chown -R node /usr/src/app
-USER node
-CMD ["npm", "run", "dev"]
+CMD [ "npm", "start" ]
