@@ -1,11 +1,11 @@
-FROM node:14-slim
-ENV NODE_ENV=production
+FROM node:16
+
 WORKDIR /usr/src/app
+
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm config set unsafe-perm true 
-RUN npm install --production --silent && mv node_modules ../
+
+RUN npm install
+
 COPY . .
 EXPOSE 3000
-RUN chown -R node /usr/src/app
-USER node
 CMD ["npm", "start"]
