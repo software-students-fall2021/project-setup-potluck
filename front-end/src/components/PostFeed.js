@@ -4,7 +4,7 @@ import React from 'react'
 import { useState } from 'react';
 import {useHistory } from "react-router-dom"
 import {FormControl, Dropdown} from 'react-bootstrap';
-
+import axios from "axios"
 import "../App.css"
 import "../styles/PostFeed.css"
 // var session = require('express-session');
@@ -58,7 +58,7 @@ const CustomMenu = React.forwardRef(
 
 const PostFeed = ( {restaurants} ) => {
 
-  
+    let [selectedRestaurant, setSelectedRestaurant] = useState('No restaurant selected')
     let history = useHistory();
     // const restaurants = JSON.parse(localStorage.getItem("restaurants")) //{ ...localStorage};
     // let newRestaurants = [];
@@ -69,12 +69,34 @@ const PostFeed = ( {restaurants} ) => {
     // }
     //   console.log("here", newRestaurants)
 
-    
+  
+  // What to do when restaurant is selected
+  const handleRestaurantSelect = async e => {
+    setSelectedRestaurant(e.target.innerHTML)
+  }
+
   // what to do when the user clicks the submit buton on the form
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault()
     try{
+
+      const requestData = {
+       
+        title: e.target.title.value,
+        caption: e.target.caption.value,
+        restaurant: selectedRestaurant
+      }
+
+      var formData = new FormData();
+      var imagefile = document.querySelector('#images')
+      formData.append("image", imagefile.files[0])
+      axios.post('http://localhost:3001/postfeed', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+      })
+
       history.push('/map')
 
     } catch (err) {
@@ -85,7 +107,7 @@ const PostFeed = ( {restaurants} ) => {
   }
 
     return (    
-        <form action="http://localhost:3001/postfeed" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
 
             <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
 
@@ -119,14 +141,15 @@ const PostFeed = ( {restaurants} ) => {
                 
               </select>
             </div> */} 
-              <Dropdown title="DropdownRestaurant">
+              <p>{selectedRestaurant}</p>
+              <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                   Choose Restaurant
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu as={CustomMenu}>
+                <Dropdown.Menu as={CustomMenu} onSelect={(e) => console.log(e)} >
                   {restaurants.map( (restaurant, idx) => (
-                    <Dropdown.Item eventKey={idx}>{restaurant.name}</Dropdown.Item>
+                    <Dropdown.Item onClick={handleRestaurantSelect} eventKey={idx}>{restaurant.name}</Dropdown.Item>
                   ))}
                 </Dropdown.Menu>
               </Dropdown>

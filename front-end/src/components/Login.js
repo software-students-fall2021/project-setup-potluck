@@ -40,6 +40,9 @@ const Login = props => {
         `http://localhost:3001/login`,
         requestData
       )
+
+      // Save username in localStorage
+      localStorage.setItem("username", JSON.stringify(requestData.username))
       history.push('/map')
       console.log('response is', response)
 
