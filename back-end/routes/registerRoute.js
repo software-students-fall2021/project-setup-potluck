@@ -52,38 +52,56 @@ const postNewUser = async (req, res) => {
     //     }
     
     // });
-   
+   try{
+       console.log("hi")
     let userPass ="";
-    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.genSalt(10,  async function(err, salt) {
         if (err) return next(err);
-        bcrypt.hash(req.body.password, salt, function(err, hash) {
-          if (err) return next(err);
+        bcrypt.hash(req.body.password, salt, async function(err, hash) {
+          if (err) {return (next(err))};
+          ///if(!err){return(hash)}
           userPass = hash; // Or however suits your setup
+          //console.log(hash +"WOWO")
+          let isUser = await User.findOne({email:req.body.email});
+          if(isUser){
+              return(res.status(403).json({error:'Email already in use'}));
+          }
+          let user2 = await User.findOne({username:req.body.username})
+          if(user2){
+              console.log("taken username")
+            return(res.status(403).json({error:'username already in use'}));
+          }
+          console.log("COSD")
+          console.log(userPass +"M")
+         // console.log(pass2 + "WOPWOW")
+          const newUser = new User({ username: req.body.username, email: req.body.email, image: "", posts: [],  password:userPass})
+          
+      
+          
+          await newUser.save();
+          const token = genToken(newUser)
+          console.log(token)
+          res.status(200).json({token})
           // Store the user to the database, then send the response
         });
       });
     
-    let isUser = await User.findOne({email:req.body.email});
-    if(isUser){
-        return(res.status(403).json({error:'Email alreay in use'}));
-    }
-    const newUser = new User({ username: req.body.username, email: req.body.email, image: "", posts: [],  password:userPass})
-    
-
-    
-    await newUser.save();
-    const token = genToken(newUser)
-    console.log(token)
-    res.status(200).json({token})
+  
+}catch(error){console.log(error);
+}
 }
 
+
 router.route("/").post((req, res) => {
+
+    console.log("budy")
     postNewUser(req, res);
 });
 
 router.route("/register").post((req, res) => {
 
     try {
+        console.log("hi")
         postNewUser(req, res);
     }
     catch (err){
