@@ -62,7 +62,7 @@ const PostFeed = () => {
             <label for="restaurants">Choose a Restaurant:</label>
             <div>
               <select name="restaurantOptions"> 
-                {/* here we need to loop through and show all newRestaurants items as dropdown */}
+                {/* here we need to loop through and show all newRestaurants items as dropdown oki */}
                 {newRestaurants.map(({ name }) => (
                   <option value="name">newRestaurants
                   </option>
