@@ -3,7 +3,7 @@ import ReactMapGl, { Marker, GeolocateControl } from "react-map-gl"
 import { useHistory } from "react-router-dom"
 import Pin from "./Pin"
 import { Spinner, Modal, Button, Container, Row, Col } from "react-bootstrap"
-import "./../styles/Maps.css"
+import "./../styles/Map.css"
 // Load API key from .env file (WHICH SHOULD BE IN .gitignore)
 require("dotenv").config()
 
