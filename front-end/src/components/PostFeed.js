@@ -56,18 +56,18 @@ const CustomMenu = React.forwardRef(
 
 
 
-const PostFeed = () => {
+const PostFeed = ( {restaurants} ) => {
 
   
     let history = useHistory();
-    const items = JSON.parse(localStorage.getItem("restaurants")) //{ ...localStorage};
-    let newRestaurants = [];
-    for (let i = 0; i < items.length; i++){
-      // console.log(items[i]["name"])
-      newRestaurants.push(items[i]["name"]);
+    // const restaurants = JSON.parse(localStorage.getItem("restaurants")) //{ ...localStorage};
+    // let newRestaurants = [];
+    // for (let i = 0; i < restaurants.length; i++){
+    //   // console.log(items[i]["name"])
+    //   newRestaurants.push(restaurants[i]["name"]);
 
-    }
-      console.log("here", newRestaurants)
+    // }
+    //   console.log("here", newRestaurants)
 
     
   // what to do when the user clicks the submit buton on the form
@@ -121,16 +121,20 @@ const PostFeed = () => {
             </div> */} 
               <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                  Custom toggle
+                  Choose Restaurant
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu as={CustomMenu}>
+                  {restaurants.map( (restaurant, idx) => (
+                    <Dropdown.Item eventKey={idx}>{restaurant.name}</Dropdown.Item>
+                  ))}
+{/* 
                   <Dropdown.Item eventKey="1">Red</Dropdown.Item>
                   <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
                   <Dropdown.Item eventKey="3" active>
                     Orange
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+                  <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item> */}
                 </Dropdown.Menu>
               </Dropdown>
             <div class="form-group2">
