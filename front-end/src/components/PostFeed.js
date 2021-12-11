@@ -119,7 +119,7 @@ const PostFeed = ( {restaurants} ) => {
                 
               </select>
             </div> */} 
-              <Dropdown>
+              <Dropdown title="DropdownRestaurant">
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                   Choose Restaurant
                 </Dropdown.Toggle>
@@ -128,13 +128,6 @@ const PostFeed = ( {restaurants} ) => {
                   {restaurants.map( (restaurant, idx) => (
                     <Dropdown.Item eventKey={idx}>{restaurant.name}</Dropdown.Item>
                   ))}
-{/* 
-                  <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-                  <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-                  <Dropdown.Item eventKey="3" active>
-                    Orange
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item> */}
                 </Dropdown.Menu>
               </Dropdown>
             <div class="form-group2">

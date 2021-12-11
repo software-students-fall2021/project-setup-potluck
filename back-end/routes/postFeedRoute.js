@@ -79,7 +79,8 @@ const posting =  async (req, res)  => {
     }
 
     // Later to be replaced by req.body.restaurantName and req.body.username
-    const RESTAURANTNAME = 'Hi-Collar'
+    const RESTAURANTNAME = req.body.DropdownRestaurant;
+    console.log("HELLOOO",RESTAURANTNAME )
     const USERNAME = 'lkg282'
 
     // Check for user login
