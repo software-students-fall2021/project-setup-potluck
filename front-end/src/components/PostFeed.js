@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import React from 'react'
+import { useState } from 'react';
 import {useHistory } from "react-router-dom"
-
+import {FormControl} from 'react-bootstrap';
 import "../App.css"
 import "../styles/PostFeed.css"
 // var session = require('express-session');
@@ -52,22 +53,7 @@ const CustomMenu = React.forwardRef(
   },
 );
 
-render(
-  <Dropdown>
-    <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-      Custom toggle
-    </Dropdown.Toggle>
 
-    <Dropdown.Menu as={CustomMenu}>
-      <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-      <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-      <Dropdown.Item eventKey="3" active>
-        Orange
-      </Dropdown.Item>
-      <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
-    </Dropdown.Menu>
-  </Dropdown>,
-);
 
 const PostFeed = () => {
 
@@ -121,17 +107,34 @@ const PostFeed = () => {
             </div>
 
             
-            <label for="restaurants">Choose a Restaurant:</label>
+            {/* <label for="restaurants">Choose a Restaurant:</label>
             <div>
               <select name="restaurantOptions"> 
                 {/* here we need to loop through and show all newRestaurants items as dropdown oki */}
-                {newRestaurants.map(({ name }) => (
+                {/* {newRestaurants.map(({ name }) => (
                   <option value="name">newRestaurants
                   </option>
                 ))}
                 
               </select>
-            </div>
+            </div> */} */
+
+            render(
+              <Dropdown>
+                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                  Custom toggle
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu as={CustomMenu}>
+                  <Dropdown.Item eventKey="1">Red</Dropdown.Item>
+                  <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
+                  <Dropdown.Item eventKey="3" active>
+                    Orange
+                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>,
+            );
 
             <div class="form-group2">
                 <button type="submit">Post</button>
