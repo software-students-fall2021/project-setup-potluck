@@ -1,18 +1,26 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import React from 'react'
-import { Redirect, useHistory } from "react-router-dom"
+import {useHistory } from "react-router-dom"
 
 import "../App.css"
 import "../styles/PostFeed.css"
 // var session = require('express-session');
-const axios = require('axios');
 
 const PostFeed = () => {
 
   
-    let history = useHistory()
-  const [items, setItems] = React.useState([]);
+    let history = useHistory();
+    const items = JSON.parse(localStorage.getItem("restaurants")) //{ ...localStorage};
+    let newRestaurants = [];
+    for (let i = 0; i < items.length; i++){
+      // console.log(items[i]["name"])
+      newRestaurants.push(items[i]["name"]);
+
+    }
+      console.log("here", newRestaurants)
+
+    
   // what to do when the user clicks the submit buton on the form
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
@@ -20,42 +28,13 @@ const PostFeed = () => {
     try{
       history.push('/map')
 
-      // // Redirect ONLY  if user logs in
-      // if (response.status == 200) {
-        
-      // } else {
-      //   alert('login failed')
-      // }
-
-      // store the response data into the data state variable
-    // axios.get('http://localhost:3s001/restaurant')
-    // .then((response) => {
-    //   console.log(response.data);
-    //   // console.log(response.status);
-    //   // console.log(response.statusText);
-    //   // console.log(response.headers);
-    //   // console.log(response.config);
-    // });
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    
-
-    React.useEffect(() => {
-      async function getCharacters() {
-        // const response = await fetch("http://localhost:3001/restaurants");
-        const response = axios.get("http://localhost:3001/restaurant");
-        const body = await response.json();
-        console.log("body", body);
-        setItems(body.results.map(({ name }) => ({ label: name, value: name })));
-      }
-      getCharacters();
-    }, []);
-
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)
     }
+   
   }
+
     return (    
         <form action="http://localhost:3001/postfeed" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
 
@@ -83,9 +62,9 @@ const PostFeed = () => {
             <label for="restaurants">Choose a Restaurant:</label>
             <div>
               <select name="restaurantOptions"> 
-                {items.map(({ label, value }) => (
-                  <option key={value} value={value}>
-                    {label}
+                {/* here we need to loop through and show all newRestaurants items as dropdown */}
+                {newRestaurants.map(({ name }) => (
+                  <option value="name">newRestaurants
                   </option>
                 ))}
                 
