@@ -4,6 +4,8 @@ import React from 'react'
 import { useState } from 'react';
 import {useHistory } from "react-router-dom"
 import {FormControl} from 'react-bootstrap';
+import Dropdown from 'react-dropdown';
+
 import "../App.css"
 import "../styles/PostFeed.css"
 // var session = require('express-session');
