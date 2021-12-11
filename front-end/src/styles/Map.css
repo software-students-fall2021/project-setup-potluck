@@ -1,16 +1,16 @@
 .modal-top-row {
     background-color: white;
 }
-
+/* 
 .modal-res-name {
     color: rgba(155, 110, 234, 5);
     font-family: "Bebas Neue";
     font-size: 35px;
-}
+} */
 
 .modal-body {
     background-color: white;
-    color: rgba(155, 110, 234, 5);
+    /* color: rgba(155, 110, 234, 5); */
 }
 
 .modal-footer {
