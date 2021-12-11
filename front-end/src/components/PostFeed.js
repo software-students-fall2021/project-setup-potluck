@@ -3,8 +3,7 @@
 import React from 'react'
 import { useState } from 'react';
 import {useHistory } from "react-router-dom"
-import {FormControl} from 'react-bootstrap';
-import Dropdown from 'react-dropdown';
+import {FormControl, Dropdown} from 'react-bootstrap';
 
 import "../App.css"
 import "../styles/PostFeed.css"
@@ -119,9 +118,7 @@ const PostFeed = () => {
                 ))}
                 
               </select>
-            </div> */} */
-
-            render(
+            </div> */} 
               <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                   Custom toggle
@@ -135,9 +132,7 @@ const PostFeed = () => {
                   </Dropdown.Item>
                   <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>,
-            );
-
+              </Dropdown>
             <div class="form-group2">
                 <button type="submit">Post</button>
             </div>
