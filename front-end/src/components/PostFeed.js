@@ -32,7 +32,7 @@ const PostFeed = () => {
     }
   }
     return (    
-        <form action="http://localhost:3001/postfeed" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
+        <form action="http://143.198.119.5:3001/postfeed" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
 
             <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
 

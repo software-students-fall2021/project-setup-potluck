@@ -7,7 +7,8 @@ const User = new Schema({
 
     email: {type: String, unique: true, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
     image: String,
-    posts: [{type:mongoose.Schema.Types.ObjectId, ref:'Post'}]
+    posts: [{type:mongoose.Schema.Types.ObjectId, ref:'Post'}],
+    password: {type: String, unique: true, required: true}
 
 });
 
