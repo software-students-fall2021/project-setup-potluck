@@ -124,7 +124,7 @@ function App() {
           <Register/>
         </Route> 
         <Route path="/postfeed">
-          <PostFeed/>
+          <PostFeed restaurants={restaurants}/>
         </Route>
         {/* Route with restaurant id passed as a parameter */}
         <Route path="/restaurant/:id">

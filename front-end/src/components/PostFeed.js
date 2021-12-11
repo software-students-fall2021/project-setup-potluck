@@ -1,15 +1,75 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import React from 'react'
-import { Redirect, useHistory } from "react-router-dom"
+import { useState } from 'react';
+import {useHistory } from "react-router-dom"
+import {FormControl, Dropdown} from 'react-bootstrap';
 
 import "../App.css"
 import "../styles/PostFeed.css"
 // var session = require('express-session');
 
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+  <a
+    href="http://localhost:3000/postfeed"
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+  >
+    {children}
+    &#x25bc;
+  </a>
+));
 
-const PostFeed = () => {
+// forwardRef again here!
+// Dropdown needs access to the DOM of the Menu to measure it
+const CustomMenu = React.forwardRef(
+  ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+    const [value, setValue] = useState('');
 
-    let history = useHistory()
+    return (
+      <div
+        ref={ref}
+        style={style}
+        className={className}
+        aria-labelledby={labeledBy}
+      >
+        <FormControl
+          autoFocus
+          className="mx-3 my-2 w-auto"
+          placeholder="Type to filter..."
+          onChange={(e) => setValue(e.target.value)}
+          value={value}
+        />
+        <ul className="list-unstyled">
+          {React.Children.toArray(children).filter(
+            (child) =>
+              !value || child.props.children.toLowerCase().startsWith(value),
+          )}
+        </ul>
+      </div>
+    );
+  },
+);
 
+
+
+const PostFeed = ( {restaurants} ) => {
+
+  
+    let history = useHistory();
+    // const restaurants = JSON.parse(localStorage.getItem("restaurants")) //{ ...localStorage};
+    // let newRestaurants = [];
+    // for (let i = 0; i < restaurants.length; i++){
+    //   // console.log(items[i]["name"])
+    //   newRestaurants.push(restaurants[i]["name"]);
+
+    // }
+    //   console.log("here", newRestaurants)
+
+    
   // what to do when the user clicks the submit buton on the form
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
@@ -17,20 +77,13 @@ const PostFeed = () => {
     try{
       history.push('/map')
 
-      // // Redirect ONLY  if user logs in
-      // if (response.status == 200) {
-        
-      // } else {
-      //   alert('login failed')
-      // }
-
-      // store the response data into the data state variable
-     
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)
     }
+   
   }
+
     return (    
         <form action="http://143.198.119.5:3001/postfeed" method="POST" enctype="multipart/form-data" onSubmit={handleSubmit}>
 
@@ -54,6 +107,36 @@ const PostFeed = () => {
                 </div>
             </div>
 
+            
+            {/* <label for="restaurants">Choose a Restaurant:</label>
+            <div>
+              <select name="restaurantOptions"> 
+                {/* here we need to loop through and show all newRestaurants items as dropdown oki */}
+                {/* {newRestaurants.map(({ name }) => (
+                  <option value="name">newRestaurants
+                  </option>
+                ))}
+                
+              </select>
+            </div> */} 
+              <Dropdown>
+                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                  Choose Restaurant
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu as={CustomMenu}>
+                  {restaurants.map( (restaurant, idx) => (
+                    <Dropdown.Item eventKey={idx}>{restaurant.name}</Dropdown.Item>
+                  ))}
+{/* 
+                  <Dropdown.Item eventKey="1">Red</Dropdown.Item>
+                  <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
+                  <Dropdown.Item eventKey="3" active>
+                    Orange
+                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item> */}
+                </Dropdown.Menu>
+              </Dropdown>
             <div class="form-group2">
                 <button type="submit">Post</button>
             </div>
