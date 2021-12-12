@@ -3,7 +3,7 @@
 import React from 'react'
 import { useState } from 'react';
 import {useHistory } from "react-router-dom"
-import {FormControl, Dropdown} from 'react-bootstrap';
+import {FormControl, Dropdown, Form} from 'react-bootstrap';
 import axios from "axios"
 import "../App.css"
 import "../styles/PostFeed.css"
@@ -109,7 +109,7 @@ const PostFeed = ( {restaurants} ) => {
     return (    
         <form  onSubmit={handleSubmit}>
 
-            <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
+            {/* <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
 
             <div class="form-group">
                 <label for="title"></label>
@@ -120,14 +120,14 @@ const PostFeed = ( {restaurants} ) => {
                 <textarea type="text" name="caption" id="caption" class="form-controll" placeholder="Add more info"/>
             </div>
 
-            <div class="form-group file-area">
+            <div class="form-group file-area"> */}
                     {/* <label for="images">Add Images</label> */}
-                <input type="file" name="images" id="images" required="required" multiple="multiple"/>
+                {/* <input type="file" name="images" id="images" required="required" multiple="multiple"/>
                 <div class="file-dummy">
-                <div class="success">Click here to upload</div>
+                <div class="success">Click here to upload</div> */}
                 {/* <div class="default">Please select some files</div> */}
-                </div>
-            </div>
+                {/* </div>
+            </div> */}
 
             
             {/* <label for="restaurants">Choose a Restaurant:</label>
@@ -140,7 +140,18 @@ const PostFeed = ( {restaurants} ) => {
                 ))}
                 
               </select>
-            </div> */} 
+            </div> */}
+
+              <Form.Control size="lg" type="text" placeholder="Title" />
+              <br />
+              <Form.Control type="text" placeholder="Description" />
+              <br />
+              <>
+              <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>Upload Food Image</Form.Label>
+                <Form.Control type="file" />
+              </Form.Group>
+              </>
               <p>{selectedRestaurant}</p>
               <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
@@ -155,6 +166,7 @@ const PostFeed = ( {restaurants} ) => {
               </Dropdown>
             <div class="form-group2">
                 <button type="submit">Post</button>
+                
             </div>
             </form>
 
