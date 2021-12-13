@@ -69,7 +69,7 @@ const send = async () =>{
   try{
     const jwtToken =localStorage.getItem("token")
     console.log('JW ${jwtToken}')
-     await others.post('http://localhost:3001/postFeed',  myData, {headers: {Authorization: 'JWT '+jwtToken}}).then(res=>console.log(res))
+     await others.post('http://143.198.119.5:3001/postFeed',  myData, {headers: {Authorization: 'JWT '+jwtToken}}).then(res=>console.log(res))
   }catch(error){console.log(error)}
   
 }
@@ -100,7 +100,7 @@ const send = async () =>{
     }
   }
     return (    
-        <form action="http://localhost:3001/postFeed" method="POST" enctype="multipart/form-data" id="myForm" onSubmit={handleSubmit}>
+        <form action="http://143.198.119.5:3001/postFeed" method="POST" enctype="multipart/form-data" id="myForm" onSubmit={handleSubmit}>
 
             <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
 
