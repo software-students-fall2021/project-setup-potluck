@@ -80,6 +80,8 @@ const PostFeed = ({username}) => {
 
       await send();
 
+
+      history.push('/feed')
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)
