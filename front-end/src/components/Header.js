@@ -95,95 +95,56 @@ const Header = ({username, isChecked, setIsChecked, keyWord, setKeyWord}) => {
 
 
 //This component funcitons as a search function and allows you to pass the results to your own result handler components
-const PostSearch = ({path, isChecked, setIsChecked, keyWord, setKeyWord}) =>{
-    //Fake Data that will be replaced by our API Call
-    const [posts, setPosts] = useState([])
-    const handleChange = () =>{
-      setIsChecked(!isChecked);
-      console.log("checked" + isChecked)
+const PostSearch = ({path}) =>{
+  //Fake Data that will be replaced by our API Call
+  const [posts, setPosts] = useState([])
+  
+  //setting up initial default search keyword that will show on page load we can set this to whatever we want
+  const[keyWord, setKeyWord] = React.useState('');
+  
+  // Makes GET API call and sets data
+  useEffect( () => {
+    
+    const initializePosts= async () => {
+      //promise based request to query backend for posts
+      
+       await fetch("http://143.198.119.5:3001/search").then(response => response.json())
+       .then(data => {console.log(data);
+        setPosts(data)
+      })
+  
+      console.log(posts) 
     }
-    // Makes GET API call and sets data
-    useEffect( () => {
-      
-      const initializePosts= async () => {
-        //promise based request to query backend for posts
-        
-         await fetch("http://143.198.119.5:3001/search").then(response => response.json())
-         .then(data => {console.log(data);
-          setPosts(data)
-        })
+    initializePosts()
+
+    let savedKeyWord = JSON.parse(localStorage.getItem('keyword'))
+    if (savedKeyWord) {setKeyWord(savedKeyWord)}
+    else {setKeyWord("")}
     
-        console.log(posts)
-    
-      }
-      
-      // initializePosts()
+  }, [])
   
     
-    }, [])
-    const dummyData = [
-        {
-          title: 'Ramen',
-          imageURL: 'https://cdn.vox-cdn.com/thumbor/JxSROcKD03BBywyMP50lG8U7FFk=/0x0:3000x2000/920x613/filters:focal(1260x760:1740x1240):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/63017335/L_Palmberg_TabeTomo_075.0.jpg',
-          url: 'https://reactjs.org/',
-          author: 'Christian Weinschenk',
-          tags: 3,
-          objectID: 0,
-        },
-        {
-          title: 'KBBQ',
-          imageURL: "https://s3-media0.fl.yelpcdn.com/bphoto/_uuM4nLAurZUgK9XBO1H2w/348s.jpg",
-          url: 'https://reactjs.org/',
-          author: 'Christian Weinschenk',
-          tags: 3,
-          objectID: 1,
-        },
-      ];
-
-      //setter function that when called changes the keyword, will be called when the searchbar is updated
-      const executeSearch = event =>{
-          setKeyWord(event.target.value);
-      }
-      //filters posts with titles that match our keyword (this itself is the search), this can be further updated to include tags
-      const matchedPosts = posts.filter(post=>
-        //   console.log(post.title.toLowerCase().includes(keyWord.toLowerCase()));
-          post.title.toLowerCase().includes(keyWord.toLowerCase())
-          ///console.log(matchedPosts);
-      );
-      // Restaurant
-      const matchedPostsR = posts.filter(post=>
-        //   console.log(post.title.toLowerCase().includes(keyWord.toLowerCase()));
-          post.parentRestaurant.name.toLowerCase().includes(keyWord.toLowerCase())
-          ///console.log(matchedPosts);
-      );
-
-      const mychange = function(){
-        
-      }
-
-    const ConditionalSearch = () => {
-      if (isChecked) {
-        return (
-          <><Search search={keyWord} onSearch={executeSearch}/>
-                        <PostFeed list={matchedPosts}/> </>
-        )
-      } else {
-        return (
-          <><Search search={keyWord} onSearch={executeSearch}/>
-                        <PostFeed list={matchedPostsR}/> </>
-        )
-      }
+    //setter function that when called changes the keyword, will be called when the searchbar is updated
+    const executeSearch = event =>{
+        setKeyWord(event.target.value);
     }
 
-    //passes search functionality to Search child component and search results to PostFeed
-      return(
-          <div  className = "searchBar">
-           {(path == "/") && <h1> Add custom search here</h1>}
-           <ConditionalSearch />
-            <input type="checkbox" checked={isChecked} onChange={handleChange}></input>
-          </div>
-      )
+    
 
+    //filters posts with titles that match our keyword (this itself is the search), this can be further updated to include tags
+    const matchedPosts = posts.filter(post=>
+      //   console.log(post.title.toLowerCase().includes(keyWord.toLowerCase()));
+        post.parentRestaurant[0].name.toLowerCase().includes(keyWord.toLowerCase())
+        ///console.log(matchedPosts);
+    );
+  //passes search functionality to Search child component and search results to PostFeed
+    return(
+        <div  className = "searchBar">
+         {(path == "/") && <h1> Add custom search here</h1>}
+         {(path =="/feed") &&  <><Search search={keyWord} onSearch={executeSearch}/>
+                      <PostFeed list={matchedPosts}/> </> }
+        </div>
+    )
 }
 
 export default Header
