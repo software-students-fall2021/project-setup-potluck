@@ -36,13 +36,13 @@ const Header = ({username}) => {
 
 
     const handleLogin = () => {
-      console.log('loggin out')
-      history.push('/logout')
+      console.log('logging out')
+      history.push('/login')
     }
 
     const handleLogout = () => {
-      console.log('logging in')
-      history.push('/login')
+      console.log('logging out')
+      history.push('/logout')
     }
     if (username) 
       return (
@@ -62,7 +62,7 @@ const Header = ({username}) => {
             <Col style={{
               textAlign : 'right'
             }}>
-            <Button onClick={() => handleLogout}>Logout</Button>
+            <Button onClick={handleLogout}>Logout</Button>
           </Col>
           </Row>
           <PostSearch path={location}/>
@@ -84,7 +84,7 @@ const Header = ({username}) => {
             <Col style={{
               textAlign : 'right'
             }}>
-            <Button onClick={() => handleLogin}>Login</Button>
+            <Button onClick={handleLogin}>Login</Button>
           </Col>
           </Row>
           <PostSearch path={location}/>

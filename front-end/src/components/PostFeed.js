@@ -87,7 +87,7 @@ const PostFeed = ({username}) => {
   
   if (username) {
     return (
-      <form action="http://localhost:3001/postFeed" method="POST" enctype="multipart/form-data" id="myForm" onSubmit={handleSubmit}>
+      <form action="http://143.198.119.5:3001/postFeed" method="POST" enctype="multipart/form-data" id="myForm" onSubmit={handleSubmit}>
 
         <h1><strong>Your Post</strong>: Share Food Love with everyone</h1>
 
