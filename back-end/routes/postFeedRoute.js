@@ -51,7 +51,7 @@ const getInfo = async (restaurantname, username) => {
 
 
 const posting =  async (req, res)  => {
-
+  //console.log("HFDASFDSAJ"+req.user)
     // check('file')
     //   .custom((value, {req}) => {
     //       if(req.file.mimetype === 'application/png'
@@ -84,7 +84,7 @@ console.log(req.body)
 
     // Later to be replaced by req.body.restaurantName and req.body.username
     const RESTAURANTNAME = req.body.restaurant;
-    const USERNAME = 'matongao'
+    const USERNAME = req.user.username
 
     // Check for user login
     if (false) {
@@ -136,7 +136,8 @@ router.get('/postfeed/:filename', (req, res) => {
 })
 
 ;router.route("/").post( upload.single('file'),    passport.authenticate("jwt", {session: false}), async (req, res) => {
-      
+     // console.log(req.user);
+    
       posting(req, res);
   });
 

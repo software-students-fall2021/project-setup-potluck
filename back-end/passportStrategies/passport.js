@@ -15,14 +15,21 @@ var JwtStrategy = require('passport-jwt').Strategy,
     // opts.issuer = 'accounts.test.net'
     // opts.audience = 'potluck.net';
     //maybe rewrite with promises later
-    const myStrat = new JwtStrategy(opts, function(jwt_payload, done){
-        console.log("WOOO")
-        User.findOne({id: jwt_payload.id}, function(err,user){
+    const myStrat = new JwtStrategy(opts,  async function(jwt_payload, done){
+        console.log(jwt_payload.sub)
+        
+
+        console.log(await User.findById(jwt_payload.sub))
+
+        const myUser =
+        //passport is stupid and doesnt work with findOne for some reason lmao
+        User.findById(jwt_payload.sub, function(err,user){
             if(err){
                 console.log("YAU")
                 return done(err, false)
             }
             if(user){
+                console.log(user)
                 return done(null, user)
             }
             else{
