@@ -31,6 +31,9 @@ function App() {
 
   const [username, setUsername] = useState()
 
+  const [ischecked, setIschecked] = useState(false)
+  const [keyWord, setKeyWord] = useState()
+
   // Makes GET API call and sets data
 
   // Make GET request to the backend the get all restaurant JSON objects
@@ -139,13 +142,13 @@ function App() {
       </nav>
       <Switch>
         <Route path="/feed">
-          <Header username={username}/>
+          <Header username={username} ischecked={ischecked} setIschecked={setIschecked} keyWord={keyWord} setKeyWord={setKeyWord}/>
         </Route> 
         {/* <Route path="/restaurant">
           <RestaurantPage />
         </Route> */}
         <Route path="/map">
-          <Map restaurants={restaurants}/>
+          <Map restaurants={restaurants} setIschecked={setIschecked} setKeyWord={setKeyWord} />
         </Route>
         <Route path="/about">
           <About />

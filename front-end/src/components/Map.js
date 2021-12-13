@@ -9,7 +9,7 @@ require("dotenv").config()
 
 // This component loads an interactive map using react-map-gl
 // which is a React wrapper package for deck.gl
-const Map = ( {restaurants} ) => {
+const Map = ( {restaurants,  setIschecked, setKeyWord} ) => {
 
   // STATES FOR MODAL
 
@@ -96,6 +96,12 @@ const Map = ( {restaurants} ) => {
     top: 40
   };
 
+  const showRelevantPosts = (name) => {
+    // Filter by resetaurants
+    setIschecked(true)
+    setKeyWord(name)
+    history.push('/feed')
+  }
 
   return (
     restaurants ? (
@@ -128,7 +134,7 @@ const Map = ( {restaurants} ) => {
         </Container>
         </Modal.Body>
         <Modal.Footer className="modal-footer">
-          <Button variant="primary" className="modal-lower-relevant-post-btn">See Releveant Posts</Button>
+          <Button variant="primary" className="modal-lower-relevant-post-btn" onClick={showRelevantPosts(restaurant.name)}>See Releveant Posts</Button>
         </Modal.Footer>
       </Modal>
       <ReactMapGl

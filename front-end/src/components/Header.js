@@ -23,7 +23,7 @@ import "../styles/FeedPage.css"
 
 // }
 
-const Header = ({username}) => {
+const Header = ({username, ischecked, setIsChecked, keyWord, setKeyWord}) => {
     //TODO: FIX USELOCATION HOOK as it is returning undefined
     // const location = useLocation();
     //use placeholder for now
@@ -65,7 +65,7 @@ const Header = ({username}) => {
             <Button onClick={handleLogout}>Logout</Button>
           </Col>
           </Row>
-          <PostSearch path={location}/>
+          <PostSearch path={location} ischecked={ischecked} setIsChecked={setIsChecked} keyWord={keyWord} setKeyWord={setKeyWord} />
         </div>
       ) 
       else return (
@@ -95,10 +95,9 @@ const Header = ({username}) => {
 
 
 //This component funcitons as a search function and allows you to pass the results to your own result handler components
-const PostSearch = ({path}) =>{
+const PostSearch = ({path, ischecked, setIsChecked, keyWord, setKeyWord}) =>{
     //Fake Data that will be replaced by our API Call
     const [posts, setPosts] = useState([])
-    const [ischecked, setIsChecked] = useState("false");
     const handleChange = () =>{
       setIsChecked(!ischecked);
       console.log("checked" + ischecked)
@@ -140,8 +139,7 @@ const PostSearch = ({path}) =>{
           objectID: 1,
         },
       ];
-      //setting up initial default search keyword that will show on page load we can set this to whatever we want
-      const[keyWord, setKeyWord] = React.useState('');
+
       //setter function that when called changes the keyword, will be called when the searchbar is updated
       const executeSearch = event =>{
           setKeyWord(event.target.value);
@@ -152,22 +150,39 @@ const PostSearch = ({path}) =>{
           post.title.toLowerCase().includes(keyWord.toLowerCase())
           ///console.log(matchedPosts);
       );
+      // Restaurant
+      const matchedPostsR = posts.filter(post=>
+        //   console.log(post.title.toLowerCase().includes(keyWord.toLowerCase()));
+          post.parentRestaurant.name.toLowerCase().includes(keyWord.toLowerCase())
+          ///console.log(matchedPosts);
+      );
+
       const mychange = function(){
         
       }
+
+    const ConditionalSearch = () => {
+      if (ischecked) {
+        return (
+          <><Search search={keyWord} onSearch={executeSearch}/>
+                        <PostFeed list={matchedPosts}/> </>
+        )
+      } else {
+        return (
+          <><Search search={keyWord} onSearch={executeSearch}/>
+                        <PostFeed list={matchedPostsR}/> </>
+        )
+      }
+    }
+
     //passes search functionality to Search child component and search results to PostFeed
       return(
           <div  className = "searchBar">
            {(path == "/") && <h1> Add custom search here</h1>}
-           {(path =="/feed") &&  <><Search search={keyWord} onSearch={executeSearch}/>
-                        <PostFeed list={matchedPosts}/> </> }
-            {(path =="/feedRest") &&  <><Search search={keyWord} onSearch={executeSearch}/>
-                        <PostFeed list={matchedPosts}/> </> }
+           <ConditionalSearch />
             <input type="checkbox" checked={ischecked} onChange={handleChange}></input>
           </div>
       )
-     
-
 
 }
 
