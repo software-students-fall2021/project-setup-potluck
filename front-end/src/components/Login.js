@@ -9,17 +9,19 @@ const Login = ({ username, setUsername }) => {
   // Initialize history to control navigation
   let history = useHistory()
 
-
+  
   // create state variables to hold username and password
   const [response, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
   const [errorMessage, setErrorMessage] = useState("")
-
+  console.log(localStorage.token)
   // if the user's logged-in status changes, save the token we receive from the server
   useEffect(() => {
     // if the user is logged-in, save the token to local storage
     if (response.success && response.token) {
+      console.log("hello")
       console.log(`User successfully logged in: ${response.username}`)
       localStorage.setItem("token", response.token) // store the token into localStorage
+      console.log(localStorage.token)
     }
   }, [response])
 
@@ -37,8 +39,8 @@ const Login = ({ username, setUsername }) => {
       console.log('requestData', requestData)
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        `http://143.198.119.5:3001/login`,
-        // `http://localhost:3001/login`,
+        // `http://143.198.119.5:3001/login`,
+        `http://localhost:3001/login`,
         requestData
       )
       // history.push('/map')
@@ -48,6 +50,20 @@ const Login = ({ username, setUsername }) => {
       setUsername(e.target.username.value)
       localStorage.setItem('username', JSON.stringify(e.target.username.value))
 
+      // // Redirect ONLY  if user logs in
+      // if (response.status == 200) {
+        
+      // } else {
+      //   alert('login failed')
+      // }
+
+      // store the response data into the data state variable
+      console.log(response.data)
+      setResponse(response.data)
+      console.log(`Server response.body in front end: ${JSON.stringify(response.hasOwnProperty('body'))}`)
+      console.log(response.data.token)
+      localStorage.setItem("token", response.data.token)
+      console.log(localStorage.token)
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)

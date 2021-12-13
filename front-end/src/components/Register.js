@@ -39,8 +39,8 @@ const Register = props => {
 
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
+        // `http://143.198.119.5:3001/register/`,
         `http://143.198.119.5:3001/register/`,
-        // "http://localhost:3001/register/,
         requestData
       )
       // store the response data into the data state variable

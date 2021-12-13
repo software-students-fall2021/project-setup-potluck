@@ -107,8 +107,8 @@ const PostSearch = ({path, ischecked, setIsChecked, keyWord, setKeyWord}) =>{
       
       const initializePosts= async () => {
         //promise based request to query backend for posts
-        console.log("hello!")
-         await fetch("http://localhost:3001/search").then(response => response.json())
+        
+         await fetch("http://143.198.119.5:3001/search").then(response => response.json())
          .then(data => {console.log(data);
           setPosts(data)
         })

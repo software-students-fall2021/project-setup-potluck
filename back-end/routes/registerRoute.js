@@ -72,13 +72,15 @@ const postNewUser = async (req, res) => {
             return(res.status(403).json({error:'username already in use'}));
           }
           console.log("COSD")
-          console.log(userPass +"M")
+         // console.log(userPass +"M")
          // console.log(pass2 + "WOPWOW")
           const newUser = new User({ username: req.body.username, email: req.body.email, image: "", posts: [],  password:userPass})
           
       
           
           await newUser.save();
+          console.log(newUser)
+          
           const token = genToken(newUser)
           console.log(token)
           res.status(200).json({token})
