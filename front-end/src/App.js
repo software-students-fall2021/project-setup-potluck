@@ -27,7 +27,7 @@ function App() {
   // to avoid calling the backend API multiple times
   const [restaurants, setRestaurants] = useState([])
 
-  const [users, setUsers] = useState([])
+  const [username, setUsername] = useState()
 
   // Makes GET API call and sets data
 
@@ -113,12 +113,8 @@ function App() {
         <Route path="/about">
           <About />
         </Route>
-        <Route path="/users">
-          <MyAccountPage users={users}/>
-          <GetData users={users} />
-        </Route>
         <Route path="/login">
-          <Login/>
+          <Login username={username} setUsername={setUsername}/>
         </Route>
         <Route path="/register">
           <Register/>
