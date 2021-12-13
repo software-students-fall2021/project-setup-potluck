@@ -8,6 +8,7 @@ const Logout = props => {
   // when this component loads, log out the user
   useEffect(() => {
     localStorage.removeItem("token")
+    localStorage.removeItem("username")
   }, [])
 
   // navigate the user to the home page after logging them out

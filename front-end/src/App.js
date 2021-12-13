@@ -64,27 +64,32 @@ function App() {
     }
   }
 
-  /*const initializeUser = async () => {
-    await fetch(`http://localhost:3001/user/`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(" logging users data", data)
-        setUsers(data)
-      })
-  }*/
+  const initializeUsername = async () => {
+    // Check if users have already been stored in local storage
+    const savedUsername = JSON.parse(localStorage.getItem("username"))
+
+    // check that users have been loaded
+    if (savedUsername) {
+      console.log("Found logged in user,", savedUsername)
+      console.log('updating user now..')
+      setUsername(savedUsername)
+    } else {
+      console.log('user not logged in')
+    }
+  }
 
   useEffect(() => {
     // Check to see if restaurants are saved in localStorage
     initializeRestaurants()
+    initializeUsername()
   }, [])
 
 
   // Conditionally render or hide links based on login state
   const ConditionalNavBar = () => {
-    const token = JSON.parse(localStorage.getItem("token"))
     return (
       // If logged in, show PostFeed and Log Out. If logged out, show Register and Login
-      token ? (
+      username ? (
         <>
           <a href="/postfeed">PostFeed</a>
           <a href="/logout">Log out</a>
@@ -99,13 +104,21 @@ function App() {
   }
 
   const PostFeedRoute = () => {
-    const token = JSON.parse(localStorage.getItem("token"))
-    console.log('PostFeedRoute token is', token)
     return (
-      token ? (
+      username ? (
         <PostFeed/>
       ) : (
         <Redirect to='/login'/>
+      )
+    )
+  }
+
+  const ConditionalLanding = () => {
+    return (
+      username ? (
+        <Redirect to='/feed'/>
+      ) : (
+        <InitialView />
       )
     )
   }
@@ -118,11 +131,10 @@ function App() {
 
         {/* Later come back and revisit implementation for desktop browser */}
         <div id="hamitems">
-          <a href="/">Initial view</a>
           <a href="/feed">Feed</a>
           {/* <a href="/restaurant">Restaurant</a> */}
           <a href="/map">Map</a>
-          <a href="/about">About</a>
+          <a href="/about">About Us</a>
           <ConditionalNavBar/>
         </div>
       </nav>
@@ -152,13 +164,13 @@ function App() {
         </Route>
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/postfeed">
-          <PostFeedRoute/>
+          <PostFeed username={username}/>
         </Route>
         <Route path="/logout">
           <Logout/>
         </Route>
         <Route path="/">
-          <InitialView />
+          <ConditionalLanding />
         </Route>
       </Switch>
       <Footer />

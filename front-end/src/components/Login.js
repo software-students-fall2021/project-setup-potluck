@@ -4,7 +4,7 @@ import axios from "axios"
 import "../styles/Login.css";
 import "../App.css";
 
-const Login = props => {
+const Login = ({ username, setUsername }) => {
   
   // Initialize history to control navigation
   let history = useHistory()
@@ -41,22 +41,12 @@ const Login = props => {
         // `http://localhost:3001/login`,
         requestData
       )
-      history.push('/map')
+      // history.push('/map')
+    
       console.log('response is', response)
-
-      // // Redirect ONLY  if user logs in
-      // if (response.status == 200) {
-        
-      // } else {
-      //   alert('login failed')
-      // }
-
-      // store the response data into the data state variable
-      setResponse(response.data)
-      console.log(`Server response.body in front end: ${JSON.stringify(response.hasOwnProperty('body'))}`)
-
-      // Add token to localStorage
-      localStorage.setItem("token", JSON.stringify("iamatoken"))  
+      
+      setUsername(e.target.username.value)
+      localStorage.setItem('username', JSON.stringify(e.target.username.value))
 
     } catch (err) {
       // request failed... user entered invalid credentials
@@ -68,7 +58,7 @@ const Login = props => {
   }
 
   // if the user is not logged in, show the login form
-  if (!response.success)
+  if (!username) {
     return (
       <div className="Login">
         <br/>
@@ -91,9 +81,9 @@ const Login = props => {
         </section>
       </div>
     )
+  }   else return <Redirect to="/feed" />
   // otherwise, if the user has successfully logged-in, redirect them to a different page
   // in this example, we simply redirect to the home page, but a real app would redirect to a page that shows content only available to logged-in users
-  else return <Redirect to="/feed" />
 }
 
 export default Login

@@ -5,13 +5,10 @@ import "../styles/FeedPage.css"
 import "../App.css"
 import Logout from "./Logout.js"
 
-const LoginOrRegister = () => {
-    // Check if user is logged in 
-    const token = JSON.parse(localStorage.getItem("token"))
-
+const LoginOrRegister = ({username}) => {
     return (
         // If logged in, show PostFeed and Log Out. If logged out, show Register and Login
-        token ? (
+        username ? (
             <></>
         ) : (
             <>
