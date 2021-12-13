@@ -9,7 +9,7 @@ import axios, * as others from 'axios';
 // var session = require('express-session');
 
 
-const PostFeed = () => {
+const PostFeed = ({username}) => {
 
     let history = useHistory()
     console.log(JSON.parse(localStorage.getItem("restaurants")))
@@ -38,13 +38,13 @@ const PostFeed = () => {
 
    }, [selectedR, file])
    
-const send = async () =>{
+  const send = async () =>{
      let form = document.getElementById("myForm");
      let myData = new FormData();
-   console.log()
+     console.log()
      console.log(form["title"].value)
      console.log(form["caption"].value)
-    let newData = {
+     let newData = {
       title: form["title"].value,
       caption: form["caption"].value,
       images: file,
@@ -56,9 +56,7 @@ const send = async () =>{
     myData.append("restaurant", selectedR)
     myData.append("file",file)
       
-      console.log(file)
-     
-
+    console.log(file)
      
      //console.log(form)
     // const data = new FormData()
@@ -82,18 +80,6 @@ const send = async () =>{
 
       await send();
 
-
-     history.push('/feed')
-
-      // // Redirect ONLY  if user logs in
-      // if (response.status == 200) {
-        
-      // } else {
-      //   alert('login failed')
-      // }
-
-      // store the response data into the data state variable
-     
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err)
@@ -125,7 +111,6 @@ const send = async () =>{
                 {/* <div class="default">Please select some files</div> */}
                 </div>
             </div>
-      oncha
             <div>
               <Select 
               onChange= { handleRestaurants}options={restaurantNames}> </Select>
@@ -140,6 +125,5 @@ const send = async () =>{
         )
 
 }
-
 
 export default PostFeed

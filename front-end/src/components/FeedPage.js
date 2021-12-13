@@ -54,7 +54,7 @@ import { InputGroup, FormControl, Button, Card } from "react-bootstrap";
 //Search component that recieves the search keyword and the search function itself is called every time the input changes
 export const Search = ({search, onSearch}) =>(
 <div>
-    <label htmlFor="search">Search:</label>
+    <label htmlFor="search">Search By Restaurant:</label>
     {/* <input
     id="search"
     type="text"
@@ -94,9 +94,9 @@ export const Post = ({ item })=>{console.log(item.parentRestaurant[0]); return(
                 
                 <Card.Img  className={"rImage"}src={item.imageURL}></Card.Img>
 
-                <div className ={"postName"}> <a href={item.url}>{item.title}</a></div>
-                <span>{item.author.username}</span>
-                <span>{item.content}</span>
+                <div className ={"postName"}> <a href={item.url}>Title: {item.title}</a></div>
+                <span>Author: {item.author.username}</span>
+                <span>Content: {item.content}</span>
                 <span>{item.parentRestaurant.map((element, iterator)=> <p key={"name"+iterator}>Restaurant: {element.name}</p>)}</span>
                 </Card>
            

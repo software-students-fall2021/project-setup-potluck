@@ -6,7 +6,6 @@ import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
 
-import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
@@ -16,9 +15,12 @@ import RestaurantPage from "./components/RestaurantPage"
 import MyAccountPage from "./components/MyAccountPage"
 import PostFeed from "./components/PostFeed"
 import GetData from "./components/MyAccountPage"
+import Logout from "./components/Logout"
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 import { useState, useEffect } from "react"
+
+
 
 function App() {
   
@@ -28,6 +30,9 @@ function App() {
   const [restaurants, setRestaurants] = useState([])
 
   const [username, setUsername] = useState()
+
+  const [isChecked, setIsChecked] = useState(false)
+  const [keyWord, setKeyWord] = useState()
 
   // Makes GET API call and sets data
 
@@ -61,54 +66,89 @@ function App() {
     }
   }
 
-  /*const initializeUser = async () => {
-    await fetch(`http://localhost:3001/user/`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(" logging users data", data)
-        setUsers(data)
-      })
-  }*/
+  const initializeUsername = async () => {
+    // Check if users have already been stored in local storage
+    const savedUsername = JSON.parse(localStorage.getItem("username"))
+
+    // check that users have been loaded
+    if (savedUsername) {
+      console.log("Found logged in user,", savedUsername)
+      console.log('updating user now..')
+      setUsername(savedUsername)
+    } else {
+      console.log('user not logged in')
+    }
+  }
 
   useEffect(() => {
+    // Check to see if restaurants are saved in localStorage
     initializeRestaurants()
-    //initializeUser()
-    console.log("so what is restaurants:", restaurants)
+    initializeUsername()
   }, [])
 
-  useEffect(() => {
-    console.log('OOP! restaurants updated:', restaurants)
-  }, [restaurants])
+
+  // Conditionally render or hide links based on login state
+  const ConditionalNavBar = () => {
+    return (
+      // If logged in, show PostFeed and Log Out. If logged out, show Register and Login
+      username ? (
+        <>
+          <a href="/postfeed">PostFeed</a>
+          <a href="/logout">Log out</a>
+        </>
+      ) : (
+        <>
+         <a href="/register">Register</a>
+         <a href="/login">Login</a>
+        </>
+        )
+    )
+  }
+
+  const PostFeedRoute = () => {
+    return (
+      username ? (
+        <PostFeed/>
+      ) : (
+        <Redirect to='/login'/>
+      )
+    )
+  }
+
+  const ConditionalLanding = () => {
+    return (
+      username ? (
+        <Redirect to='/feed'/>
+      ) : (
+        <InitialView />
+      )
+    )
+  }
 
   return (
-    <Router>
-      {/* <div> */}
+    <Router>  
       <nav id="hamnav">
         <label for="hamburger">&#9776;</label>
         <input type="checkbox" id="hamburger" />
 
         {/* Later come back and revisit implementation for desktop browser */}
         <div id="hamitems">
-          <a href="/">Initial view</a>
           <a href="/feed">Feed</a>
           {/* <a href="/restaurant">Restaurant</a> */}
           <a href="/map">Map</a>
-          <a href="/about">About</a>
-          <a href="/register">Register</a>
-          <a href="/postfeed">PostFeed</a>
+          <a href="/about">About Us</a>
+          <ConditionalNavBar/>
         </div>
       </nav>
-
       <Switch>
         <Route path="/feed">
-          <TagButton />
-          <Header />
+          <Header username={username} isChecked={isChecked} setIsChecked={setIsChecked} keyWord={keyWord} setKeyWord={setKeyWord}/>
         </Route> 
         {/* <Route path="/restaurant">
           <RestaurantPage />
         </Route> */}
         <Route path="/map">
-          <Map restaurants={restaurants}/>
+          <Map restaurants={restaurants} setIsChecked={setIsChecked} setKeyWord={setKeyWord} />
         </Route>
         <Route path="/about">
           <About />
@@ -118,17 +158,20 @@ function App() {
         </Route>
         <Route path="/register">
           <Register/>
-        </Route> 
-        <Route path="/postfeed">
-          <PostFeed/>
         </Route>
         {/* Route with restaurant id passed as a parameter */}
         <Route path="/restaurant/:id">
           <RestaurantPage restaurants={restaurants} />
         </Route>
         {/* Dont add routes after the base route they wont work*/}
+        <Route path="/postfeed">
+          <PostFeed username={username} />
+        </Route>
+        <Route path="/logout">
+          <Logout/>
+        </Route>
         <Route path="/">
-          <InitialView />
+          <ConditionalLanding />
         </Route>
       </Switch>
       <Footer />
