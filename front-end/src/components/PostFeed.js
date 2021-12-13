@@ -82,7 +82,7 @@ const send = async () =>{
       await send();
 
 
-     // history.push('/map')
+     history.push('/feed')
 
       // // Redirect ONLY  if user logs in
       // if (response.status == 200) {

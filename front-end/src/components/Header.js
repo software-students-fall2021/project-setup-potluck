@@ -102,7 +102,7 @@ const PostSearch = ({path}) =>{
         },
       ];
       //setting up initial default search keyword that will show on page load we can set this to whatever we want
-      const[keyWord, setKeyWord] = React.useState('React');
+      const[keyWord, setKeyWord] = React.useState('');
       //setter function that when called changes the keyword, will be called when the searchbar is updated
       const executeSearch = event =>{
           setKeyWord(event.target.value);
