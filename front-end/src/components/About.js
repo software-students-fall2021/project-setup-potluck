@@ -10,9 +10,10 @@ const About = () => {
             
             <div class="what-PL">
             <h2 class="WhatisPL"> What is PotLuck?</h2>
-            <p class="intro"> Gummies jujubes bear claw I love sweet gingerbread. Gummies marzipan I love chocolate powder carrot cake. Fruitcake lollipop dragée wafer sugar plum halvah. Jujubes carrot cake marzipan wafer topping brownie candy dessert pie. Toffee chocolate jujubes muffin sesame snaps fruitcake. Chocolate cake lollipop cupcake pastry danish chocolate cake tootsie roll bear claw cotton candy.
-                Shortbread liquorice sugar plum jelly beans pudding. Marshmallow danish I love I love tiramisu sesame snaps apple pie. Carrot cake sesame snaps danish cupcake croissant candy. Pudding fruitcake cotton candy macaroon icing gummi bears jelly. Muffin lemon drops halvah candy lollipop fruitcake biscuit biscuit wafer. Jelly-o jelly marshmallow gummies lemon drops gingerbread.
-                Cupcake pastry cake oat cake cotton candy gingerbread.</p>
+            <p class="intro"> The idea of the project stemmed from our personal experience as students of a school that does not necessarily provide for the easiest access to different student communities. In other words, most students find themselves in a bustling city with very little opportunities to make friends. Even if students find others to occupy themselves with, it is never guaranteed that a students’ surrounding environment will cater to the specific dietary needs/preferences/wants of any respective individual. 
+                With Potluck, most, if not all, of these issues are addressed in that an individual can find the most affordable restaurants (or even better, the ingredients and steps to preparing these dishes for themselves) without the need to have to directly ask others or even meet anybody in-person! 
+                These posts may help students find restaurants where prices are more affordable OR a guide on how to prepare high-end dishes at home!
+</p>
             </div>
             
             <h2 class="TeamTag" style={{fontFamily:'Bebas Neue, cursive'}}> Our Team</h2>
@@ -39,7 +40,7 @@ const About = () => {
                 <div class="column">
                     <div class="card">
         
-                    <img src="../team/wajahat.jpg"></img>
+                    <img src="../team/christian.jpg"></img>
                     <div class="container">
                         <h2 class="name">Christian </h2>
                         <p class="title">NYU CAS</p>
