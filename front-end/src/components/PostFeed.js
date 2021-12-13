@@ -142,10 +142,10 @@ const PostFeed = ( {restaurants} ) => {
               </select>
             </div> */}
 
-              <Form.Control size="lg" type="text" placeholder="Title" />
+              {/* <Form.Control size="lg" type="text" placeholder="Title" />
               <br />
               <Form.Control type="text" placeholder="Description" />
-              <br />
+              <br /> */}
               <>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Upload Food Image</Form.Label>
