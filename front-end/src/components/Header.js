@@ -92,18 +92,24 @@ const Header = ({username}) => {
       )
 }
 
+
+
 //This component funcitons as a search function and allows you to pass the results to your own result handler components
 const PostSearch = ({path}) =>{
     //Fake Data that will be replaced by our API Call
     const [posts, setPosts] = useState([])
-
+    const [ischecked, setIsChecked] = useState("false");
+    const handleChange = () =>{
+      setIsChecked(!ischecked);
+      console.log("checked" + ischecked)
+    }
     // Makes GET API call and sets data
     useEffect( () => {
       
       const initializePosts= async () => {
         //promise based request to query backend for posts
-        
-         await fetch("http://143.198.119.5:3001/search").then(response => response.json())
+        console.log("hello!")
+         await fetch("http://localhost:3001/search").then(response => response.json())
          .then(data => {console.log(data);
           setPosts(data)
         })
@@ -146,13 +152,18 @@ const PostSearch = ({path}) =>{
           post.title.toLowerCase().includes(keyWord.toLowerCase())
           ///console.log(matchedPosts);
       );
+      const mychange = function(){
+        
+      }
     //passes search functionality to Search child component and search results to PostFeed
       return(
           <div  className = "searchBar">
            {(path == "/") && <h1> Add custom search here</h1>}
            {(path =="/feed") &&  <><Search search={keyWord} onSearch={executeSearch}/>
                         <PostFeed list={matchedPosts}/> </> }
-        
+            {(path =="/feedRest") &&  <><Search search={keyWord} onSearch={executeSearch}/>
+                        <PostFeed list={matchedPosts}/> </> }
+            <input type="checkbox" checked={ischecked} onChange={handleChange}></input>
           </div>
       )
      
