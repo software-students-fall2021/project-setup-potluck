@@ -6,7 +6,6 @@ import Header from "./components/Header.js"
 import Map from "./components/Map.js"
 import Login from "./components/Login"
 
-import TagButton from "./components/TagButton"
 import InitialView from "./components/InitialView"
 import About from "./components/About"
 import Footer from "./components/Footer"
@@ -140,8 +139,7 @@ function App() {
       </nav>
       <Switch>
         <Route path="/feed">
-          <TagButton />
-          <Header />
+          <Header username={username}/>
         </Route> 
         {/* <Route path="/restaurant">
           <RestaurantPage />

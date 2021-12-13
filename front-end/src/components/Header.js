@@ -1,6 +1,6 @@
 import React, { useState, useEffect }  from "react"
+import { Link, useHistory } from "react-router-dom"
 import { useLocation } from 'react-router-dom';
-
 import { Container, Row, Col, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Search, PostFeed, Post} from "./FeedPage.js"
@@ -23,7 +23,7 @@ import "../styles/FeedPage.css"
 
 // }
 
-const Header = () => {
+const Header = ({username}) => {
     //TODO: FIX USELOCATION HOOK as it is returning undefined
     // const location = useLocation();
     //use placeholder for now
@@ -31,32 +31,65 @@ const Header = () => {
     //Creates adjustable and stylable header columns
     //TODO: Move all styling to seperate CSS file
     //TODO: Add route handling to this Header
-    return (
+
+    let history = useHistory()
+
+
+    const handleLogin = () => {
+      console.log('loggin out')
+      history.push('/logout')
+    }
+
+    const handleLogout = () => {
+      console.log('logging in')
+      history.push('/login')
+    }
+    if (username) 
+      return (
         <div className="myHeader" style={{ display: 'block', width: '99%'}}>
-     
-      <Row id= "myRow">
-        <Col style={{
-          
-          textAlign : 'left'
-        }}>
-          <Button variant="primary">Account</Button>{' '}
-      </Col>
-        <Col style={{
-         
-          textAlign : 'center'
-        }}>
-          <img src="../Logos/TextOnlyBlack.png" height="100px"/>
-      </Col>
-        <Col style={{
-          
-          textAlign : 'right'
-        }}>
-           <Button variant="primary">Filter</Button>{' '}
-      </Col>
-      </Row>
-      <PostSearch path={location}/>
-    </div>
-    )
+          <Row id= "myRow">
+            <Col style={{
+              textAlign : 'left'
+            }}>
+              Logged in as {username}
+          </Col>
+            <Col style={{
+            
+              textAlign : 'center'
+            }}>
+              <img src="../Logos/TextOnlyBlack.png" height="50px"/>
+          </Col>
+            <Col style={{
+              textAlign : 'right'
+            }}>
+            <Button onClick={() => handleLogout}>Logout</Button>
+          </Col>
+          </Row>
+          <PostSearch path={location}/>
+        </div>
+      ) 
+      else return (
+        <div className="myHeader" style={{ display: 'block', width: '99%'}}>
+          <Row id= "myRow">
+            <Col style={{
+              textAlign : 'left'
+            }}>
+          </Col>
+            <Col style={{
+            
+              textAlign : 'center'
+            }}>
+              <img src="../Logos/TextOnlyBlack.png" height="50px"/>
+          </Col>
+            <Col style={{
+              textAlign : 'right'
+            }}>
+            <Button onClick={() => handleLogin}>Login</Button>
+          </Col>
+          </Row>
+          <PostSearch path={location}/>
+        </div>
+      )
 }
 
 //This component funcitons as a search function and allows you to pass the results to your own result handler components
