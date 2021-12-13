@@ -2,10 +2,11 @@ const express = require('express');
 const router = require("express").Router(); // Router object to define a route
 const mockaroo = require("mockaroo")
 const axios = require("axios")
+const passport = require("passport")
 const app = express();
 require("dotenv").config({ silent: true })
 const multer = require('multer');
-
+const jwtStrat = require('../passportStrategies/passport.js')
 // Initiate Mongoose
 const mongoose = require("mongoose")
 const postModel = require("../models/postModel")
@@ -17,6 +18,8 @@ const { body, validationResult, expressValidator} = require('express-validator')
 // console.log(__dirname);
 
 // cb with destination...?
+
+passport.use(jwtStrat)
 const Storage = multer.diskStorage({
    destination: function (req, file, callback) {
        console.log(__dirname);
@@ -130,11 +133,16 @@ console.log(req.body)
 // Image Get Routes
 router.get('/postfeed/:filename', (req, res) => {
     res.json('/postfeed/:filename');
-});
+})
 
-router.route("/").post( upload.single('file'), async (req, res) => {
-    posting(req, res);
-});
+;router.route("/").post( upload.single('file'),    passport.authenticate("jwt", {session: false}), async (req, res) => {
+      
+      posting(req, res);
+  });
+
+// router.route("/").post( upload.single('file'), async (req, res) => {
+//     posting(req, res);
+// });
 
 router.route("/").get((req, res) => {
     posting(req, res)

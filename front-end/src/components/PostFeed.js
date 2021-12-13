@@ -67,8 +67,9 @@ const send = async () =>{
     //   data.append("")
   //  await Axios({method:'post', url:'localhost:3001/postFeed', data:form}).then(res=>console.log(res))
   try{
-
-     await others.post('http://localhost:3001/postFeed',  myData).then(res=>console.log(res))
+    const jwtToken =localStorage.getItem("token")
+    console.log('JW ${jwtToken}')
+     await others.post('http://localhost:3001/postFeed',  myData, {headers: {Authorization: 'JWT '+jwtToken}}).then(res=>console.log(res))
   }catch(error){console.log(error)}
   
 }

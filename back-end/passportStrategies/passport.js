@@ -15,9 +15,11 @@ var JwtStrategy = require('passport-jwt').Strategy,
     // opts.issuer = 'accounts.test.net'
     // opts.audience = 'potluck.net';
     //maybe rewrite with promises later
-    passport.use(new JwtStrategy(opts, function(jwt_payload, done){
+    const myStrat = new JwtStrategy(opts, function(jwt_payload, done){
+        console.log("WOOO")
         User.findOne({id: jwt_payload.id}, function(err,user){
             if(err){
+                console.log("YAU")
                 return done(err, false)
             }
             if(user){
@@ -28,8 +30,33 @@ var JwtStrategy = require('passport-jwt').Strategy,
                 //new account registration here?
             }
         })
-    }))
+    })
 
+    module.exports = myStrat
+
+
+    // module.exports = function(passport){
+    //     var opts = {}
+    //     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
+    //     opts.secretOrKey ='secret';
+    //     console.log("OPTS"+ opts)
+    //     passport.use(new JwtStrategy(opts, function(jwt_payload, done){
+    //         console.log("WOOO")
+    //         User.findOne({id: jwt_payload.id}, function(err,user){
+    //             if(err){
+    //                 console.log("YAU")
+    //                 return done(err, false)
+    //             }
+    //             if(user){
+    //                 return done(null, user)
+    //             }
+    //             else{
+    //                 return done(null, false)
+    //                 //new account registration here?
+    //             }
+    //         })
+    //     }))
+    // }
         
 //     var cookieExtractor = function(req) {
 //         var token = null;
