@@ -132,8 +132,8 @@ router.get('/postfeed/:filename', (req, res) => {
     res.json('/postfeed/:filename');
 });
 
-router.route("/").post( upload.single('file'), async (req, res) => {
-    posting(req, res);
+router.route("/").post( upload.single('file'), passport.authenticate("jwt", { session: false }), async (req, res) => {
+  posting(req, res);
 });
 
 router.route("/").get((req, res) => {
