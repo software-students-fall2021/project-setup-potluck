@@ -90,7 +90,7 @@ const getSearch = async (req, res) =>{
         //console.log(src)
         //onsole.log(post)
         const myPosts = await Post.find({}).populate("author").populate("parentRestaurant")
-        console.log( myPosts)
+      //  console.log( myPosts)
         const allPosts = myPosts.map((element, iterator)=>
         
             {return(

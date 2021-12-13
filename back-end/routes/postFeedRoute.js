@@ -2,10 +2,11 @@ const express = require('express');
 const router = require("express").Router(); // Router object to define a route
 const mockaroo = require("mockaroo")
 const axios = require("axios")
+const passport = require("passport")
 const app = express();
 require("dotenv").config({ silent: true })
 const multer = require('multer');
-
+const jwtStrat = require('../passportStrategies/passport.js')
 // Initiate Mongoose
 const mongoose = require("mongoose")
 const postModel = require("../models/postModel")
@@ -17,6 +18,8 @@ const { body, validationResult, expressValidator} = require('express-validator')
 // console.log(__dirname);
 
 // cb with destination...?
+
+passport.use(jwtStrat)
 const Storage = multer.diskStorage({
    destination: function (req, file, callback) {
        console.log(__dirname);
@@ -48,7 +51,7 @@ const getInfo = async (restaurantname, username) => {
 
 
 const posting =  async (req, res)  => {
-
+  //console.log("HFDASFDSAJ"+req.user)
     // check('file')
     //   .custom((value, {req}) => {
     //       if(req.file.mimetype === 'application/png'
@@ -69,7 +72,8 @@ const posting =  async (req, res)  => {
     //   })
       // .withMessage('Please only submit valid photos.')
     //console.log('REQUEST IS ', req)
-
+    
+console.log(req.body)
     let obj = {
         'title': req.body.title,
         'author': {type: mongoose.Types.ObjectId, ref: 'User'}, // id or username from user schema
@@ -79,8 +83,8 @@ const posting =  async (req, res)  => {
     }
 
     // Later to be replaced by req.body.restaurantName and req.body.username
-    const RESTAURANTNAME = 'Hi-Collar'
-    const USERNAME = 'lkg282'
+    const RESTAURANTNAME = req.body.restaurant;
+    const USERNAME = req.user.username
 
     // Check for user login
     if (false) {
@@ -129,10 +133,10 @@ const posting =  async (req, res)  => {
 // Image Get Routes
 router.get('/postfeed/:filename', (req, res) => {
     res.json('/postfeed/:filename');
-});
+})
 
-router.route("/").post( upload.single('images'), async (req, res) => {
-    posting(req, res);
+router.route("/").post( upload.single('file'), passport.authenticate("jwt", { session: false }), async (req, res) => {
+  posting(req, res);
 });
 
 router.route("/").get((req, res) => {
