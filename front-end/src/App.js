@@ -31,7 +31,7 @@ function App() {
 
   const [username, setUsername] = useState()
 
-  const [ischecked, setIschecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
   const [keyWord, setKeyWord] = useState()
 
   // Makes GET API call and sets data
@@ -142,13 +142,13 @@ function App() {
       </nav>
       <Switch>
         <Route path="/feed">
-          <Header username={username} ischecked={ischecked} setIschecked={setIschecked} keyWord={keyWord} setKeyWord={setKeyWord}/>
+          <Header username={username} isChecked={isChecked} setIsChecked={setIsChecked} keyWord={keyWord} setKeyWord={setKeyWord}/>
         </Route> 
         {/* <Route path="/restaurant">
           <RestaurantPage />
         </Route> */}
         <Route path="/map">
-          <Map restaurants={restaurants} setIschecked={setIschecked} setKeyWord={setKeyWord} />
+          <Map restaurants={restaurants} setIsChecked={setIsChecked} setKeyWord={setKeyWord} />
         </Route>
         <Route path="/about">
           <About />
@@ -165,7 +165,7 @@ function App() {
         </Route>
         {/* Dont add routes after the base route they wont work*/}
         <Route path="/postfeed">
-          <PostFeed username={username}/>
+          <PostFeed username={username} />
         </Route>
         <Route path="/logout">
           <Logout/>

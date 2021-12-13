@@ -23,7 +23,7 @@ import "../styles/FeedPage.css"
 
 // }
 
-const Header = ({username, ischecked, setIsChecked, keyWord, setKeyWord}) => {
+const Header = ({username, isChecked, setIsChecked, keyWord, setKeyWord}) => {
     //TODO: FIX USELOCATION HOOK as it is returning undefined
     // const location = useLocation();
     //use placeholder for now
@@ -65,7 +65,7 @@ const Header = ({username, ischecked, setIsChecked, keyWord, setKeyWord}) => {
             <Button onClick={handleLogout}>Logout</Button>
           </Col>
           </Row>
-          <PostSearch path={location} ischecked={ischecked} setIsChecked={setIsChecked} keyWord={keyWord} setKeyWord={setKeyWord} />
+          <PostSearch path={location} isChecked={isChecked} setIsChecked={setIsChecked} keyWord={keyWord} setKeyWord={setKeyWord} />
         </div>
       ) 
       else return (
@@ -95,12 +95,12 @@ const Header = ({username, ischecked, setIsChecked, keyWord, setKeyWord}) => {
 
 
 //This component funcitons as a search function and allows you to pass the results to your own result handler components
-const PostSearch = ({path, ischecked, setIsChecked, keyWord, setKeyWord}) =>{
+const PostSearch = ({path, isChecked, setIsChecked, keyWord, setKeyWord}) =>{
     //Fake Data that will be replaced by our API Call
     const [posts, setPosts] = useState([])
     const handleChange = () =>{
-      setIsChecked(!ischecked);
-      console.log("checked" + ischecked)
+      setIsChecked(!isChecked);
+      console.log("checked" + isChecked)
     }
     // Makes GET API call and sets data
     useEffect( () => {
@@ -162,7 +162,7 @@ const PostSearch = ({path, ischecked, setIsChecked, keyWord, setKeyWord}) =>{
       }
 
     const ConditionalSearch = () => {
-      if (ischecked) {
+      if (isChecked) {
         return (
           <><Search search={keyWord} onSearch={executeSearch}/>
                         <PostFeed list={matchedPosts}/> </>
@@ -180,7 +180,7 @@ const PostSearch = ({path, ischecked, setIsChecked, keyWord, setKeyWord}) =>{
           <div  className = "searchBar">
            {(path == "/") && <h1> Add custom search here</h1>}
            <ConditionalSearch />
-            <input type="checkbox" checked={ischecked} onChange={handleChange}></input>
+            <input type="checkbox" checked={isChecked} onChange={handleChange}></input>
           </div>
       )
 
