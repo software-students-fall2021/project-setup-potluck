@@ -37,7 +37,8 @@ const Login = props => {
       console.log('requestData', requestData)
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        `http://localhost:3001/login`,
+        `http://143.198.119.5:3001/login`,
+        // `http://localhost:3001/login`,
         requestData
       )
       history.push('/map')
@@ -59,6 +60,7 @@ const Login = props => {
 
     } catch (err) {
       // request failed... user entered invalid credentials
+      console.log(err)
       setErrorMessage(
         "You entered invalid credentials. Please try again."
       )

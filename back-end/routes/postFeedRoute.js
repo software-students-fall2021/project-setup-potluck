@@ -69,7 +69,8 @@ const posting =  async (req, res)  => {
     //   })
       // .withMessage('Please only submit valid photos.')
     //console.log('REQUEST IS ', req)
-
+    
+console.log(req.body)
     let obj = {
         'title': req.body.title,
         'author': {type: mongoose.Types.ObjectId, ref: 'User'}, // id or username from user schema
@@ -79,8 +80,8 @@ const posting =  async (req, res)  => {
     }
 
     // Later to be replaced by req.body.restaurantName and req.body.username
-    const RESTAURANTNAME = 'Hi-Collar'
-    const USERNAME = 'lkg282'
+    const RESTAURANTNAME = req.body.restaurant;
+    const USERNAME = 'matongao'
 
     // Check for user login
     if (false) {
@@ -131,8 +132,8 @@ router.get('/postfeed/:filename', (req, res) => {
     res.json('/postfeed/:filename');
 });
 
-router.route("/").post( upload.single('images'), async (req, res) => {
-    posting(req, res);
+router.route("/").post( upload.single('file'), passport.authenticate("jwt", { session: false }), async (req, res) => {
+  posting(req, res);
 });
 
 router.route("/").get((req, res) => {

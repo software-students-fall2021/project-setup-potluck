@@ -29,7 +29,8 @@ function App() {
   // This array will be passed down as prop to RestaurantPage, RestaurantFeed, and Map
   // to avoid calling the backend API multiple times
   const [restaurants, setRestaurants] = useState([])
-  const [users, setUsers] = useState([])
+
+  const [username, setUsername] = useState()
 
   // Makes GET API call and sets data
 
@@ -51,7 +52,7 @@ function App() {
       localStorage.clear()
 
       // Request for the particular restaurant using its id
-      await fetch(`http://localhost:3001/restaurants/`)
+      await fetch(`http://143.198.119.5:3001/restaurants/`)
         .then((response) => response.json())
         .then((data) => {
           console.log(" logging data", data)
@@ -139,12 +140,8 @@ function App() {
         <Route path="/about">
           <About />
         </Route>
-        <Route path="/users">
-          <MyAccountPage users={users}/>
-          <GetData users={users} />
-        </Route>
         <Route path="/login">
-          <Login/>
+          <Login username={username} setUsername={setUsername}/>
         </Route>
         <Route path="/register">
           <Register/>
