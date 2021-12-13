@@ -39,8 +39,8 @@ const Login = ({ username, setUsername }) => {
       console.log('requestData', requestData)
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
-        // `http://143.198.119.5:3001/login`,
-        `http://localhost:3001/login`,
+        `http://143.198.119.5:3001/login`,
+        // `http://localhost:3001/login`,
         requestData
       )
       // history.push('/map')
