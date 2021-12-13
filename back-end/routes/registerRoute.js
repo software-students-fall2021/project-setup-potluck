@@ -98,16 +98,16 @@ router.route("/").post((req, res) => {
     postNewUser(req, res);
 });
 
-router.route("/register").post((req, res) => {
+// router.route("/register").post((req, res) => {
 
-    try {
-        console.log("hi")
-        postNewUser(req, res);
-    }
-    catch (err){
-        res.send(err)
-    }
+//     try {
+//         console.log("hi")
+//         postNewUser(req, res);
+//     }
+//     catch (err){
+//         res.send(err)
+//     }
     
-})
+// })
 
 module.exports = router;
