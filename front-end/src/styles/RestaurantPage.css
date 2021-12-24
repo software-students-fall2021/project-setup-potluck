@@ -1,0 +1,102 @@
+.restaurantContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    border: 10px #A467F2;
+    width: 100%;
+}
+
+.topMost {
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    width: 101%;
+    background-color: #A467F2;
+    position: fixed;
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+    z-index:0;
+    position: center;
+}
+
+.dishImage {
+    height: auto;
+    width: 100%;
+    z-index:-1;
+
+}
+
+.dishPic {
+    display: flex;
+    width: 100%;
+    height: 300px;
+}
+
+.restaurantInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #A467F2;
+    width: 100%;
+}
+
+.restaurantNameAddr {
+    color: white;
+    padding: 10px;
+}
+
+.roundedCorners {
+    float: right;
+    border-radius: 30px;
+}
+
+.mostPopularDishses {
+    width: 100%;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.popDishes {
+    display: flex;
+    flex-wrap: wrap;;
+    justify-content: space-around;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.mainDishes {
+    width: 100%;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.allDishes {
+    display: flex;
+    flex-wrap: wrap;;
+    justify-content: space-around;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.beverages {
+    display: flex;
+    flex-wrap: wrap;;
+    justify-content: space-around;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.drinks {
+    width: 100%;
+    background-color: rgba(241, 231, 254, 1);
+}
+
+.rounded {
+    border-radius: 30px;
+}
+
+.indent {
+    left: 30px;
+    position: relative;
+
+}
+

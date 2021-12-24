@@ -1,17 +1,48 @@
 # Project Repository
 
-This repository will be used for team projects.
+---
+[![CircleCI](https://circleci.com/gh/software-students-fall2021/project-setup-potluck/tree/master.svg?style=svg)](https://circleci.com/gh/software-students-fall2021/project-setup-potluck/tree/master)
+## Description
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+[pot.luck](http://143.198.119.5:3000/)
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-1a-project-setup.md)
+**Potluck** is a school-specific social media platform for students to find and share their experiences with food around campus. Users can post recipes, items they bought from local grocery stores, food from local restaurants, or anything else they want to share. Students can also discuss in the feed area, Sample topics include: Street Food, Bubble Tea, Italian food, 3-ingredient meals, et cetera.
 
-1. See the [Sprint Planning instructions](instructions-1b-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
+## Product Vision Statement
 
-1. See the [Front-End Development instructions](./instructions-2-front-end.md) for the requirements of the initial Front-End Development.
+**Potluck** consists of two main components.
 
-1. See the [Back-End Development instructions](./instructions-3-back-end.md) for the requirements of the initial Back-End Development.
+**The Map** shows a wholistic view of cheapeats, restaurants, and affordable grocery stores around campus. Users can select a location, where they can view photos, the address, and any posts related to the location. Each location also has its own tags.
 
-1. See the [Database Integration instructions](./instructions-4-database.md) for the requirements of integrating a database into the back-end.
+**The Feed** displays the posts shared by users (students), whether that be experiences at a certain restaurant, a new recipe discovered, or a cheap-eats venue around the corner. Each post has a title, text content, and tags. Users can comment on posts.
 
-1. See the [Deployment instructions](./instructions-5-deployment.md) for the requirements of deploying an app.
+Both **The Feed** and **The Map** have a filter functionality, where users can choose to view posts/locations with only specific tags.
+
+In addition to the feed and map view, users can view their own account page, where they can change their profile photo, username, settings, and log out.
+
+Finally, the users can read about the app (PotLuck) and its origins and purpose in the About page.
+
+Initial [Prototype](https://www.figma.com/proto/XMcwr5StWMdYmwJL3cW51j/First-attempt?node-id=47701%3A946&scaling=min-zoom&page-id=33%3A444&starting-point-node-id=47701%3A946&show-proto-sidebar=1) (check different flows on the left the handside)  and [design file](https://www.figma.com/file/XMcwr5StWMdYmwJL3cW51j/First-attempt?node-id=33%3A444)
+---
+
+## Meet the Team
+
+- [Lauren Gatesman](https://github.com/lkgatesman)
+- [Jin Kim](https://github.com/jhk742)
+- [Seunggun Lee](https://github.com/seungguini)
+- [Christian Weinschenk](https://github.com/HaveACookie)
+- [Wajahat Mirza](https://github.com/Wajahat-Mirza)
+
+---
+
+## Contribute to the Project
+
+Want to **contribute** to our project? [Find out how!](https://github.com/software-students-fall2021/project-setup-potluck/blob/master/CONTRIBUTING.md)
+
+## Build Potluck
+
+_To be filled.._
+
+## Test Potluck
+
+_To be filled.._

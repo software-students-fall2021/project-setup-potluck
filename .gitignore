@@ -124,3 +124,9 @@ typings/
 ## Jekyll artifacts
 **/.jekyll-cache
 **/_site/
+
+
+.vscode
+/venv
+data.json
+*.pkl
